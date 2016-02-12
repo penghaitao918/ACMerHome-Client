@@ -1,4 +1,4 @@
-package com.xiaotao.acmerhome;
+package com.xiaotao.acmerhome.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,8 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.xiaotao.acmerhome.R;
+import com.xiaotao.acmerhome.network.ClientThread;
 
-public class MainActivity extends Activity
+
+public class WelcomeActivity extends Activity
 {
 	// 定义界面上的两个文本框
 	EditText input;
@@ -25,7 +28,7 @@ public class MainActivity extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_welcome);
 		input = (EditText) findViewById(R.id.input);
 		send = (Button) findViewById(R.id.send);
 		show = (TextView) findViewById(R.id.show);
