@@ -13,7 +13,24 @@ import android.widget.TextView;
 import com.xiaotao.acmerhome.R;
 import com.xiaotao.acmerhome.network.ClientThread;
 
-
+/**
+ * 　 　　   へ　　　 　／|
+ * 　　    /＼7　　　 ∠＿/
+ * 　     /　│　　 ／　／
+ * 　    │　Z ＿,＜　／　　   /`ヽ
+ * 　    │　　　 　　ヽ　    /　　〉
+ * 　     Y　　　　　   `　  /　　/
+ * 　    ｲ●　､　●　　⊂⊃〈　　/
+ * 　    ()　 へ　　　　|　＼〈
+ * 　　    >ｰ ､_　 ィ　 │ ／／      去吧！
+ * 　     / へ　　 /　ﾉ＜| ＼＼        比卡丘~
+ * 　     ヽ_ﾉ　　(_／　 │／／           消灭代码BUG
+ * 　　    7　　　　　　　|／
+ * 　　    ＞―r￣￣`ｰ―＿
+ *
+ * @author xiaoTao
+ * @date 2016-02-13  0:12
+ */
 public class WelcomeActivity extends Activity
 {
 	// 定义界面上的两个文本框

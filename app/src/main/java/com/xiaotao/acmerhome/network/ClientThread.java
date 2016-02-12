@@ -11,6 +11,24 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
+/**
+ * 　 　　   へ　　　 　／|
+ * 　　    /＼7　　　 ∠＿/
+ * 　     /　│　　 ／　／
+ * 　    │　Z ＿,＜　／　　   /`ヽ
+ * 　    │　　　 　　ヽ　    /　　〉
+ * 　     Y　　　　　   `　  /　　/
+ * 　    ｲ●　､　●　　⊂⊃〈　　/
+ * 　    ()　 へ　　　　|　＼〈
+ * 　　    >ｰ ､_　 ィ　 │ ／／      去吧！
+ * 　     / へ　　 /　ﾉ＜| ＼＼        比卡丘~
+ * 　     ヽ_ﾉ　　(_／　 │／／           消灭代码BUG
+ * 　　    7　　　　　　　|／
+ * 　　    ＞―r￣￣`ｰ―＿
+ *
+ * @author xiaoTao
+ * @date 2016-02-13  0:13
+ */
 public class ClientThread implements Runnable
 {
 	private Socket s;
@@ -29,7 +47,7 @@ public class ClientThread implements Runnable
 	{
 		try
 		{
-			s = new Socket("192.168.1.104", 30000);
+			s = new Socket("192.168.1.106", 30000);
 			br = new BufferedReader(new InputStreamReader(
 					s.getInputStream()));
 			os = s.getOutputStream();
