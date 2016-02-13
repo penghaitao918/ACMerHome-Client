@@ -1,6 +1,6 @@
-package com.xiaotao.acmerhome.base;
+package com.xiaotao.acmerhome.network;
 
-import android.app.Activity;
+import java.io.OutputStream;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -17,8 +17,23 @@ import android.app.Activity;
  * 　　    7　　　　　　　|／
  * 　　    ＞―r￣￣`ｰ―＿
  *
- * @author littleTao
- * @date 2016-02-03 20:01
+ * @author xiaoTao
+ * @date 2016-02-13  22:10
  */
-public class BaseUi extends Activity{
+public class ClientSend {
+
+    private OutputStream os = null;
+    public ClientSend(OutputStream os) {
+        this.os = os;
+    }
+
+    //  设置同步方法，任意时刻有且只能有一个发送程序
+    public synchronized void put(String msg) {
+        try {
+            os.write((msg + "\r\n").getBytes("utf-8"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

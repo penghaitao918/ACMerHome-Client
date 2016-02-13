@@ -15,21 +15,14 @@ package com.xiaotao.acmerhome.util;
  * 　　    7　　　　　　　|／
  * 　　    ＞―r￣￣`ｰ―＿
  *
- * @author littleTao
- * @date 2016-02-03  21:11
+ * @author xiaoTao
+ * @date 2016-02-13  23:14
  */
-public class AppUtil {
+public class MSGUtil {
 
     //  Socket Connect
     public static final class net {
-        public static final int port = 30000;
-        public static final String IP = "192.168.1.106";
-        public static final String tip = "消息类型错误！";
-    }
-
-    //  TAG
-    public static final class tag {
-        public static final String activity = "tag_activity";
-        public static final String network = "tag_network";
+        public static final int testSend = -1;
+        public static final int testReceive = 0;
     }
 }

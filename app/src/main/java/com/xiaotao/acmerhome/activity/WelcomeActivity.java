@@ -11,7 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.xiaotao.acmerhome.R;
+import com.xiaotao.acmerhome.base.BaseActivity;
 import com.xiaotao.acmerhome.network.ClientThread;
+import com.xiaotao.acmerhome.util.MSGUtil;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -31,7 +33,7 @@ import com.xiaotao.acmerhome.network.ClientThread;
  * @author xiaoTao
  * @date 2016-02-13  0:12
  */
-public class WelcomeActivity extends Activity
+public class WelcomeActivity extends BaseActivity
 {
 	// 定义界面上的两个文本框
 	EditText input;
@@ -41,6 +43,7 @@ public class WelcomeActivity extends Activity
 	Handler handler;
 	// 定义与服务器通信的子线程
 	ClientThread clientThread;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -49,44 +52,35 @@ public class WelcomeActivity extends Activity
 		input = (EditText) findViewById(R.id.input);
 		send = (Button) findViewById(R.id.send);
 		show = (TextView) findViewById(R.id.show);
+
+
+		// 客户端启动ClientThread线程创建网络连接、读取来自服务器的数据
+		clientThread = new ClientThread(handler);
+		new Thread(clientThread).start(); // ①
+
+
+		send.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				clientThread.send.put(input.getText().toString());
+				input.setText("");
+			}
+		});
+
+
 		handler = new Handler() // ②
 		{
 			@Override
 			public void handleMessage(Message msg)
 			{
 				// 如果消息来自于子线程
-				if (msg.what == 0x123)
+				if (msg.what == MSGUtil.net.testReceive)
 				{
 					// 将读取的内容追加显示在文本框中
 					show.append("\n" + msg.obj.toString());
 				}
 			}
 		};
-		clientThread = new ClientThread(handler);
-		// 客户端启动ClientThread线程创建网络连接、读取来自服务器的数据
-		new Thread(clientThread).start(); // ①
-		send.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				try
-				{
-					// 当用户按下发送按钮后，将用户输入的数据封装成Message
-					// 然后发送给子线程的Handler
-					Message msg = new Message();
-					msg.what = 0x345;
-					msg.obj = input.getText().toString();
-					clientThread.revHandler.sendMessage(msg);
-					// 清空input文本框
-					input.setText("");
-				}
-				catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 }
 
