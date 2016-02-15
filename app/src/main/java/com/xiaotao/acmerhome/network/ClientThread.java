@@ -40,6 +40,13 @@ public class ClientThread implements Runnable {
 	private ClientReceive receive = null;
 	public ClientSend send = null;
 
+	public ClientThread() {}
+
+	public void setHandler(Handler handler)
+	{
+		this.handler = handler;
+	}
+
 	public ClientThread(Handler handler)
 	{
 		this.handler = handler;
@@ -52,12 +59,12 @@ public class ClientThread implements Runnable {
 			socket = new Socket(AppUtil.net.IP, AppUtil.net.port);
 			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-			//	将用户的请求提交到网络
-			send = new ClientSend(socket.getOutputStream());
-
 			// 启动一条子线程来读取服务器响应的数据
 			receive = new ClientReceive(handler,br);
 			new Thread(receive).start();
+
+			//	将用户的请求提交到网络
+			send = new ClientSend(socket.getOutputStream());
 			// 为当前线程初始化Looper
 			Looper.prepare();
 			// 启动Looper

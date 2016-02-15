@@ -15,7 +15,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".test.TestActivity"/>
     </application>
+
+    <receive android:name=".TestActivity">
+        <intent-filer>
+            <action android:name="app.test"/>
+        </intent-filer>
+    </receive>
+    <receive android:name=".WelcomeActivity">
+        <intent-filer>
+            <action android:name="app.welcome"/>
+        </intent-filer>
+    </receive>
 
     <!--授权访问互联网-->
     <uses-permission android:name="android.permission.INTERNET"/>

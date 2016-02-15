@@ -3,7 +3,10 @@ package com.xiaotao.acmerhome.network;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.TextView;
 
+import com.xiaotao.acmerhome.activity.WelcomeActivity;
+import com.xiaotao.acmerhome.test.TestActivity;
 import com.xiaotao.acmerhome.util.AppUtil;
 import com.xiaotao.acmerhome.util.MSGUtil;
 
@@ -66,7 +69,7 @@ public class ClientReceive implements Runnable {
                     Message msg = new Message();
                     msg.what = MSGUtil.net.testReceive;
                     msg.obj = content;
-                    handler.sendMessage(msg);
+                    TestActivity.handler.sendMessage(msg);
                     break;
                 default:
                     Log.i(AppUtil.tag.network,AppUtil.net.tip);
