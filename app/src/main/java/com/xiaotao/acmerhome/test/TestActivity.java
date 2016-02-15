@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.xiaotao.acmerhome.R;
 import com.xiaotao.acmerhome.base.BaseActivity;
+import com.xiaotao.acmerhome.network.ClientSend;
 import com.xiaotao.acmerhome.network.ClientThread;
 import com.xiaotao.acmerhome.util.MSGUtil;
 
@@ -37,9 +38,9 @@ public class TestActivity extends BaseActivity {
     TextView show;
     // 定义界面上的一个按钮
     Button send;
-    public static Handler handler;
     // 定义与服务器通信的子线程
-    ClientThread clientThread;
+    private ClientThread clientThread;
+    private static Handler handler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,14 +52,14 @@ public class TestActivity extends BaseActivity {
 
 
         // 客户端启动ClientThread线程创建网络连接、读取来自服务器的数据
-        clientThread = new ClientThread(handler);
-        new Thread(clientThread).start(); // ①
-
+        clientThread = new ClientThread();
+        new Thread(clientThread).start();
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clientThread.send.put(input.getText().toString());
+                //  发送数据到服务器
+                clientThread.getSend(input.getText().toString());
                 input.setText("");
             }
         });
@@ -73,5 +74,9 @@ public class TestActivity extends BaseActivity {
                 }
             }
         };
+    }
+
+    public static Handler getHandler() {
+        return handler;
     }
 }

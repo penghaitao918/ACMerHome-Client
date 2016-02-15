@@ -14,8 +14,12 @@ import android.widget.TextView;
 import com.xiaotao.acmerhome.R;
 import com.xiaotao.acmerhome.base.BaseActivity;
 import com.xiaotao.acmerhome.network.ClientThread;
+import com.xiaotao.acmerhome.network.NetConnect;
 import com.xiaotao.acmerhome.test.TestActivity;
+import com.xiaotao.acmerhome.util.AppUtil;
 import com.xiaotao.acmerhome.util.MSGUtil;
+
+import java.net.Socket;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -37,10 +41,8 @@ import com.xiaotao.acmerhome.util.MSGUtil;
  */
 public class WelcomeActivity extends BaseActivity
 {
-
 	// 定义界面上的一个按钮
 	private Button send;
-
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -60,10 +62,7 @@ public class WelcomeActivity extends BaseActivity
 			}
 		});
 
-
-
 	}
-
 
 }
 

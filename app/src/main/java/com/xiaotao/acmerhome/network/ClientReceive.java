@@ -33,12 +33,9 @@ import java.io.IOException;
  */
 public class ClientReceive implements Runnable {
 
-    // 定义向UI线程发送消息的Handler对象
-    private Handler handler = null;
     private BufferedReader bufferedReader = null;
 
-    public ClientReceive(Handler handler, BufferedReader bufferedReader) {
-        this.handler = handler;
+    public ClientReceive(BufferedReader bufferedReader) {
         this.bufferedReader = bufferedReader;
     }
 
@@ -69,7 +66,7 @@ public class ClientReceive implements Runnable {
                     Message msg = new Message();
                     msg.what = MSGUtil.net.testReceive;
                     msg.obj = content;
-                    TestActivity.handler.sendMessage(msg);
+                    TestActivity.getHandler().sendMessage(msg);
                     break;
                 default:
                     Log.i(AppUtil.tag.network,AppUtil.net.tip);
