@@ -33,4 +33,14 @@ public class AppUtil {
         public static final String network = "tag_network";
         public static final String error = "tag_error";
     }
+
+    //  BroadcastReceiver
+    public static final class broadcast {
+        public static final String service_client = "com.xiaotao.action.SERVICE_CLIENT";
+    }
+
+    //  Broadcast Message
+    public static final class message {
+        public static final String service = "SERVICE_MSG";
+    }
 }

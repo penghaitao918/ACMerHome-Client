@@ -41,11 +41,6 @@ public class NetConnect {
     private void setSocket() {
         try {
             socket = new Socket(AppUtil.net.IP, AppUtil.net.port);
-            Log.i(AppUtil.tag.network, "NetConnect : Socket is build.");
-        }
-        catch (SocketTimeoutException e1)
-        {
-            System.out.println("网络连接超时！！");
         }
         catch (Exception e){
             Log.i(AppUtil.tag.network, "NetConnect.setSocket() is Error ----->  Exception 2");

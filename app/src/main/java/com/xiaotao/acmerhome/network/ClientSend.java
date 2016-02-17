@@ -29,7 +29,7 @@ import java.io.OutputStream;
 public class ClientSend implements Runnable {
 
     private OutputStream outputStream = null;
-    private  String msg = null;
+    private String msg = null;
 
     public ClientSend( String msg) {
         this.msg = msg;

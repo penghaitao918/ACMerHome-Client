@@ -1,25 +1,15 @@
 package com.xiaotao.acmerhome.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.xiaotao.acmerhome.R;
 import com.xiaotao.acmerhome.base.BaseActivity;
-import com.xiaotao.acmerhome.network.ClientThread;
-import com.xiaotao.acmerhome.network.NetConnect;
+import com.xiaotao.acmerhome.service.ClientService;
 import com.xiaotao.acmerhome.test.TestActivity;
-import com.xiaotao.acmerhome.util.AppUtil;
-import com.xiaotao.acmerhome.util.MSGUtil;
-
-import java.net.Socket;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -50,17 +40,24 @@ public class WelcomeActivity extends BaseActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
 
+		//	启动后台Service
+		Intent intent = new Intent(this,ClientService.class);
+		startService(intent);
+
 		send = (Button) findViewById(R.id.send);
-
-
 		send.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+/*				Intent it = new Intent(AppUtil.broadcast.service_client);
+				it.putExtra(AppUtil.message.service,"Hello World");
+				sendBroadcast(it);*/
 				Intent intent = new Intent(WelcomeActivity.this, TestActivity.class);
 				startActivity(intent);
 				WelcomeActivity.this.finish();
 			}
 		});
+
+
 
 	}
 

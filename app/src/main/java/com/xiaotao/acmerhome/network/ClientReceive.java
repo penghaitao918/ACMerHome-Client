@@ -40,6 +40,7 @@ public class ClientReceive implements Runnable {
     }
 
     @Override
+    //  对数据包进行解读
     public void run()
     {
         String content = null;
@@ -59,6 +60,8 @@ public class ClientReceive implements Runnable {
 
     //  设置同步方法，任意时刻有且只能有一个接收程序
     public synchronized void get(int type, String content) {
+
+        System.out.println("### " + type + " # " + content);
         // 每当读到来自服务器的数据之后，发送消息通知程序
         try {
             switch (type) {
