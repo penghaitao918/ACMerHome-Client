@@ -71,6 +71,20 @@ public class ClientService extends Service
         new Thread(clientThread).start();
     }
 
+    private void setSocket() {
+        try{
+            socket = new Socket(AppUtil.net.IP, AppUtil.net.port);
+        }
+        catch (SocketTimeoutException timeException){
+            Log.i(AppUtil.tag.network, "ClientService is Error -----> 服务器连接超时");
+            timeException.printStackTrace();
+        }
+        catch (Exception e){
+            Log.i(AppUtil.tag.network, "ClientService is Error -----> 服务器连接失败");
+            e.printStackTrace();
+        }
+    }
+
     public class ClientThread implements Runnable {
         // 该线程所处理的Socket所对应的输入流
         private BufferedReader br = null;
@@ -78,40 +92,30 @@ public class ClientService extends Service
         public ClientThread() {}
         public void run()
         {
-            try
-            {
-                socket = new Socket(AppUtil.net.IP, AppUtil.net.port);
-                socketCheck();
-                //  创建一个子线程来读取服务器的相应
-                new Thread(){
-                    @Override
-                    public void run() {
-                        try {
-                            br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                            // 启动一条子线程来读取服务器响应的数据
-                            receive = new ClientReceive(ClientService.this,br);
-                            new Thread(receive).start();
-                            // 为当前线程初始化Looper
-                            Looper.prepare();
-                            // 启动Looper
-                            Looper.loop();
-                        }
-                        catch (Exception e)
-                        {
-                            Log.i(AppUtil.tag.error, "ClientService.onHandleIntent() is Error ----->  Exception ");
-                            e.printStackTrace();
-                        }
+            setSocket();
+            socketCheck();
+            //  创建一个子线程来读取服务器的相应
+            new Thread(){
+                @Override
+                public void run() {
+                    try {
+                        br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                        // 启动一条子线程来读取服务器响应的数据
+                        receive = new ClientReceive(ClientService.this,br);
+                        new Thread(receive).start();
+                        // 为当前线程初始化Looper
+                        Looper.prepare();
+                        // 启动Looper
+                        Looper.loop();
                     }
-                }.start();
-            }
-            catch (SocketTimeoutException timeException){
-                Log.i(AppUtil.tag.network, "ClientService is Error -----> 服务器连接超时");
-                timeException.printStackTrace();
-            }
-            catch (Exception e){
-                Log.i(AppUtil.tag.network, "ClientService is Error -----> 服务器连接失败");
-                e.printStackTrace();
-            }
+                    catch (Exception e)
+                    {
+                        Log.i(AppUtil.tag.error, "ClientService.onHandleIntent() is Error ----->  Exception ");
+                        e.printStackTrace();
+                        setSocket();
+                    }
+                }
+            }.start();
         }
     }
 
@@ -120,6 +124,7 @@ public class ClientService extends Service
         send = new ClientSend(jsonObject);
         new Thread(send).start();
     }
+
 
     public static Socket getSocket() {
         return socket;
@@ -130,10 +135,9 @@ public class ClientService extends Service
         new Thread(new Runnable() {
             @Override
             public void run() {
-                boolean flag = true;
-                while (flag) {
+                while (true) {
                     try {
-                    // 发送心跳包
+                        // 发送心跳包
                         JSONUtil jsonUtil = new JSONUtil();
                         JSONObject jsonObject = jsonUtil.connectCheck();
                         getSend(jsonObject);
@@ -142,7 +146,6 @@ public class ClientService extends Service
                     } catch (Exception e) {
                         e.printStackTrace();
                         System.out.println("目前是处于断开状态！");
-                        flag = false;
                     }
                 }
             };
