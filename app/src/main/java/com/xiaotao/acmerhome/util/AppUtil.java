@@ -34,6 +34,7 @@ public class AppUtil {
         public static final String type = "CONNECT_TYPE";
         public static final String connectCheck = "CONNECT_CHECK";
         public static final String checkMSG = "###心跳检测###";
+        public static final int test = -1;
         public static final int check = 0;
     }
 
@@ -47,10 +48,12 @@ public class AppUtil {
     //  BroadcastReceiver
     public static final class broadcast {
         public static final String service_client = "com.xiaotao.action.SERVICE_CLIENT";
+        public static final String test = "com.xiaotao.action.TEST";
     }
 
     //  Broadcast Message
     public static final class message {
+        public static final String test = "TEST_MSG";
         public static final String service = "SERVICE_MSG";
     }
 }

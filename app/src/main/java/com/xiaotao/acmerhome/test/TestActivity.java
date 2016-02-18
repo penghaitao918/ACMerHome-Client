@@ -1,6 +1,9 @@
 package com.xiaotao.acmerhome.test;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,11 +16,8 @@ import com.xiaotao.acmerhome.R;
 import com.xiaotao.acmerhome.base.BaseActivity;
 import com.xiaotao.acmerhome.util.AppUtil;
 import com.xiaotao.acmerhome.util.JSONUtil;
-import com.xiaotao.acmerhome.util.MSGUtil;
 
 import org.json.JSONObject;
-
-import java.io.Serializable;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -45,10 +45,20 @@ public class TestActivity extends BaseActivity {
     Button send;
     private static Handler handler;
 
+    private TestReceiver testReceiver = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        //  TestReceiver
+        testReceiver = new TestReceiver();
+        //  创建IntentFilter
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(AppUtil.broadcast.test);
+        registerReceiver(testReceiver, filter);
+
         input = (EditText) findViewById(R.id.input);
         send = (Button) findViewById(R.id.send);
         show = (TextView) findViewById(R.id.show);
@@ -58,11 +68,11 @@ public class TestActivity extends BaseActivity {
             public void onClick(View v) {
                 //  发送数据到服务器
 
-                Entity entity = new Entity();
-                entity.setMsg(input.getText().toString());
+                TestEntity testEntity = new TestEntity();
+                testEntity.setMsg(input.getText().toString());
 
                 JSONUtil jsonUtil = new JSONUtil();
-                JSONObject jsonObject = jsonUtil.connectCheck();
+                JSONObject jsonObject = jsonUtil.test(testEntity);
 
 				Intent it = new Intent(AppUtil.broadcast.service_client);
 				it.putExtra(AppUtil.message.service, jsonObject.toString());
@@ -76,7 +86,7 @@ public class TestActivity extends BaseActivity {
             @Override
             public void handleMessage(Message msg) {
                 // 如果消息来自于子线程
-                if (msg.what == MSGUtil.net.testReceive) {
+                if (msg.what == -1) {
                     // 将读取的内容追加显示在文本框中
                     show.append("\n" + msg.obj.toString());
                 }
@@ -84,7 +94,16 @@ public class TestActivity extends BaseActivity {
         };
     }
 
-    public static Handler getHandler() {
-        return handler;
+    public class TestReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            TestEntity testEntity = (TestEntity)intent.getSerializableExtra(AppUtil.message.test);
+
+                Message msg = new Message();
+                msg.what = -1;
+                msg.obj = testEntity.getMsg();
+                handler.sendMessage(msg);
+
+        }
     }
 }

@@ -63,11 +63,9 @@ public class ClientService extends Service
         super.onCreate();
         //  创建ServiceReceiver
         serviceReceiver = new ServiceReceiver();
-        //  创建IntentFilter
         IntentFilter filter = new IntentFilter();
         filter.addAction(AppUtil.broadcast.service_client);
         registerReceiver(serviceReceiver, filter);
-
         //  创建网络连接
         clientThread = new ClientThread();
         new Thread(clientThread).start();
@@ -77,9 +75,7 @@ public class ClientService extends Service
         // 该线程所处理的Socket所对应的输入流
         private BufferedReader br = null;
         private ClientReceive receive = null;
-
         public ClientThread() {}
-
         public void run()
         {
             try
@@ -93,7 +89,7 @@ public class ClientService extends Service
                         try {
                             br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                             // 启动一条子线程来读取服务器响应的数据
-                            receive = new ClientReceive(br);
+                            receive = new ClientReceive(ClientService.this,br);
                             new Thread(receive).start();
                             // 为当前线程初始化Looper
                             Looper.prepare();
@@ -120,7 +116,7 @@ public class ClientService extends Service
     }
 
     //	将用户的请求提交到网络
-    public void getSend(JSONObject jsonObject) {
+    private void getSend(JSONObject jsonObject) {
         send = new ClientSend(jsonObject);
         new Thread(send).start();
     }

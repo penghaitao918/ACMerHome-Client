@@ -1,4 +1,9 @@
-package com.xiaotao.acmerhome.util;
+package com.xiaotao.acmerhome.test;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -16,13 +21,26 @@ package com.xiaotao.acmerhome.util;
  * 　　    ＞―r￣￣`ｰ―＿
  *
  * @author xiaoTao
- * @date 2016-02-13  23:14
+ * @date 2016-02-18  13:24
  */
-public class MSGUtil {
+public class TestEntity implements Serializable{
+    private String msg = null;
 
-    //  Socket Connect
-    public static final class net {
-        public static final int testSend = -1;
-        public static final int testReceive = 0;
+    public TestEntity() { }
+
+    public TestEntity(JSONObject jsonObject) {
+        try {
+            this.msg = jsonObject.getString("MSG");
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String getMsg() {
+        return msg;
     }
 }

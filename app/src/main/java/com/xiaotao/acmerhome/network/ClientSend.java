@@ -4,11 +4,9 @@ import android.util.Log;
 
 import com.xiaotao.acmerhome.service.ClientService;
 import com.xiaotao.acmerhome.util.AppUtil;
-import com.xiaotao.acmerhome.util.MSGUtil;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.io.OutputStream;
 
 /**

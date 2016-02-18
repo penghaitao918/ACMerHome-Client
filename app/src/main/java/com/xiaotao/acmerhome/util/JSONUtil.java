@@ -1,11 +1,10 @@
 package com.xiaotao.acmerhome.util;
 
-import com.xiaotao.acmerhome.test.Entity;
+import com.xiaotao.acmerhome.test.TestEntity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -30,10 +29,23 @@ public class JSONUtil{
     //  心跳检测
     public static JSONObject connectCheck() {
         //  创建 JSONObject 对象
+        JSONObject checkJSON = new JSONObject();
+        try {
+            checkJSON.put(AppUtil.connectType.type, AppUtil.connectType.check);
+            checkJSON.put(AppUtil.connectType.connectCheck, AppUtil.connectType.checkMSG);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return checkJSON;
+    }
+
+    //  test
+    public static JSONObject test(TestEntity testEntity) {
+        //  创建 JSONObject 对象
         JSONObject testJSON = new JSONObject();
         try {
-            testJSON.put(AppUtil.connectType.type, AppUtil.connectType.check);
-            testJSON.put(AppUtil.connectType.connectCheck, AppUtil.connectType.checkMSG);
+            testJSON.put(AppUtil.connectType.type, -1);
+            testJSON.put("MSG", testEntity.getMsg());
         }catch (JSONException e){
             e.printStackTrace();
         }

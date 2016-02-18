@@ -1,15 +1,11 @@
 package com.xiaotao.acmerhome.network;
 
-import android.os.Handler;
-import android.os.Message;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
-import android.widget.TextView;
 
-import com.xiaotao.acmerhome.activity.WelcomeActivity;
-import com.xiaotao.acmerhome.test.Entity;
-import com.xiaotao.acmerhome.test.TestActivity;
+import com.xiaotao.acmerhome.test.TestEntity;
 import com.xiaotao.acmerhome.util.AppUtil;
-import com.xiaotao.acmerhome.util.MSGUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,9 +33,11 @@ import java.io.IOException;
  */
 public class ClientReceive implements Runnable {
 
+    private Context context = null;
     private BufferedReader bufferedReader = null;
 
-    public ClientReceive(BufferedReader bufferedReader) {
+    public ClientReceive(Context context, BufferedReader bufferedReader) {
+        this.context = context;
         this.bufferedReader = bufferedReader;
     }
 
@@ -74,9 +72,13 @@ public class ClientReceive implements Runnable {
         // 每当读到来自服务器的数据之后，发送消息通知程序
         try {
             switch (type) {
-                case MSGUtil.net.testSend:
-                    Entity entity = new Entity(jsonObject);
-                    System.out.println(entity.getMsg());
+                case AppUtil.connectType.test:
+                    TestEntity testEntity = new TestEntity(jsonObject);
+                    System.out.println(testEntity.getMsg());
+
+                    Intent intent = new Intent(AppUtil.broadcast.test);
+                    intent.putExtra(AppUtil.message.test, testEntity);
+                    context.sendBroadcast(intent);
                     break;
                 default:
                     Log.i(AppUtil.tag.network,AppUtil.net.tip);
@@ -86,5 +88,6 @@ public class ClientReceive implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }
