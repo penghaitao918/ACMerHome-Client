@@ -9,18 +9,18 @@
 
         <!--配置Activity组件-->
         <!--欢迎界面-->
-        <activity android:name="com.xiaotao.acmfamily.activity.WelcomeActivity" >
+        <activity android:name=".activity.WelcomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <!--测试-->
-        <activity android:name="com.xiaotao.acmfamily.test.TestActivity"/>
+        <activity android:name=".test.TestActivity"/>
 
         <!--配置Service组件-->
         <!--网络服务-->
-        <service android:name = "com.xiaotao.acmfamily.service.ClientService"/>
+        <service android:name = ".service.ClientService"/>
 
     </application>
 
