@@ -1,4 +1,4 @@
-package com.xiaotao.acmerhome.test;
+package com.xiaotao.acmfamily.test;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,10 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.xiaotao.acmerhome.R;
-import com.xiaotao.acmerhome.base.BaseActivity;
-import com.xiaotao.acmerhome.util.AppUtil;
-import com.xiaotao.acmerhome.util.JSONUtil;
+import com.xiaotao.acmfamily.R;
+import com.xiaotao.acmfamily.base.BaseActivity;
+import com.xiaotao.acmfamily.util.AppUtil;
+import com.xiaotao.acmfamily.util.JSONUtil;
 
 import org.json.JSONObject;
 

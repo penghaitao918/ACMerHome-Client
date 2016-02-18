@@ -1,9 +1,4 @@
-package com.xiaotao.acmerhome.test;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.Serializable;
+package com.xiaotao.acmfamily.base;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -20,27 +15,8 @@ import java.io.Serializable;
  * 　　    7　　　　　　　|／
  * 　　    ＞―r￣￣`ｰ―＿
  *
- * @author xiaoTao
- * @date 2016-02-18  13:24
+ * @author littleTao
+ * @date 2016-02-03  21:08
  */
-public class TestEntity implements Serializable{
-    private String msg = null;
-
-    public TestEntity() { }
-
-    public TestEntity(JSONObject jsonObject) {
-        try {
-            this.msg = jsonObject.getString("MSG");
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
+public class BaseUiWeb {
 }

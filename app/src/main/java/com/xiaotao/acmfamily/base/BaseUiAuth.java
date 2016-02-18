@@ -1,4 +1,4 @@
-package com.xiaotao.acmerhome.base;
+package com.xiaotao.acmfamily.base;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -16,7 +16,7 @@ package com.xiaotao.acmerhome.base;
  * 　　    ＞―r￣￣`ｰ―＿
  *
  * @author littleTao
- * @date 2016-02-03  21:09
+ * @date 2016-02-03  21:07
  */
-public class BaseList {
+public class BaseUiAuth {
 }

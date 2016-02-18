@@ -1,4 +1,4 @@
-package com.xiaotao.acmerhome.util;
+package com.xiaotao.acmfamily.util;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -25,8 +25,6 @@ public class AppUtil {
         public static final int port = 30000;
         public static final String IP = "192.168.1.104";
         public static final String tip = "消息类型错误！";
-
-
     }
 
     //  Connect Type

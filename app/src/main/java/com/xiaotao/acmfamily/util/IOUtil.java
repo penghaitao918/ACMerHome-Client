@@ -1,4 +1,4 @@
-package com.xiaotao.acmerhome.util;
+package com.xiaotao.acmfamily.util;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -18,5 +18,5 @@ package com.xiaotao.acmerhome.util;
  * @author littleTao
  * @date 2016-02-03  21:14
  */
-public class UIUtil {
+public class IOUtil {
 }

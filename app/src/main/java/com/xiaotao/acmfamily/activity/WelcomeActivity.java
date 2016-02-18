@@ -1,4 +1,4 @@
-package com.xiaotao.acmerhome.activity;
+package com.xiaotao.acmfamily.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.xiaotao.acmerhome.R;
-import com.xiaotao.acmerhome.base.BaseActivity;
-import com.xiaotao.acmerhome.service.ClientService;
-import com.xiaotao.acmerhome.test.TestActivity;
+import com.xiaotao.acmfamily.R;
+import com.xiaotao.acmfamily.base.BaseActivity;
+import com.xiaotao.acmfamily.service.ClientService;
+import com.xiaotao.acmfamily.test.TestActivity;
 
 /**
  * 　 　　   へ　　　 　／|

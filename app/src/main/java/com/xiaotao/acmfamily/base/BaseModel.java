@@ -1,4 +1,4 @@
-package com.xiaotao.acmerhome.util;
+package com.xiaotao.acmfamily.base;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -16,7 +16,7 @@ package com.xiaotao.acmerhome.util;
  * 　　    ＞―r￣￣`ｰ―＿
  *
  * @author littleTao
- * @date 2016-02-03  21:13
+ * @date 2016-02-03  21:09
  */
-public class HttpUtil {
+public class BaseModel {
 }

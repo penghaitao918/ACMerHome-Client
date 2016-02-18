@@ -1,4 +1,4 @@
-package com.xiaotao.acmerhome.base;
+package com.xiaotao.acmfamily.base;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -18,5 +18,5 @@ package com.xiaotao.acmerhome.base;
  * @author littleTao
  * @date 2016-02-03  21:09
  */
-public class BaseModel {
+public class BaseService {
 }

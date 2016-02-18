@@ -1,4 +1,4 @@
-package com.xiaotao.acmerhome;
+package com.xiaotao.acmfamily;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

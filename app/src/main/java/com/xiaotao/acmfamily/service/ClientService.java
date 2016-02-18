@@ -1,4 +1,4 @@
-package com.xiaotao.acmerhome.service;
+package com.xiaotao.acmfamily.service;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -9,10 +9,10 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 
-import com.xiaotao.acmerhome.network.ClientReceive;
-import com.xiaotao.acmerhome.network.ClientSend;
-import com.xiaotao.acmerhome.util.AppUtil;
-import com.xiaotao.acmerhome.util.JSONUtil;
+import com.xiaotao.acmfamily.network.ClientReceive;
+import com.xiaotao.acmfamily.network.ClientSend;
+import com.xiaotao.acmfamily.util.AppUtil;
+import com.xiaotao.acmfamily.util.JSONUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

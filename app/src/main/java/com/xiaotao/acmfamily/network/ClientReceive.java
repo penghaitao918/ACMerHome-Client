@@ -1,11 +1,11 @@
-package com.xiaotao.acmerhome.network;
+package com.xiaotao.acmfamily.network;
 
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.xiaotao.acmerhome.test.TestEntity;
-import com.xiaotao.acmerhome.util.AppUtil;
+import com.xiaotao.acmfamily.test.TestEntity;
+import com.xiaotao.acmfamily.util.AppUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

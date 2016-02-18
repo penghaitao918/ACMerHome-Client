@@ -1,6 +1,6 @@
-package com.xiaotao.acmerhome.util;
+package com.xiaotao.acmfamily.util;
 
-import com.xiaotao.acmerhome.test.TestEntity;
+import com.xiaotao.acmfamily.test.TestEntity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

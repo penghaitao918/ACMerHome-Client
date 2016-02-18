@@ -1,11 +1,11 @@
-package com.xiaotao.acmerhome.base;
+package com.xiaotao.acmfamily.base;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
-import com.xiaotao.acmerhome.util.AppUtil;
+import com.xiaotao.acmfamily.util.AppUtil;
 
 /**
  * 　 　　   へ　　　 　／|
