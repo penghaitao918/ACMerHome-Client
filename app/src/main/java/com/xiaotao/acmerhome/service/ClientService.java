@@ -12,6 +12,10 @@ import android.util.Log;
 import com.xiaotao.acmerhome.network.ClientReceive;
 import com.xiaotao.acmerhome.network.ClientSend;
 import com.xiaotao.acmerhome.util.AppUtil;
+import com.xiaotao.acmerhome.util.JSONUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -70,7 +74,6 @@ public class ClientService extends Service
     }
 
     public class ClientThread implements Runnable {
-
         // 该线程所处理的Socket所对应的输入流
         private BufferedReader br = null;
         private ClientReceive receive = null;
@@ -89,7 +92,6 @@ public class ClientService extends Service
                     public void run() {
                         try {
                             br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                            System.out.println("### 798 # " + br.readLine());
                             // 启动一条子线程来读取服务器响应的数据
                             receive = new ClientReceive(br);
                             new Thread(receive).start();
@@ -118,9 +120,13 @@ public class ClientService extends Service
     }
 
     //	将用户的请求提交到网络
-    public void getSend(String msg) {
-        send = new ClientSend(msg);
+    public void getSend(JSONObject jsonObject) {
+        send = new ClientSend(jsonObject);
         new Thread(send).start();
+    }
+
+    public static Socket getSocket() {
+        return socket;
     }
 
     //  心跳检测
@@ -131,10 +137,12 @@ public class ClientService extends Service
                 boolean flag = true;
                 while (flag) {
                     try {
-                    //    socket.sendUrgentData(0xFF); // 发送心跳包
-                        getSend("####心跳检测####");
+                    // 发送心跳包
+                        JSONUtil jsonUtil = new JSONUtil();
+                        JSONObject jsonObject = jsonUtil.connectCheck();
+                        getSend(jsonObject);
                         System.out.println("目前是处于链接状态！");
-                        Thread.sleep(5 * 60 * 1000);
+                        Thread.sleep(60 * 1000);
                     } catch (Exception e) {
                         e.printStackTrace();
                         System.out.println("目前是处于断开状态！");
@@ -149,7 +157,12 @@ public class ClientService extends Service
         @Override
         public void onReceive(final Context context, Intent intent) {
             String msg = intent.getStringExtra(AppUtil.message.service);
-            getSend(msg);
+            try {
+                JSONObject jsonObject = new JSONObject(msg);
+                getSend(jsonObject);
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
         }
     }
 }

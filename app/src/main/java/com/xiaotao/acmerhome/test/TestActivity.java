@@ -12,7 +12,12 @@ import android.widget.TextView;
 import com.xiaotao.acmerhome.R;
 import com.xiaotao.acmerhome.base.BaseActivity;
 import com.xiaotao.acmerhome.util.AppUtil;
+import com.xiaotao.acmerhome.util.JSONUtil;
 import com.xiaotao.acmerhome.util.MSGUtil;
+
+import org.json.JSONObject;
+
+import java.io.Serializable;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -52,9 +57,17 @@ public class TestActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //  发送数据到服务器
+
+                Entity entity = new Entity();
+                entity.setMsg(input.getText().toString());
+
+                JSONUtil jsonUtil = new JSONUtil();
+                JSONObject jsonObject = jsonUtil.connectCheck();
+
 				Intent it = new Intent(AppUtil.broadcast.service_client);
-				it.putExtra(AppUtil.message.service,input.getText().toString());
-				sendBroadcast(it);
+				it.putExtra(AppUtil.message.service, jsonObject.toString());
+                sendBroadcast(it);
+
                 input.setText("");
             }
         });

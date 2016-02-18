@@ -48,9 +48,6 @@ public class WelcomeActivity extends BaseActivity
 		send.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-/*				Intent it = new Intent(AppUtil.broadcast.service_client);
-				it.putExtra(AppUtil.message.service,"Hello World");
-				sendBroadcast(it);*/
 				Intent intent = new Intent(WelcomeActivity.this, TestActivity.class);
 				startActivity(intent);
 				WelcomeActivity.this.finish();

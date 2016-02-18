@@ -2,8 +2,11 @@ package com.xiaotao.acmerhome.network;
 
 import android.util.Log;
 
+import com.xiaotao.acmerhome.service.ClientService;
 import com.xiaotao.acmerhome.util.AppUtil;
 import com.xiaotao.acmerhome.util.MSGUtil;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -28,19 +31,18 @@ import java.io.OutputStream;
  */
 public class ClientSend implements Runnable {
 
-    private OutputStream outputStream = null;
-    private String msg = null;
+    private JSONObject jsonObject = null;
 
-    public ClientSend( String msg) {
-        this.msg = msg;
+    public ClientSend(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
     }
 
     @Override
     public void run()
     {
         try{
-            outputStream = NetConnect.getInstance().getSocket().getOutputStream();
-            outputStream.write((msg + "\r\n").getBytes("utf-8"));
+            OutputStream outputStream = ClientService.getSocket().getOutputStream();
+            outputStream.write((jsonObject + "\r\n").getBytes("utf-8"));
         }catch (Exception e) {
             Log.i(AppUtil.tag.error, "ClientSend.run() is Error");
             e.printStackTrace();
