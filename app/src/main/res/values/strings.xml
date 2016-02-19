@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ACMerHome</string>
+    <string name="app_name">ACMFamily</string>
     <string name="send">发送</string>
     <string name="hello_world">Hello world!</string>
+
+    <string name="login">登 录</string>
+    <string name="register">注 册</string>
 
 </resources>

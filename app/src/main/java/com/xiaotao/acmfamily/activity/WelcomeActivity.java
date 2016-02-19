@@ -44,7 +44,7 @@ public class WelcomeActivity extends BaseActivity
 		Intent intent = new Intent(this,ClientService.class);
 		startService(intent);
 
-		send = (Button) findViewById(R.id.send);
+		send = (Button) findViewById(R.id.imageButton1);
 		send.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
