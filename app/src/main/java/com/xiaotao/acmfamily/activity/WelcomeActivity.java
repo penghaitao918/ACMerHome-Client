@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.xiaotao.acmfamily.R;
 import com.xiaotao.acmfamily.base.BaseActivity;
 import com.xiaotao.acmfamily.service.ClientService;
 import com.xiaotao.acmfamily.test.TestActivity;
+import com.xiaotao.acmfamily.util.AppUtil;
+import com.xiaotao.acmfamily.util.SPUtils;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -31,32 +34,46 @@ import com.xiaotao.acmfamily.test.TestActivity;
  */
 public class WelcomeActivity extends BaseActivity
 {
-	// 定义界面上的一个按钮
-	private Button send;
+	private LinearLayout layout = null;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState)
+	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
-
+		this.layout = (LinearLayout) findViewById(R.id.flagLayout);
 		//	启动后台Service
 		Intent intent = new Intent(this,ClientService.class);
 		startService(intent);
-
-		send = (Button) findViewById(R.id.imageButton1);
-		send.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(WelcomeActivity.this, TestActivity.class);
-				startActivity(intent);
-				WelcomeActivity.this.finish();
-			}
-		});
-
-
-
+		this.init();
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
+	private void init(){
+		SPUtils spUtils = new SPUtils(this);
+		Boolean isLogin = (Boolean) spUtils.get(AppUtil.sp.flagLogin,false);
+		if (!isLogin) {
+			layout.setVisibility(View.VISIBLE);
+		}else {
+			//	自主登录
+		}
+	}
+
+	public void welcomeOnClick(View view) {
+		switch (view.getId()) {
+			case R.id.loginButton:
+				Intent loginIntent = new Intent(WelcomeActivity.this, TestActivity.class);
+				startActivity(loginIntent);
+				break;
+			case R.id.registerButton:
+				Intent registerIntent = new Intent(WelcomeActivity.this, TestActivity.class);
+				startActivity(registerIntent);
+				break;
+		}
+	}
 }
 

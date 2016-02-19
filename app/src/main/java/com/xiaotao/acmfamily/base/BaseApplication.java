@@ -2,6 +2,7 @@ package com.xiaotao.acmfamily.base;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import com.xiaotao.acmfamily.util.AppUtil;
@@ -44,6 +45,23 @@ public class BaseApplication extends Application {
     public void addActivity(Activity activity) {
         activityList.add(activity);
         Log.i(AppUtil.tag.activity, activity.getClass().getSimpleName() + "---> is add to List.");
+    }
+
+/*    //  结束指定Activity
+    public void finish(Context context){
+        for (Activity activity : activityList) {
+            if (activity.equals(context)) {
+                activity.finish();
+                Log.i(AppUtil.tag.activity, activity.getClass().getSimpleName() + "---> was finished.");
+            }
+        }
+    }*/
+
+    //  打印所有的Activity
+    public void display(){
+        for (Activity activity : activityList) {
+            Log.i(AppUtil.tag.activity, activity.getClass().getSimpleName() + "---> was display.");
+        }
     }
 
     // 遍历所有Activity并finish

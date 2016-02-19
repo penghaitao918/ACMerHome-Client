@@ -24,8 +24,10 @@ import com.xiaotao.acmfamily.base.BaseActivity;
  * @date 2016-02-19  15:26
  */
 public class LoginActivity extends BaseActivity {
+
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
+
 }

@@ -54,4 +54,9 @@ public class AppUtil {
         public static final String test = "TEST_MSG";
         public static final String service = "SERVICE_MSG";
     }
+
+    public static final class sp {
+        public static final String file_name = "spFile";
+        public static final String flagLogin = "loginFlag";
+    }
 }
