@@ -3,6 +3,7 @@ package com.xiaotao.acmfamily.activity;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.xiaotao.acmfamily.R;
 import com.xiaotao.acmfamily.base.BaseActivity;
 
 /**
@@ -28,6 +29,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
     }
 
 }

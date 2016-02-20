@@ -15,6 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--登录-->
+        <activity android:name=".activity.LoginActivity"/>
+
         <!--测试-->
         <activity android:name=".test.TestActivity"/>
 

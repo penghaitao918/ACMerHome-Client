@@ -96,7 +96,7 @@ public class WelcomeActivity extends BaseActivity
 	public void welcomeOnClick(View view) {
 		switch (view.getId()) {
 			case R.id.loginButton:
-				Intent loginIntent = new Intent(WelcomeActivity.this, TestActivity.class);
+				Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
 				startActivity(loginIntent);
 				break;
 			case R.id.registerButton:
