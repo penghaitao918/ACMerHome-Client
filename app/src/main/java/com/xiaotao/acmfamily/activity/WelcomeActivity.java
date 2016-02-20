@@ -2,10 +2,17 @@ package com.xiaotao.acmfamily.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.xiaotao.acmfamily.R;
 import com.xiaotao.acmfamily.base.BaseActivity;
@@ -34,34 +41,57 @@ import com.xiaotao.acmfamily.util.SPUtils;
  */
 public class WelcomeActivity extends BaseActivity
 {
-	private LinearLayout layout = null;
+	private AlphaAnimation animation = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
-		this.layout = (LinearLayout) findViewById(R.id.flagLayout);
+		RelativeLayout layout = (RelativeLayout) findViewById(R.id.flagLayout);
 		//	启动后台Service
 		Intent intent = new Intent(this,ClientService.class);
 		startService(intent);
-		this.init();
+		/** 设置透明度渐变动画 */
+		animation = new AlphaAnimation(0, 1);
+		animation.setDuration(4000);//设置动画持续时间
+		layout.setAnimation(animation);
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		new Thread(){
+			@Override
+			public void run() {
+				SPUtils spUtils = new SPUtils(WelcomeActivity.this);
+				Boolean isLogin = (Boolean) spUtils.get(AppUtil.sp.flagLogin,false);
+				if (!isLogin) {
+					Message msg = new Message();
+					handler.sendMessage(msg);
+				}else {
+					//	自主登录
+				}
+			}
+		}.start();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		//	结束动画
+		animation.cancel();
 	}
 
-	private void init(){
-		SPUtils spUtils = new SPUtils(this);
-		Boolean isLogin = (Boolean) spUtils.get(AppUtil.sp.flagLogin,false);
-		if (!isLogin) {
-			layout.setVisibility(View.VISIBLE);
-		}else {
-			//	自主登录
+	private Handler handler = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg)
+		{
+			//按钮淡入淡出特效
+			animation.startNow();
 		}
-	}
+	};
 
 	public void welcomeOnClick(View view) {
 		switch (view.getId()) {
@@ -76,4 +106,3 @@ public class WelcomeActivity extends BaseActivity
 		}
 	}
 }
-

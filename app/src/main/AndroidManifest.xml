@@ -9,7 +9,7 @@
 
         <!--配置Activity组件-->
         <!--欢迎界面-->
-        <activity android:name=".activity.WelcomeActivity" >
+        <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
