@@ -11,13 +11,18 @@
     <color name="white">#ffffffff</color>
     <color name="white_">#dcdfe0</color>
 
+    <color name="blue">#ff1eb4ff</color>
+    <color name="blue_">#ff04abff</color>
+    <color name="blue0">#ff2498ae</color>
+    <color name="blue1">#3586b3</color>
+
     <color name="black">#ff000000</color>
-    <color name="text_hint">#ffa89d87</color>
+    <color name="text_hint">#a0a0a0</color>
 
     <color name="white_green">#18b05b</color>
 
-    <color name="tab_blue">#ff04abff</color>
-    <color name="text_blue">#ff1eb4ff</color>
+
+
     <color name="text_checked">#ff737373</color>
     <color name="page">#c6c6c6</color>
 
@@ -31,7 +36,6 @@
     <color name="gray">#ff888888</color>
     <color name="black_grey">#83000000</color>
     <color name="font_value">#ff2f2f2f</color>
-    <color name="blue">#ff2e7ac4</color>
     <color name="white_blue">#ff56c6ff</color>
     <color name="green0">#ff18b151</color>
 

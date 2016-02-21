@@ -54,7 +54,7 @@ public class WelcomeActivity extends BaseActivity
 		startService(intent);
 		/** 设置透明度渐变动画 */
 		animation = new AlphaAnimation(0, 1);
-		animation.setDuration(4000);//设置动画持续时间
+		animation.setDuration(3000);//设置动画持续时间
 		layout.setAnimation(animation);
 	}
 

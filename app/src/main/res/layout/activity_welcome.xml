@@ -28,7 +28,7 @@
 
                 <Button
                     android:id="@+id/loginButton"
-                    android:background="@drawable/btn_login"
+                    android:background="@drawable/btn_welcome_login"
                     android:text="@string/login"
                     android:textColor="@color/white"
                     android:paddingLeft="40dp"
@@ -48,7 +48,7 @@
 
                 <Button
                     android:id="@+id/registerButton"
-                    android:background="@drawable/btn_register"
+                    android:background="@drawable/btn_welcome_register"
                     android:text="@string/register"
                     android:textColor="@color/black"
                     android:paddingLeft="40dp"

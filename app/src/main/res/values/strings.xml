@@ -3,9 +3,11 @@
 
     <string name="app_name">ACMFamily</string>
     <string name="send">发送</string>
-    <string name="hello_world">Hello world!</string>
 
     <string name="login">登 录</string>
     <string name="register">注 册</string>
+
+    <string name="accountHint">请输入账号</string>
+    <string name="passwordHint">请输入密码</string>
 
 </resources>
