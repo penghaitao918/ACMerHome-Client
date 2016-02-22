@@ -3,7 +3,9 @@ package com.xiaotao.acmfamily.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.View;
+import android.widget.Button;
 
 import com.xiaotao.acmfamily.R;
 import com.xiaotao.acmfamily.base.BaseActivity;
@@ -33,17 +35,32 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        this.init();
     }
 
     private void init(){
-
     }
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 0:
+                    break;
+                case 1:
+                    break;
+            }
+        }
+    };
 
     public void loginOnClick(View view) {
         switch (view.getId()) {
-            case R.id.textView2:
-                Intent loginIntent = new Intent(LoginActivity.this, TestActivity.class);
-                startActivity(loginIntent);
+            case R.id.backButton:
+                onBackPressed();
+                break;
+            case R.id.loginButton:
+                break;
+            case R.id.registerButton:
                 break;
         }
     }

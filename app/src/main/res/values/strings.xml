@@ -9,5 +9,6 @@
 
     <string name="accountHint">请输入账号</string>
     <string name="passwordHint">请输入密码</string>
+    <string name="registerTip">没有账号？立即注册</string>
 
 </resources>

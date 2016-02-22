@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <drawable name="text_normal">#a0a0a0</drawable>
+    <drawable name="text_press">#ff1eb4ff</drawable>
+
     <color name="transparent">#00000000</color>
     <color name="translucent_white">#6effffff</color>
     <color name="translucent_grey">#b4a5a5a5</color>

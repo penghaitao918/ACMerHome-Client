@@ -16,7 +16,7 @@
             android:textSize="28dp"
             android:textStyle="bold"
             android:layout_margin="12dp"
-            android:textColor="@color/blue1"
+            android:textColor="@color/blue0"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
@@ -24,8 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/backButton"
-            android:layout_marginLeft="14dp"
-            android:background="@drawable/title_back"
+            android:onClick="loginOnClick"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/btn_login_back"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
 
@@ -91,17 +92,25 @@
                 android:layout_marginTop="68dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="loginOnClick"
                 android:background="@drawable/btn_login_login"
                 android:layout_gravity="center_horizontal" />
-<!--todo 添加text注册-->
-            <TextView
-                android:id="@+id/textView2"
+
+            <Button
+                android:id="@+id/registerButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:layout_marginTop="68dp"
+                android:text="@string/registerTip"
+                android:layout_marginTop="12dp"
                 android:clickable="true"
+                android:textStyle="italic"
                 android:onClick="loginOnClick"
+                android:textColor="@drawable/text_login_register"
+                android:background="@drawable/btn_login_register"
+                android:textSize="15dp"
+                android:paddingBottom="30dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
                 android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
