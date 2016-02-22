@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xiaotao.acmfamily">
+    package="com.xiaotao.Afamily">
 
     <application
         android:allowBackup="true"
@@ -17,6 +17,8 @@
         </activity>
         <!--登录-->
         <activity android:name=".activity.LoginActivity"/>
+        <!--注册-->
+        <activity android:name=".activity.RegisterActivity"/>
 
         <!--测试-->
         <activity android:name=".test.TestActivity"/>

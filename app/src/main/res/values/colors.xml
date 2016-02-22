@@ -2,7 +2,8 @@
 <resources>
 
     <drawable name="text_normal">#a0a0a0</drawable>
-    <drawable name="text_press">#ff1eb4ff</drawable>
+    <drawable name="text_press">#24a2b8</drawable>
+    <drawable name="text_pressed">#2491a7</drawable>
 
     <color name="transparent">#00000000</color>
     <color name="translucent_white">#6effffff</color>
@@ -14,10 +15,17 @@
     <color name="white">#ffffffff</color>
     <color name="white_">#dcdfe0</color>
 
+    <color name="gray">#ff888888</color>
+    <color name="gray_">#5d5d5d</color>
+
     <color name="blue">#ff1eb4ff</color>
     <color name="blue_">#ff04abff</color>
+
     <color name="blue0">#ff2498ae</color>
     <color name="blue1">#3586b3</color>
+
+    <color name="blue2">#b42498ae</color>
+    <color name="blue3">#c92294e5</color>
 
     <color name="black">#ff000000</color>
     <color name="text_hint">#a0a0a0</color>
@@ -36,7 +44,6 @@
     <color name="red">#ffff0000</color>
     <color name="orange">#ffff570a</color>
     <color name="grey">#ffbfbfbf</color>
-    <color name="gray">#ff888888</color>
     <color name="black_grey">#83000000</color>
     <color name="font_value">#ff2f2f2f</color>
     <color name="white_blue">#ff56c6ff</color>

@@ -23,10 +23,11 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/backButton"
+            android:id="@+id/login_backButton"
             android:onClick="loginOnClick"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/btn_login_back"
+            android:padding="15dp"
+            android:background="@null"
+            android:src="@drawable/btn_login_back"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
 
@@ -48,7 +49,7 @@
             android:focusableInTouchMode="true">
 
             <EditText
-                android:id="@+id/accountEdit"
+                android:id="@+id/login_accountEdit"
                 android:hint="@string/accountHint"
                 android:textSize="22dp"
                 android:paddingTop="10dp"
@@ -66,7 +67,7 @@
                 android:layout_gravity="center_horizontal" />
 
             <EditText
-                android:id="@+id/passwardEdit"
+                android:id="@+id/login_passwardEdit"
                 android:hint="@string/passwordHint"
                 android:textSize="22dp"
                 android:paddingTop="10dp"
@@ -84,7 +85,7 @@
                 android:layout_gravity="center_horizontal" />
 
             <Button
-                android:id="@+id/loginButton"
+                android:id="@+id/login_loginButton"
                 android:text="@string/login"
                 android:textSize="24dp"
                 android:textStyle="bold"
@@ -97,13 +98,12 @@
                 android:layout_gravity="center_horizontal" />
 
             <Button
-                android:id="@+id/registerButton"
+                android:id="@+id/login_registerButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/registerTip"
+                android:text="@string/loginTip"
                 android:layout_marginTop="12dp"
                 android:clickable="true"
-                android:textStyle="italic"
                 android:onClick="loginOnClick"
                 android:textColor="@drawable/text_login_register"
                 android:background="@drawable/btn_login_register"
