@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.xiaotao.Afamily.model.view.MyNotification;
 import com.xiaotao.Afamily.test.TestEntity;
 import com.xiaotao.Afamily.util.AppUtil;
 
@@ -79,6 +80,10 @@ public class ClientReceive implements Runnable {
                     Intent intent = new Intent(AppUtil.broadcast.test);
                     intent.putExtra(AppUtil.message.test, testEntity);
                     context.sendBroadcast(intent);
+                    break;
+                case AppUtil.connectType.notify:
+                    MyNotification notification = new MyNotification(context,"这里是新的通知");
+                    notification.start();
                     break;
                 default:
                     Log.i(AppUtil.tag.network,AppUtil.net.tip);
