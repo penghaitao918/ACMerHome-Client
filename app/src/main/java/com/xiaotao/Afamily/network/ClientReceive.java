@@ -68,11 +68,16 @@ public class ClientReceive implements Runnable {
     }
 
     //  设置同步方法，任意时刻有且只能有一个接收程序
-    public synchronized void get(int type, JSONObject jsonObject) {
+/*    public synchronized void get(int type, JSONObject jsonObject) {*/
+    public void get(int type, JSONObject jsonObject) {
         System.out.println("### " + type + " # ");
         // 每当读到来自服务器的数据之后，发送消息通知程序
         try {
             switch (type) {
+                case AppUtil.connectType.notify:
+                    MyNotification notification = new MyNotification(context,"这里是新的通知");
+                    notification.start();
+                    break;
                 case AppUtil.connectType.test:
                     TestEntity testEntity = new TestEntity(jsonObject);
                     System.out.println(testEntity.getMsg());
@@ -80,10 +85,6 @@ public class ClientReceive implements Runnable {
                     Intent intent = new Intent(AppUtil.broadcast.test);
                     intent.putExtra(AppUtil.message.test, testEntity);
                     context.sendBroadcast(intent);
-                    break;
-                case AppUtil.connectType.notify:
-                    MyNotification notification = new MyNotification(context,"这里是新的通知");
-                    notification.start();
                     break;
                 default:
                     Log.i(AppUtil.tag.network,AppUtil.net.tip);
