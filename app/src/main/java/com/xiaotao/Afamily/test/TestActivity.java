@@ -75,7 +75,7 @@ public class TestActivity extends BaseActivity {
                 JSONObject jsonObject = jsonUtil.test(testEntity);
 
 				Intent it = new Intent(AppUtil.broadcast.service_client);
-				it.putExtra(AppUtil.message.service, jsonObject.toString());
+				it.putExtra(AppUtil.message.sendMessage, jsonObject.toString());
                 sendBroadcast(it);
 
                 input.setText("");

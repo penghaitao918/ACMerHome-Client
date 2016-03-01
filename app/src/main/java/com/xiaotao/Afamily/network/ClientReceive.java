@@ -54,7 +54,7 @@ public class ClientReceive implements Runnable {
             {
                 try {
                     JSONObject jsonObject = new JSONObject(content);
-                    int type = jsonObject.getInt(AppUtil.connectType.type);
+                    int type = jsonObject.getInt(AppUtil.socket.type);
                     get(type,jsonObject);
                 }catch (JSONException e){
                     e.printStackTrace();
@@ -74,11 +74,13 @@ public class ClientReceive implements Runnable {
         // 每当读到来自服务器的数据之后，发送消息通知程序
         try {
             switch (type) {
-                case AppUtil.connectType.notify:
+                case AppUtil.socket.notify:
                     MyNotification notification = new MyNotification(context,"这里是新的通知");
                     notification.start();
                     break;
-                case AppUtil.connectType.test:
+                case AppUtil.socket.login:
+                    break;
+                case AppUtil.socket.test:
                     TestEntity testEntity = new TestEntity(jsonObject);
                     System.out.println(testEntity.getMsg());
 
@@ -88,7 +90,7 @@ public class ClientReceive implements Runnable {
                     break;
                 default:
                     Log.i(AppUtil.tag.network,AppUtil.net.tip);
-                    System.out.println(AppUtil.connectType.checkMSG);
+                    System.out.println(AppUtil.socket.checkMSG);
                     break;
             }
         } catch (Exception e) {

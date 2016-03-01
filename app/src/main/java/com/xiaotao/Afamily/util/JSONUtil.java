@@ -1,5 +1,6 @@
 package com.xiaotao.Afamily.util;
 
+import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.test.TestEntity;
 
 import org.json.JSONException;
@@ -31,8 +32,8 @@ public class JSONUtil{
         //  创建 JSONObject 对象
         JSONObject checkJSON = new JSONObject();
         try {
-            checkJSON.put(AppUtil.connectType.type, AppUtil.connectType.check);
-            checkJSON.put(AppUtil.connectType.connectCheck, AppUtil.connectType.checkMSG);
+            checkJSON.put(AppUtil.socket.type, AppUtil.socket.check);
+            checkJSON.put(AppUtil.socket.connectCheck, AppUtil.socket.checkMSG);
         }catch (JSONException e){
             e.printStackTrace();
         }
@@ -44,7 +45,7 @@ public class JSONUtil{
         //  创建 JSONObject 对象
         JSONObject testJSON = new JSONObject();
         try {
-            testJSON.put(AppUtil.connectType.type, -1);
+            testJSON.put(AppUtil.socket.type, -1);
             testJSON.put("MSG", testEntity.getMsg());
         }catch (JSONException e){
             e.printStackTrace();
@@ -53,8 +54,15 @@ public class JSONUtil{
     }
 
     //  login
-    public static JSONObject login(){
+    public static JSONObject login(User user){
         JSONObject testJSON = new JSONObject();
+        try {
+            testJSON.put(AppUtil.socket.type, AppUtil.socket.login);
+            testJSON.put(AppUtil.login.account, user.getStuId());
+            testJSON.put(AppUtil.login.password, user.getPassword());
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
         return testJSON;
     }
 }

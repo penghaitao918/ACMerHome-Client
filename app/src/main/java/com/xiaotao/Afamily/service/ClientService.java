@@ -159,7 +159,7 @@ public class ClientService extends Service
     public class ServiceReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(final Context context, Intent intent) {
-            String msg = intent.getStringExtra(AppUtil.message.service);
+            String msg = intent.getStringExtra(AppUtil.message.sendMessage);
             try {
                 JSONObject jsonObject = new JSONObject(msg);
                 send = new ClientSend(jsonObject);
