@@ -12,12 +12,14 @@ import android.util.Log;
 import com.xiaotao.Afamily.network.ClientReceive;
 import com.xiaotao.Afamily.network.ClientSend;
 import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.JSONUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
@@ -49,6 +51,9 @@ public class ClientService extends Service
     private ServiceReceiver serviceReceiver = null;
     //  将客户端数据发送到服务器
     private ClientSend send = null;
+
+
+    public static boolean flag = true;
 
     @Override
     public IBinder onBind(Intent intent)
@@ -89,7 +94,10 @@ public class ClientService extends Service
         //  创建Socket连接
         private void setSocket() {
             try{
+                socket = null;
+                System.out.println("###新建socket连接");
                 socket = new Socket(AppUtil.net.IP, AppUtil.net.port);
+                flag = true;
                 receiveThread();
             }
             catch (SocketTimeoutException timeException){
@@ -129,20 +137,21 @@ public class ClientService extends Service
                 @Override
                 public void run() {
                     while (true) {
-                        boolean flag = true;
-                        while (flag) {
-                            try {
-                                // 发送心跳包
-                                socket.sendUrgentData(0xFF);
-                                System.out.println("目前是处于链接状态！");
-                                Thread.sleep(30 * 1000);
-                            } catch (Exception e) {
-                                System.out.println("目前是处于断开状态！");
-                                socket = null;
-                                flag = false;
-                            }
-                        }
                         try {
+                            while (flag) {
+                                try {
+                                    // 发送心跳包
+                        //            socket.sendUrgentData(0xFF);
+                                    OutputStream outputStream = ClientService.getSocket().getOutputStream();
+                                    outputStream.write((JSONUtil.connectCheck() + "\r\n").getBytes("utf-8"));
+                                    flag =false;
+                                    Thread.sleep(30 * 1000);
+                                } catch (Exception e) {
+                                    System.out.println("目前是处于断开状态！");
+                                    socket.close();
+                                    flag =false;
+                                }
+                            }
                             Thread.sleep(3000);
                         }catch (Exception e){
                             e.printStackTrace();

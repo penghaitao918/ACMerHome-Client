@@ -1,6 +1,9 @@
 package com.xiaotao.Afamily.model.entity;
 
+import android.graphics.Bitmap;
+
 import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.ChangeUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +31,7 @@ public class User {
     private String stuId = null;
     private String password = null;
     // TODO: 2016/3/1 将头像的String改为Bitmap，在函数中转换，变量只存bitmap
-    private String portrait = null;
+    private Bitmap portrait = null;
     private String userName = null;
     private int sex = 0;
     private String grade = null;
@@ -40,7 +43,11 @@ public class User {
     public User(JSONObject jsonObject) {
         try {
             this.stuId = jsonObject.getString(AppUtil.login.account);
-            this.password = jsonObject.getString(AppUtil.login.password);
+            this.portrait = ChangeUtil.toBitmap(jsonObject.getString(AppUtil.login.password));
+            this.userName = jsonObject.getString(AppUtil.login.password);
+            this.sex = jsonObject.getInt(AppUtil.login.password);
+            this.grade = jsonObject.getString(AppUtil.login.password);
+            this.classes = jsonObject.getString(AppUtil.login.password);
         }catch (JSONException e){
             e.printStackTrace();
         }
@@ -62,11 +69,11 @@ public class User {
         this.password = password;
     }
 
-    public String getPortrait() {
+    public Bitmap getPortrait() {
         return portrait;
     }
 
-    public void setPortrait(String portrait) {
+    public void setPortrait(Bitmap portrait) {
         this.portrait = portrait;
     }
 

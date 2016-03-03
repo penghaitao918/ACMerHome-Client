@@ -33,7 +33,6 @@ public class JSONUtil{
         JSONObject checkJSON = new JSONObject();
         try {
             checkJSON.put(AppUtil.socket.type, AppUtil.socket.check);
-            checkJSON.put(AppUtil.socket.connectCheck, AppUtil.socket.checkMSG);
         }catch (JSONException e){
             e.printStackTrace();
         }
@@ -45,7 +44,7 @@ public class JSONUtil{
         //  创建 JSONObject 对象
         JSONObject testJSON = new JSONObject();
         try {
-            testJSON.put(AppUtil.socket.type, -1);
+            testJSON.put(AppUtil.socket.type, AppUtil.socket.test);
             testJSON.put("MSG", testEntity.getMsg());
         }catch (JSONException e){
             e.printStackTrace();
@@ -55,14 +54,14 @@ public class JSONUtil{
 
     //  login
     public static JSONObject login(User user){
-        JSONObject testJSON = new JSONObject();
+        JSONObject loginJSON = new JSONObject();
         try {
-            testJSON.put(AppUtil.socket.type, AppUtil.socket.login);
-            testJSON.put(AppUtil.login.account, user.getStuId());
-            testJSON.put(AppUtil.login.password, user.getPassword());
+            loginJSON.put(AppUtil.socket.type, AppUtil.socket.login);
+            loginJSON.put(AppUtil.login.account, user.getStuId());
+            loginJSON.put(AppUtil.login.password, user.getPassword());
         }catch (JSONException e){
             e.printStackTrace();
         }
-        return testJSON;
+        return loginJSON;
     }
 }

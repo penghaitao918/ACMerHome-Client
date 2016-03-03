@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.xiaotao.Afamily.model.view.MyNotification;
+import com.xiaotao.Afamily.service.ClientService;
 import com.xiaotao.Afamily.test.TestEntity;
 import com.xiaotao.Afamily.utils.AppUtil;
 
@@ -74,11 +75,18 @@ public class ClientReceive implements Runnable {
         // 每当读到来自服务器的数据之后，发送消息通知程序
         try {
             switch (type) {
+                case AppUtil.socket.check:
+                    ClientService.flag = true;
+                    System.out.println("目前是处于连接状态！");
+                    break;
                 case AppUtil.socket.notify:
                     MyNotification notification = new MyNotification(context,"这里是新的通知");
                     notification.start();
                     break;
                 case AppUtil.socket.login:
+                    Intent intentLogin = new Intent(AppUtil.broadcast.login);
+                    intentLogin.putExtra(AppUtil.message.login, jsonObject.toString());
+                    context.sendBroadcast(intentLogin);
                     break;
                 case AppUtil.socket.test:
                     TestEntity testEntity = new TestEntity(jsonObject);
