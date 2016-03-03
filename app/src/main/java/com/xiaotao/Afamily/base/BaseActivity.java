@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
-import com.xiaotao.Afamily.util.AppUtil;
+import com.xiaotao.Afamily.utils.AppUtil;
 
 /**
  * 　 　　   へ　　　 　／|

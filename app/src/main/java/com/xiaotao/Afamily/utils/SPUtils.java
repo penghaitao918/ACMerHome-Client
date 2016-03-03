@@ -1,4 +1,4 @@
-package com.xiaotao.Afamily.util;
+package com.xiaotao.Afamily.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package com.xiaotao.Afamily.util;
+package com.xiaotao.Afamily.utils;
 
 import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.test.TestEntity;

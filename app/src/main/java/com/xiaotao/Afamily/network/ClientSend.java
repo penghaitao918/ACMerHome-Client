@@ -3,7 +3,7 @@ package com.xiaotao.Afamily.network;
 import android.util.Log;
 
 import com.xiaotao.Afamily.service.ClientService;
-import com.xiaotao.Afamily.util.AppUtil;
+import com.xiaotao.Afamily.utils.AppUtil;
 
 import org.json.JSONObject;
 

@@ -11,8 +11,7 @@ import android.util.Log;
 
 import com.xiaotao.Afamily.network.ClientReceive;
 import com.xiaotao.Afamily.network.ClientSend;
-import com.xiaotao.Afamily.util.AppUtil;
-import com.xiaotao.Afamily.util.JSONUtil;
+import com.xiaotao.Afamily.utils.AppUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -16,9 +16,9 @@ import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.test.TestActivity;
-import com.xiaotao.Afamily.test.TestEntity;
-import com.xiaotao.Afamily.util.AppUtil;
-import com.xiaotao.Afamily.util.JSONUtil;
+import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.JSONUtil;
+import com.xiaotao.Afamily.utils.StringUtil;
 
 import org.json.JSONObject;
 
@@ -108,8 +108,7 @@ public class LoginActivity extends BaseActivity {
                         if (true) {
                             User user = new User();
                             user.setStuId(accountEdit.getText().toString());
-                            // TODO: 2016/3/2 密码MD5加密
-                            user.setPassword(passwordEdit.getText().toString());
+                            user.setPassword(StringUtil.MD5(passwordEdit.getText().toString()));
                             JSONUtil jsonUtil = new JSONUtil();
                             JSONObject jsonObject = jsonUtil.login(user);
                             Intent it = new Intent(AppUtil.broadcast.service_client);

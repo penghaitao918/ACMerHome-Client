@@ -1,4 +1,4 @@
-package com.xiaotao.Afamily.util;
+package com.xiaotao.Afamily.utils;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -16,7 +16,7 @@ package com.xiaotao.Afamily.util;
  * 　　    ＞―r￣￣`ｰ―＿
  *
  * @author littleTao
- * @date 2016-02-03  21:12
+ * @date 2016-02-03  21:14
  */
-public class DBUtil {
+public class UIUtil {
 }

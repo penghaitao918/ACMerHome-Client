@@ -11,8 +11,8 @@ import android.widget.RelativeLayout;
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.service.ClientService;
-import com.xiaotao.Afamily.util.AppUtil;
-import com.xiaotao.Afamily.util.SPUtils;
+import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.SPUtils;
 
 /**
  * 　 　　   へ　　　 　／|

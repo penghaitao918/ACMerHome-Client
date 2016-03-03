@@ -2,10 +2,9 @@ package com.xiaotao.Afamily.base;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.util.Log;
 
-import com.xiaotao.Afamily.util.AppUtil;
+import com.xiaotao.Afamily.utils.AppUtil;
 
 import java.util.LinkedList;
 import java.util.List;

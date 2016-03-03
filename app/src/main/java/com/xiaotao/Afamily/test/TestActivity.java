@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.base.BaseActivity;
-import com.xiaotao.Afamily.util.AppUtil;
-import com.xiaotao.Afamily.util.JSONUtil;
+import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.JSONUtil;
 
 import org.json.JSONObject;
 

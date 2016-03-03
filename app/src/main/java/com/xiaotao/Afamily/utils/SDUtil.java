@@ -1,4 +1,4 @@
-package com.xiaotao.Afamily.util;
+package com.xiaotao.Afamily.utils;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -18,5 +18,5 @@ package com.xiaotao.Afamily.util;
  * @author littleTao
  * @date 2016-02-03  21:14
  */
-public class UIUtil {
+public class SDUtil {
 }

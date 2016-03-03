@@ -1,11 +1,9 @@
 package com.xiaotao.Afamily.model.entity;
 
-import com.xiaotao.Afamily.util.AppUtil;
+import com.xiaotao.Afamily.utils.AppUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.sql.Blob;
 
 /**
  * 　 　　   へ　　　 　／|

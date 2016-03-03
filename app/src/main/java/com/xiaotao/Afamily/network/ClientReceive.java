@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.xiaotao.Afamily.model.view.MyNotification;
 import com.xiaotao.Afamily.test.TestEntity;
-import com.xiaotao.Afamily.util.AppUtil;
+import com.xiaotao.Afamily.utils.AppUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
