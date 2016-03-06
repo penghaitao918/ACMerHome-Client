@@ -2,9 +2,14 @@ package com.xiaotao.Afamily.base;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.xiaotao.Afamily.network.ClientSend;
+import com.xiaotao.Afamily.service.ClientService;
 import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.JSONUtil;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -46,15 +51,13 @@ public class BaseApplication extends Application {
         Log.i(AppUtil.tag.activity, activity.getClass().getSimpleName() + "---> is add to List.");
     }
 
-/*    //  结束指定Activity
+    //  结束指定Activity
     public void finish(Context context){
-        for (Activity activity : activityList) {
-            if (activity.equals(context)) {
-                activity.finish();
-                Log.i(AppUtil.tag.activity, activity.getClass().getSimpleName() + "---> was finished.");
-            }
-        }
-    }*/
+        System.out.println(context);
+        activityList.remove(context);
+        Log.i(AppUtil.tag.activity, context.getClass().getSimpleName() + "---> was finished.");
+
+    }
 
     //  打印所有的Activity
     public void display(){
@@ -63,11 +66,21 @@ public class BaseApplication extends Application {
         }
     }
 
+    //  判断是否存在前台程序
+    public boolean isRunning(){
+        if (activityList.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
     // 遍历所有Activity并finish
-    public void exit() {
-        for (Activity activity : activityList) {
-            activity.finish();
-            Log.i(AppUtil.tag.activity, activity.getClass().getSimpleName() + "---> was finished.");
+    public void exit(Context mContext) {
+        if (!isRunning()) {
+            for (Activity activity : activityList) {
+                activity.finish();
+                Log.i(AppUtil.tag.activity, activity.getClass().getSimpleName() + "---> was finished.");
+            }
         }
         System.exit(0);
     }

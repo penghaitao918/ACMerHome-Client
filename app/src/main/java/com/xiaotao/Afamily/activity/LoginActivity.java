@@ -17,6 +17,7 @@ import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.network.ClientSend;
+import com.xiaotao.Afamily.service.ClientService;
 import com.xiaotao.Afamily.test.TestActivity;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
@@ -62,6 +63,9 @@ public class LoginActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         super.unregisterReceiver(this.loginReceiver);
+        if (progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
     }
 
     private void init(){
@@ -69,7 +73,8 @@ public class LoginActivity extends BaseActivity {
         this.accountEdit = (EditText) findViewById(R.id.login_accountEdit);
         this.passwordEdit = (EditText) findViewById(R.id.login_passwardEdit);
         this.progressDialog = new ProgressDialog(LoginActivity.this);
-        this.progressDialog.setMessage("Login...");
+        this.progressDialog.setMessage("登录中...");
+        this.progressDialog.onStart();
     }
 
     private void initBroadcast(){
@@ -96,9 +101,7 @@ public class LoginActivity extends BaseActivity {
                 case 0:
                     InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     im.hideSoftInputFromWindow(getCurrentFocus().getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    progressDialog.onStart();
                     progressDialog.show();
-                    // TODO: 2016/3/3 登录超时应该报错
                     break;
                 //  登录成功
                 case 1:
@@ -117,9 +120,29 @@ public class LoginActivity extends BaseActivity {
                     }
                     Toast.makeText(LoginActivity.this,"账号或密码错误\r\n请查证后登录",Toast.LENGTH_LONG).show();
                     break;
+                case 3:
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                        Toast.makeText(LoginActivity.this,"登录超时！",Toast.LENGTH_LONG).show();
+                    }
+                    break;
             }
         }
     };
+
+    private void setProgressDialogTime(int time){
+        Message m = new Message();
+        m.what = 0;
+        handler.sendMessage(m);
+        //    handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Message m = new Message();
+                m.what = 3;
+                handler.sendMessage(m);
+            }
+        }, time);
+    }
 
     public void loginOnClick(View view) {
         switch (view.getId()) {
@@ -127,12 +150,11 @@ public class LoginActivity extends BaseActivity {
                 onBackPressed();
                 break;
             case R.id.login_loginButton:
-                Message m = new Message();
-                m.what = 0;
-                handler.sendMessage(m);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        setProgressDialogTime(1000 * 15);
+                        while (ClientService.getSocket() == null){}
                         //  判断是否输入账号密码
                         String account = accountEdit.getText().toString();
                         String password = passwordEdit.getText().toString();

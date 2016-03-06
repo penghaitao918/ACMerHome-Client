@@ -64,4 +64,16 @@ public class JSONUtil{
         }
         return loginJSON;
     }
+
+    //  logout
+    public static JSONObject logout(){
+        JSONObject logoutJSON = new JSONObject();
+        try {
+            logoutJSON.put(AppUtil.socket.type,AppUtil.socket.logout);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        System.out.println(logoutJSON);
+        return logoutJSON;
+    }
 }

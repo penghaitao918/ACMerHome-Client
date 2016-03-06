@@ -43,8 +43,11 @@ public class WelcomeActivity extends BaseActivity
 		setContentView(R.layout.activity_welcome);
 		RelativeLayout layout = (RelativeLayout) findViewById(R.id.flagLayout);
 		//	启动后台Service
-		Intent intent = new Intent(this,ClientService.class);
-		startService(intent);
+		System.out.println("### 开启service");
+		if (ClientService.getSocket() == null) {
+			Intent intent = new Intent(this, ClientService.class);
+			startService(intent);
+		}
 		/** 设置透明度渐变动画 */
 		animation = new AlphaAnimation(0, 1);
 		animation.setDuration(3000);//设置动画持续时间

@@ -1,11 +1,16 @@
 package com.xiaotao.Afamily.base;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
 import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.JSONUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -71,6 +76,7 @@ public class BaseActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        BaseApplication.getInstance().finish(this);
         Log.i(AppUtil.tag.activity, this.getClass().getSimpleName() + "--->onDestroy");
     }
 

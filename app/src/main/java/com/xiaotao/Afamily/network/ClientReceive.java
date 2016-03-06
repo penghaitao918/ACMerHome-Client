@@ -75,10 +75,6 @@ public class ClientReceive implements Runnable {
         // 每当读到来自服务器的数据之后，发送消息通知程序
         try {
             switch (type) {
-                case AppUtil.socket.check:
-                    ClientService.flag = true;
-                    System.out.println("目前是处于连接状态！");
-                    break;
                 case AppUtil.socket.notify:
                     MyNotification notification = new MyNotification(context,"这里是新的通知");
                     notification.start();
@@ -87,6 +83,9 @@ public class ClientReceive implements Runnable {
                     Intent intentLogin = new Intent(AppUtil.broadcast.login);
                     intentLogin.putExtra(AppUtil.message.login, jsonObject.toString());
                     context.sendBroadcast(intentLogin);
+                    break;
+                case AppUtil.socket.logout:
+                    ClientService.getSocket().close();
                     break;
                 case AppUtil.socket.test:
                     TestEntity testEntity = new TestEntity(jsonObject);

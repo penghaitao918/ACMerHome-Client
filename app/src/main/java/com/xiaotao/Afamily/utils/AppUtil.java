@@ -30,12 +30,13 @@ public class AppUtil {
     //  Connect Type
     public static final class socket {
         public static final String type = "CONNECT_TYPE";
-        public static final String connectCheck = "CONNECT_CHECK";
+        public static final String logoutFLAG = "LOGOUT_FLAG";
         public static final String checkMSG = "###心跳检测###";
         public static final int test = -2;
         public static final int check = -1;
         public static final int notify = 0;
         public static final int login = 1;
+        public static final int logout = 2;
     }
 
     //  login
