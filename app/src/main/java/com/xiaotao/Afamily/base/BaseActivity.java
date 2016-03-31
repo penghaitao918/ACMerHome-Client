@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
+import com.xiaotao.Afamily.service.ClientService;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
 
@@ -59,6 +60,14 @@ public class BaseActivity extends Activity {
     protected void onResume() {
         super.onResume();
         Log.i(AppUtil.tag.activity, this.getClass().getSimpleName() + "--->onResume");
+    }
+
+    protected void startClientService(){
+        //	启动后台Service
+        System.out.println("### 开启service");
+        Intent intent = new Intent(this, ClientService.class);
+        startService(intent);
+
     }
 
     @Override

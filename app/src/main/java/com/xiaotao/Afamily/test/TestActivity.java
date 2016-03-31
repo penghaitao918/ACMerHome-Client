@@ -101,19 +101,10 @@ public class TestActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         super.unregisterReceiver(testReceiver);
-        //  告诉服务器登出
-        ClientSend send = new ClientSend(JSONUtil.logout());
-        new Thread(send).start();
-        try {
-            Thread.sleep(3 * 1000);
-            //      System.out.println("Socket xiu mian 中断");
-            ClientService.getSocket().close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
         Intent intent = new Intent(this, ClientService.class);
         stopService(intent);
-        BaseApplication.getInstance().exit(this);
+        BaseApplication.getInstance().exit();
     }
 
     public class TestReceiver extends BroadcastReceiver {

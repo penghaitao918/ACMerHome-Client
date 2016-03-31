@@ -10,9 +10,15 @@ import android.widget.RelativeLayout;
 
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.base.BaseActivity;
+import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.service.ClientService;
+import com.xiaotao.Afamily.test.TestActivity;
 import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.JSONUtil;
 import com.xiaotao.Afamily.utils.SPUtils;
+import com.xiaotao.Afamily.utils.StringUtil;
+
+import org.json.JSONObject;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -42,15 +48,13 @@ public class WelcomeActivity extends BaseActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
 		RelativeLayout layout = (RelativeLayout) findViewById(R.id.flagLayout);
+
 		//	启动后台Service
-		System.out.println("### 开启service");
-		if (ClientService.getSocket() == null) {
-			Intent intent = new Intent(this, ClientService.class);
-			startService(intent);
-		}
+		startClientService();
+	//	ClientService.getInstance().getSocket();
 		/** 设置透明度渐变动画 */
 		animation = new AlphaAnimation(0, 1);
-		animation.setDuration(3000);//设置动画持续时间
+		animation.setDuration(3500);//设置动画持续时间
 		layout.setAnimation(animation);
 	}
 
@@ -66,7 +70,7 @@ public class WelcomeActivity extends BaseActivity
 					Message msg = new Message();
 					handler.sendMessage(msg);
 				}else {
-					//	自主登录
+				//	initLogin();
 				}
 			}
 		}.start();
@@ -77,6 +81,18 @@ public class WelcomeActivity extends BaseActivity
 		super.onDestroy();
 		//	结束动画
 		animation.cancel();
+	}
+
+	private void initLogin(){
+		//	TODO 从缓存获取数据
+		User user = new User();
+		user.setStuId("account");
+		user.setPassword(StringUtil.MD5("password"));
+		JSONUtil jsonUtil = new JSONUtil();
+		JSONObject jsonObject = jsonUtil.login(user);
+		Intent it = new Intent(AppUtil.broadcast.service_client);
+		it.putExtra(AppUtil.message.sendMessage, jsonObject.toString());
+		sendBroadcast(it);
 	}
 
 	private Handler handler = new Handler()
@@ -96,7 +112,7 @@ public class WelcomeActivity extends BaseActivity
 				startActivity(loginIntent);
 				break;
 			case R.id.welcome_registerButton:
-				Intent registerIntent = new Intent(WelcomeActivity.this, RegisterActivity.class);
+				Intent registerIntent = new Intent(WelcomeActivity.this, TestActivity.class);
 				startActivity(registerIntent);
 				break;
 		}

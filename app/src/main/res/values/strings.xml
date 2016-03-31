@@ -11,10 +11,11 @@
     <string name="passwordHint">请输入密码</string>
     <string name="loginTip">没有账号？立即注册</string>
 
-    <string name="phoneHint">请输入手机号</string>
-    <string name="checkHint">请输入验证码</string>
-    <string name="checkBtn">获取验证码</string>
+    <string name="phoneHint">请输入学号</string>
+<!--    <string name="checkHint">请输入验证码</string>
+    <string name="checkBtn">获取验证码</string>-->
     <string name="nameHint">请输入昵称</string>
+    <string name="classesHint">请输入班级</string>
     <string name="registerTip">注册即表示同意</string>
     <string name="appTip">《一家人用户协议》</string>
 

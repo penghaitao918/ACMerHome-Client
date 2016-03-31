@@ -20,6 +20,9 @@
         <!--注册-->
         <activity android:name=".activity.RegisterActivity"/>
 
+        <!--主体功能界面-->
+        <activity android:name=".activity.core.MainPageActivity"/>
+
         <!--测试-->
         <activity android:name=".test.TestActivity"/>
 

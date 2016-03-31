@@ -5,11 +5,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Binder;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.network.ClientReceive;
 import com.xiaotao.Afamily.network.ClientSend;
@@ -45,18 +47,14 @@ import java.net.SocketTimeoutException;
  */
 public class ClientService extends Service {
     //  Socket 连接
-    private static Socket socket = null;
+    private Socket socket = null;
     //  定义客户端发送数据的广播接收
     private ServiceReceiver serviceReceiver = null;
     //  将客户端数据发送到服务器
     private ClientSend send = null;
-
-
     // 该线程所处理的Socket所对应的输入流
     private BufferedReader br = null;
     private ClientReceive receive = null;
-
-    private boolean FLAG = true;
 
     @Override
     public IBinder onBind(Intent intent)
@@ -67,23 +65,27 @@ public class ClientService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        System.out.println("### service onCreate");
         this.init();
-        //  创建网络连接&心跳检测
-        check.start();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         super.unregisterReceiver(serviceReceiver);
-        FLAG = false;
-        check.interrupt();
-
+        //  告诉服务器登出
+        try{
+            OutputStream outputStream = getSocket().getOutputStream();
+            outputStream.write((JSONUtil.logout() + "\r\n").getBytes("utf-8"));
+        }catch (Exception e) {
+            Log.i(AppUtil.tag.error, "logout is Error");
+            e.printStackTrace();
+        }
+        this.close();
         socket = null;
-        System.out.println("Socket 连接中断");
     }
+
     private void init(){
-        System.out.println("### service onCreate");
         //  创建ServiceReceiver
         serviceReceiver = new ServiceReceiver();
         IntentFilter filter = new IntentFilter();
@@ -91,30 +93,44 @@ public class ClientService extends Service {
         registerReceiver(serviceReceiver, filter);
     }
 
-    public static Socket getSocket() {
+
+    public void close(){
+        try {
+            br.close();
+            socket.close();
+            System.out.println("Socket 已关闭");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    //  获取Socket连接
+    private Socket getSocket() {
+        if (null == socket) {
+            setSocket();
+        }
+        while (socket == null){}
         return socket;
     }
 
     //  创建Socket连接
-    private void setSocket() {
-        try{
-            Thread.sleep(5 * 1000);
-            if (!FLAG) {
-                return;
+    private void setSocket(){
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    socket = new Socket(AppUtil.net.IP, AppUtil.net.port);
+                    System.out.println("###新建socket连接");
+                    receiveThread();
+                } catch (SocketTimeoutException timeException) {
+                    Log.i(AppUtil.tag.network, "ClientService is Error -----> 服务器连接超时");
+                    timeException.printStackTrace();
+                } catch (Exception e) {
+                    Log.i(AppUtil.tag.network, "ClientService is Error -----> 服务器连接失败");
+                    e.printStackTrace();
+                }
             }
-            socket = null;
-            System.out.println("###新建socket连接");
-            socket = new Socket(AppUtil.net.IP, AppUtil.net.port);
-            receiveThread();
-        }
-        catch (SocketTimeoutException timeException){
-            Log.i(AppUtil.tag.network, "ClientService is Error -----> 服务器连接超时");
-            timeException.printStackTrace();
-        }
-        catch (Exception e){
-            Log.i(AppUtil.tag.network, "ClientService is Error -----> 服务器连接失败");
-            e.printStackTrace();
-        }
+        }.start();
     }
 
     //  创建一个子线程来读取服务器的相应
@@ -123,15 +139,14 @@ public class ClientService extends Service {
             @Override
             public void run() {
                 try {
-                    Log.i(AppUtil.tag.error, "ClientService.receiveThread() is Connect");
-                    br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    br = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
                     // 启动一条子线程来读取服务器响应的数据
-                    receive = new ClientReceive(ClientService.this, br);
+                    receive = new ClientReceive(getBaseContext(), br);
                     new Thread(receive).start();
                     // 为当前线程初始化Looper
                     Looper.prepare();
                     // 启动Looper
-                    Looper.loop();
+                    Looper.loop();Log.i(AppUtil.tag.network, "ClientService.receiveThread() is Connect");
                 } catch (Exception e) {
                     Log.i(AppUtil.tag.error, "ClientService.receiveThread() is Error ----->  Exception ");
                     e.printStackTrace();
@@ -140,42 +155,6 @@ public class ClientService extends Service {
         }.start();
     }
 
-    //  心跳检测
-    private Thread check = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            while (FLAG){
-                try {
-                    socket.sendUrgentData(0xFF);
-                    System.out.println("目前是处于连接状态！");
-                    Thread.sleep(30 * 1000);
-                }catch (Exception e){
-                    e.printStackTrace();
-                    System.out.println("目前是处于断开状态！");
-                    try {
-                        socket.close();
-                    }catch (Exception e1){
-                        e.printStackTrace();
-                    }
-                    if (FLAG) {
-                        setSocket();
-                    }
-                }
-                if (FLAG && !BaseApplication.getInstance().isRunning()){
-                    System.out.println("### check is close");
-                    ClientSend send = new ClientSend(JSONUtil.logout());
-                    new Thread(send).start();
-                    FLAG = false;
-                    return;
-                }
-            }
-            stopSelf();
-        }
-    });
-
-
-
-
     //  服务器广播,将接受到的客户端请求发送到服务器
     public class ServiceReceiver extends BroadcastReceiver {
         @Override
@@ -183,7 +162,7 @@ public class ClientService extends Service {
             String msg = intent.getStringExtra(AppUtil.message.sendMessage);
             try {
                 JSONObject jsonObject = new JSONObject(msg);
-                send = new ClientSend(jsonObject);
+                send = new ClientSend(getSocket(),jsonObject);
                 new Thread(send).start();
             }catch (JSONException e){
                 e.printStackTrace();

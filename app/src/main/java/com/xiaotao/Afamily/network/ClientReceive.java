@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.xiaotao.Afamily.base.BaseActivity;
+import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.model.view.MyNotification;
 import com.xiaotao.Afamily.service.ClientService;
 import com.xiaotao.Afamily.test.TestEntity;
@@ -69,7 +71,6 @@ public class ClientReceive implements Runnable {
     }
 
     //  设置同步方法，任意时刻有且只能有一个接收程序
-/*    public synchronized void get(int type, JSONObject jsonObject) {*/
     public void get(int type, JSONObject jsonObject) {
         System.out.println("### " + type + " # ");
         // 每当读到来自服务器的数据之后，发送消息通知程序
@@ -85,7 +86,7 @@ public class ClientReceive implements Runnable {
                     context.sendBroadcast(intentLogin);
                     break;
                 case AppUtil.socket.logout:
-                    ClientService.getSocket().close();
+                //    ClientService.getSocket().close();
                     break;
                 case AppUtil.socket.test:
                     TestEntity testEntity = new TestEntity(jsonObject);

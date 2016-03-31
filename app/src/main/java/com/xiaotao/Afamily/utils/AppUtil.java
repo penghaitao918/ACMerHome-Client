@@ -23,7 +23,7 @@ public class AppUtil {
     //  Socket Connect
     public static final class net {
         public static final int port = 30000;
-        public static final String IP = "192.168.1.106";
+        public static final String IP = "192.168.72.2";
         public static final String tip = "消息类型错误！";
     }
 
@@ -47,7 +47,6 @@ public class AppUtil {
         public static final String portrait = "USER_PORTRAIT";
         public static final String userName = "USER_NAME";
         public static final String sex = "USER_SEX";
-        public static final String grade = "USER_GRADE";
         public static final String classes = "USER_CLASSES";
     }
 

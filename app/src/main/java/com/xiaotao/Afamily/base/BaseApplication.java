@@ -75,14 +75,12 @@ public class BaseApplication extends Application {
     }
 
     // 遍历所有Activity并finish
-    public void exit(Context mContext) {
-        if (!isRunning()) {
-            for (Activity activity : activityList) {
-                activity.finish();
-                Log.i(AppUtil.tag.activity, activity.getClass().getSimpleName() + "---> was finished.");
-            }
+    public void exit() {
+        for (Activity activity : activityList) {
+            activity.finish();
+            Log.i(AppUtil.tag.activity, activity.getClass().getSimpleName() + "---> was finished.");
         }
-        System.exit(0);
+   //     System.exit(0);
     }
 
     @Override

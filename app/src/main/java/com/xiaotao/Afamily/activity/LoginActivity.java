@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.xiaotao.Afamily.R;
+import com.xiaotao.Afamily.activity.core.MainPageActivity;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.network.ClientSend;
@@ -67,7 +68,12 @@ public class LoginActivity extends BaseActivity {
             progressDialog.dismiss();
         }
     }
-
+/**
+  * @author xiaoTao
+  * @date 2016/3/31  14:37
+  *
+  * @description 初始化编辑框控件和进度条
+  */
     private void init(){
         this.initBroadcast();
         this.accountEdit = (EditText) findViewById(R.id.login_accountEdit);
@@ -76,7 +82,12 @@ public class LoginActivity extends BaseActivity {
         this.progressDialog.setMessage("登录中...");
         this.progressDialog.onStart();
     }
-
+/**
+  * @author xiaoTao
+  * @date 2016/3/31  14:38
+  *
+  * @description 初始化广播
+  */
     private void initBroadcast(){
         //  TestReceiver
         loginReceiver = new LoginReceiver();
@@ -97,18 +108,18 @@ public class LoginActivity extends BaseActivity {
                     }
                     Toast.makeText(LoginActivity.this,"请输入账号和密码",Toast.LENGTH_LONG).show();
                     break;
-                //  登录验证
+                //  等待登录验证结果
                 case 0:
                     InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     im.hideSoftInputFromWindow(getCurrentFocus().getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     progressDialog.show();
                     break;
-                //  登录成功
+                //  登录成功进入MainPage
                 case 1:
                     if (progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
-                    Intent loginIntent = new Intent(LoginActivity.this,TestActivity.class);
+                    Intent loginIntent = new Intent(LoginActivity.this,MainPageActivity.class);
                     loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(loginIntent);
                     finish();
@@ -134,7 +145,6 @@ public class LoginActivity extends BaseActivity {
         Message m = new Message();
         m.what = 0;
         handler.sendMessage(m);
-        //    handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
                 Message m = new Message();
@@ -154,7 +164,6 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void run() {
                         setProgressDialogTime(1000 * 15);
-                        while (ClientService.getSocket() == null){}
                         //  判断是否输入账号密码
                         String account = accountEdit.getText().toString();
                         String password = passwordEdit.getText().toString();
@@ -165,6 +174,7 @@ public class LoginActivity extends BaseActivity {
                             return;
                         }
                         //  无网络功能测试
+                        //  TODO 此处在最终版本时注释
                         if (account.equals("adminTest") && password.equals("adminTest")){
                             Message m = new Message();
                             m.what = 1;
@@ -193,11 +203,18 @@ public class LoginActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String msg = intent.getStringExtra(AppUtil.message.login);
+            System.out.println(msg);
             try {
                 Message m = new Message();
                 JSONObject jsonObject = new JSONObject(msg);
                 boolean flag = jsonObject.getBoolean(AppUtil.login.loginFlag);
                 if (flag){
+                    //  TODO 获取账号信息并写入缓存
+                    System.out.println(jsonObject.getString(AppUtil.login.account));
+                    System.out.println(jsonObject.getString(AppUtil.login.classes));
+                    System.out.println(jsonObject.getString(AppUtil.login.userName));
+                    System.out.println(jsonObject.getString(AppUtil.login.portrait));
+                    System.out.println(jsonObject.getString(AppUtil.login.sex));
                     m.what = 1;
                 }else {
                     m.what = 2;
@@ -206,8 +223,6 @@ public class LoginActivity extends BaseActivity {
             }catch (JSONException e){
                 e.printStackTrace();
             }
-
-
         }
     }
 

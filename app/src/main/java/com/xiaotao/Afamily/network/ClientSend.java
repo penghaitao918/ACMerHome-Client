@@ -1,5 +1,9 @@
 package com.xiaotao.Afamily.network;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.util.Log;
 
 import com.xiaotao.Afamily.service.ClientService;
@@ -8,6 +12,7 @@ import com.xiaotao.Afamily.utils.AppUtil;
 import org.json.JSONObject;
 
 import java.io.OutputStream;
+import java.net.Socket;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -29,18 +34,20 @@ import java.io.OutputStream;
  */
 public class ClientSend implements Runnable {
 
-    private JSONObject jsonObject = null;
+    private Socket mSocket = null;
+    private JSONObject mJsonObject = null;
 
-    public ClientSend(JSONObject jsonObject) {
-        this.jsonObject = jsonObject;
+    public ClientSend(Socket socket, JSONObject jsonObject) {
+        this.mSocket = socket;
+        this.mJsonObject = jsonObject;
     }
 
     @Override
     public void run()
     {
         try{
-            OutputStream outputStream = ClientService.getSocket().getOutputStream();
-            outputStream.write((jsonObject + "\r\n").getBytes("utf-8"));
+            OutputStream outputStream = mSocket.getOutputStream();
+            outputStream.write((mJsonObject + "\r\n").getBytes("utf-8"));
         }catch (Exception e) {
             Log.i(AppUtil.tag.error, "ClientSend.run() is Error");
             e.printStackTrace();
