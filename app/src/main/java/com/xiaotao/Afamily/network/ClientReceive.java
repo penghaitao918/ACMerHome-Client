@@ -85,6 +85,11 @@ public class ClientReceive implements Runnable {
                     intentLogin.putExtra(AppUtil.message.login, jsonObject.toString());
                     context.sendBroadcast(intentLogin);
                     break;
+                case AppUtil.socket.reLogin:
+                    Intent intentReLogin = new Intent(AppUtil.broadcast.reLogin);
+                    intentReLogin.putExtra(AppUtil.message.reLogin, jsonObject.toString());
+                    context.sendBroadcast(intentReLogin);
+                    break;
                 case AppUtil.socket.logout:
                 //    ClientService.getSocket().close();
                     break;

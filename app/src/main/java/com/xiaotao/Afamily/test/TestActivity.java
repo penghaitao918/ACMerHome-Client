@@ -19,6 +19,7 @@ import com.xiaotao.Afamily.network.ClientSend;
 import com.xiaotao.Afamily.service.ClientService;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
+import com.xiaotao.Afamily.utils.SPUtils;
 
 import org.json.JSONObject;
 
@@ -101,7 +102,8 @@ public class TestActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         super.unregisterReceiver(testReceiver);
-
+        SPUtils spUtils = new SPUtils(getBaseContext());
+        spUtils.set(AppUtil.sp.loginFlag, false);
         Intent intent = new Intent(this, ClientService.class);
         stopService(intent);
         BaseApplication.getInstance().exit();

@@ -22,6 +22,7 @@ import com.xiaotao.Afamily.service.ClientService;
 import com.xiaotao.Afamily.test.TestActivity;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
+import com.xiaotao.Afamily.utils.SPUtils;
 import com.xiaotao.Afamily.utils.StringUtil;
 
 import org.json.JSONException;
@@ -52,6 +53,7 @@ public class LoginActivity extends BaseActivity {
 
     private ProgressDialog progressDialog = null;
     private LoginReceiver loginReceiver = null;
+    private SPUtils spUtils = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class LoginActivity extends BaseActivity {
         if (progressDialog.isShowing()){
             progressDialog.dismiss();
         }
+        this.spUtils.recycle();
     }
 /**
   * @author xiaoTao
@@ -76,6 +79,7 @@ public class LoginActivity extends BaseActivity {
   */
     private void init(){
         this.initBroadcast();
+        this.spUtils = new SPUtils(getBaseContext());
         this.accountEdit = (EditText) findViewById(R.id.login_accountEdit);
         this.passwordEdit = (EditText) findViewById(R.id.login_passwardEdit);
         this.progressDialog = new ProgressDialog(LoginActivity.this);
@@ -89,7 +93,6 @@ public class LoginActivity extends BaseActivity {
   * @description 初始化广播
   */
     private void initBroadcast(){
-        //  TestReceiver
         loginReceiver = new LoginReceiver();
         //  创建IntentFilter
         IntentFilter filter = new IntentFilter();
@@ -199,6 +202,26 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    private void saveInfoToSP(final JSONObject jsonObject) {
+        new Thread(new Runnable() {
+            @Override
+            public void run(){
+                try {
+                    spUtils.set(AppUtil.sp.loginFlag, true);
+                    spUtils.set(AppUtil.sp.account, accountEdit.getText().toString());
+                    spUtils.set(AppUtil.sp.password, StringUtil.MD5(passwordEdit.getText().toString()));
+                    spUtils.set(AppUtil.sp.classes, jsonObject.getString(AppUtil.login.classes));
+                    spUtils.set(AppUtil.sp.userName, jsonObject.getString(AppUtil.login.userName));
+                    spUtils.set(AppUtil.sp.portrait, jsonObject.getString(AppUtil.login.portrait));
+                    spUtils.set(AppUtil.sp.sex, jsonObject.getString(AppUtil.login.sex));
+                    System.out.println("写入");
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
     public class LoginReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -207,14 +230,10 @@ public class LoginActivity extends BaseActivity {
             try {
                 Message m = new Message();
                 JSONObject jsonObject = new JSONObject(msg);
-                boolean flag = jsonObject.getBoolean(AppUtil.login.loginFlag);
+                Boolean flag = jsonObject.getBoolean(AppUtil.login.loginFlag);
                 if (flag){
-                    //  TODO 获取账号信息并写入缓存
-                    System.out.println(jsonObject.getString(AppUtil.login.account));
-                    System.out.println(jsonObject.getString(AppUtil.login.classes));
-                    System.out.println(jsonObject.getString(AppUtil.login.userName));
-                    System.out.println(jsonObject.getString(AppUtil.login.portrait));
-                    System.out.println(jsonObject.getString(AppUtil.login.sex));
+                    //  获取账号信息并写入缓存
+                    saveInfoToSP(jsonObject);
                     m.what = 1;
                 }else {
                     m.what = 2;

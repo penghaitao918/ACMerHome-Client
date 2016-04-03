@@ -26,7 +26,7 @@ import java.util.Map;
 public class SPUtils {
 
     private Context context = null;
-    private String FILENAME = AppUtil.sp.file_name;
+    private String FILENAME = AppUtil.sp.fileName;
 
     public SPUtils(Context context) {
         this.context = context;

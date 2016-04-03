@@ -8,7 +8,8 @@
     <!-- Customize your theme here. -->
     <style name="AppTheme" parent="AppBaseTheme" >
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/page</item>
+<!--        <item name="android:windowBackground">@color/page</item>-->
+        <item name="android:windowBackground">@drawable/bg_welcome</item>
     </style>
 
     <!-- menu_pop_up 弹窗样式 -->
