@@ -140,7 +140,7 @@ public class WelcomeActivity extends BaseActivity
 				startActivity(loginIntent);
 				break;
 			case R.id.welcome_registerButton:
-				Intent registerIntent = new Intent(WelcomeActivity.this, TestActivity.class);
+				Intent registerIntent = new Intent(WelcomeActivity.this, RegisterActivity.class);
 				startActivity(registerIntent);
 				break;
 		}

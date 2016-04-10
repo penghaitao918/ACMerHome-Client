@@ -82,7 +82,7 @@ public class LoginActivity extends BaseActivity {
         this.spUtils = new SPUtils(getBaseContext());
         this.accountEdit = (EditText) findViewById(R.id.login_accountEdit);
         this.passwordEdit = (EditText) findViewById(R.id.login_passwardEdit);
-        this.progressDialog = new ProgressDialog(LoginActivity.this);
+        this.progressDialog = new ProgressDialog(this);
         this.progressDialog.setMessage("登录中...");
         this.progressDialog.onStart();
     }
