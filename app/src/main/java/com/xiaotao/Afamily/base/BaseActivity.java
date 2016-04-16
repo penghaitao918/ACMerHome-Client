@@ -67,7 +67,12 @@ public class BaseActivity extends Activity {
         System.out.println("### 开启service");
         Intent intent = new Intent(this, ClientService.class);
         startService(intent);
+    }
 
+    protected void sendToService(String jsonMessage) {
+        Intent it = new Intent(AppUtil.broadcast.service_client);
+        it.putExtra(AppUtil.message.sendMessage, jsonMessage);
+        sendBroadcast(it);
     }
 
     @Override

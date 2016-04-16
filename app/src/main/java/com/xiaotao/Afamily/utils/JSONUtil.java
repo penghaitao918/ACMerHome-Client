@@ -57,8 +57,8 @@ public class JSONUtil{
         JSONObject loginJSON = new JSONObject();
         try {
             loginJSON.put(AppUtil.socket.type, AppUtil.socket.login);
-            loginJSON.put(AppUtil.login.account, user.getStuId());
-            loginJSON.put(AppUtil.login.password, user.getPassword());
+            loginJSON.put(AppUtil.user.account, user.getStuId());
+            loginJSON.put(AppUtil.user.password, user.getPassword());
         }catch (JSONException e){
             e.printStackTrace();
         }
@@ -70,8 +70,8 @@ public class JSONUtil{
         JSONObject loginJSON = new JSONObject();
         try {
             loginJSON.put(AppUtil.socket.type, AppUtil.socket.reLogin);
-            loginJSON.put(AppUtil.login.account, user.getStuId());
-            loginJSON.put(AppUtil.login.password, user.getPassword());
+            loginJSON.put(AppUtil.user.account, user.getStuId());
+            loginJSON.put(AppUtil.user.password, user.getPassword());
         }catch (JSONException e){
             e.printStackTrace();
         }
@@ -83,6 +83,18 @@ public class JSONUtil{
         JSONObject logoutJSON = new JSONObject();
         try {
             logoutJSON.put(AppUtil.socket.type,AppUtil.socket.logout);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        System.out.println(logoutJSON);
+        return logoutJSON;
+    }
+
+    //  logout
+    public static JSONObject getAllTaskInfoList(){
+        JSONObject logoutJSON = new JSONObject();
+        try {
+            logoutJSON.put(AppUtil.socket.type,AppUtil.socket.taskList);
         }catch (JSONException e){
             e.printStackTrace();
         }

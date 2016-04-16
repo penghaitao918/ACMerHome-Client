@@ -1,15 +1,16 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+<!--    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">-->
+    <style name="AppBaseTheme" parent="android:Theme.DeviceDefault.NoActionBar">
     </style>
 
 
     <!-- Customize your theme here. -->
     <style name="AppTheme" parent="AppBaseTheme" >
         <item name="android:windowNoTitle">true</item>
-<!--        <item name="android:windowBackground">@color/page</item>-->
-        <item name="android:windowBackground">@drawable/bg_welcome</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@drawable/bg_main</item>
     </style>
 
     <!-- menu_pop_up 弹窗样式 -->

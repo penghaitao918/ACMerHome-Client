@@ -38,10 +38,11 @@ public class AppUtil {
         public static final int login = 1;
         public static final int reLogin = 2;
         public static final int logout = 3;
+        public static final int taskList = 4;
     }
 
-    //  login
-    public static final class login {
+    //  user
+    public static final class user {
         public static final String loginFlag = "LOGIN_FLAG";
         public static final String account = "USER_ACCOUNT";
         public static final String password = "USER_PASSWORD";
@@ -64,16 +65,20 @@ public class AppUtil {
         public static final String login = "com.xiaotao.action.LOGIN";
         public static final String reLogin = "com.xiaotao.action.RELOGIN";
         public static final String test = "com.xiaotao.action.TEST";
+        public static final String conversationList = "com.xiaotao.action.CONVERSATION_LIST";
     }
 
     //  Broadcast Message
     public static final class message {
         public static final String sendMessage = "SERVICE_MSG";
+        public static final String type = "RECEIVE_TYPE";
         public static final String login = "RECEIVE_LOGIN_MSG";
         public static final String reLogin = "RECEIVE_RELOGIN_MSG";
+        public static final String taskList = "RECEIVE_TASK_LIST_MSG";
         public static final String test = "TEST_MSG";
     }
 
+    //  SharedPreferences 存储
     public static final class sp {
         public static final String fileName = "spFile";
         public static final String loginFlag = "loginFlag";
@@ -83,5 +88,17 @@ public class AppUtil {
         public static final String userName = "userName";
         public static final String sex = "userSex";
         public static final String classes = "userClasses";
+    }
+
+    //  讨论组
+    public static final class conversation {
+        public static final String type = "TYPE";
+        public static final String taskId = "TASK_ID";
+        public static final String name = "TASK_NAME";
+        public static final String who = "STUDENT_NAME";
+        public static final String mesaage = "MESSAGE";
+        public static final String time = "MESSAHE_TIME";
+        public static final String count = "MESSAGE_COUNT";
+        public static final String image = "COUNT_BG";
     }
 }

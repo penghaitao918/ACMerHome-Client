@@ -21,6 +21,8 @@
     <color name="blue">#ff1eb4ff</color>
     <color name="blue_">#ff04abff</color>
 
+    <color name="search_cursor">#3cb2ef</color>
+
     <color name="blue0">#ff2498ae</color>
     <color name="blue1">#3586b3</color>
 

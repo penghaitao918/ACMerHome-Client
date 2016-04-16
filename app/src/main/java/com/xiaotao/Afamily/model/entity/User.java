@@ -42,12 +42,12 @@ public class User {
     //  JSON解析
     public User(JSONObject jsonObject) {
         try {
-            this.stuId = jsonObject.getString(AppUtil.login.account);
-            this.portrait = ChangeUtil.toBitmap(jsonObject.getString(AppUtil.login.password));
-            this.userName = jsonObject.getString(AppUtil.login.password);
-            this.sex = jsonObject.getInt(AppUtil.login.password);
-            this.grade = jsonObject.getString(AppUtil.login.password);
-            this.classes = jsonObject.getString(AppUtil.login.password);
+            this.stuId = jsonObject.getString(AppUtil.user.account);
+            this.portrait = ChangeUtil.toBitmap(jsonObject.getString(AppUtil.user.password));
+            this.userName = jsonObject.getString(AppUtil.user.password);
+            this.sex = jsonObject.getInt(AppUtil.user.password);
+            this.grade = jsonObject.getString(AppUtil.user.password);
+            this.classes = jsonObject.getString(AppUtil.user.password);
         }catch (JSONException e){
             e.printStackTrace();
         }

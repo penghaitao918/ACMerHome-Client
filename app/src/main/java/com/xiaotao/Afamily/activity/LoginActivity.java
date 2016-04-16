@@ -14,12 +14,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.xiaotao.Afamily.R;
-import com.xiaotao.Afamily.activity.core.MainPageActivity;
+import com.xiaotao.Afamily.activity.core.BasePageActivity;
+import com.xiaotao.Afamily.activity.register.RegisterActivity;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.model.entity.User;
-import com.xiaotao.Afamily.network.ClientSend;
-import com.xiaotao.Afamily.service.ClientService;
-import com.xiaotao.Afamily.test.TestActivity;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
 import com.xiaotao.Afamily.utils.SPUtils;
@@ -114,7 +112,9 @@ public class LoginActivity extends BaseActivity {
                 //  等待登录验证结果
                 case 0:
                     InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    im.hideSoftInputFromWindow(getCurrentFocus().getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    if (getCurrentFocus() != null) {
+                        im.hideSoftInputFromWindow(getCurrentFocus().getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
                     progressDialog.show();
                     break;
                 //  登录成功进入MainPage
@@ -122,7 +122,8 @@ public class LoginActivity extends BaseActivity {
                     if (progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
-                    Intent loginIntent = new Intent(LoginActivity.this,MainPageActivity.class);
+                    System.out.println("111111");
+                    Intent loginIntent = new Intent(LoginActivity.this,BasePageActivity.class);
                     loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(loginIntent);
                     finish();
@@ -144,17 +145,30 @@ public class LoginActivity extends BaseActivity {
         }
     };
 
-    private void setProgressDialogTime(int time){
-        Message m = new Message();
-        m.what = 0;
-        handler.sendMessage(m);
-        handler.postDelayed(new Runnable() {
+    private void setProgressDialogTime(final int time){
+        new Thread(){
+            @Override
             public void run() {
                 Message m = new Message();
-                m.what = 3;
+                m.what = 0;
                 handler.sendMessage(m);
             }
-        }, time);
+        }.start();
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(time);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (progressDialog.isShowing()){
+                    Message m = new Message();
+                    m.what = 3;
+                    handler.sendMessage(m);
+                }
+            }
+        }.start();
     }
 
     public void loginOnClick(View view) {
@@ -178,7 +192,7 @@ public class LoginActivity extends BaseActivity {
                         }
                         //  无网络功能测试
                         //  TODO 此处在最终版本时注释
-                        if (account.equals("adminTest") && password.equals("adminTest")){
+                        if (account.equals("1234") && password.equals("5678")){
                             Message m = new Message();
                             m.what = 1;
                             handler.sendMessage(m);
@@ -186,11 +200,7 @@ public class LoginActivity extends BaseActivity {
                             User user = new User();
                             user.setStuId(account);
                             user.setPassword(StringUtil.MD5(password));
-                            JSONUtil jsonUtil = new JSONUtil();
-                            JSONObject jsonObject = jsonUtil.login(user);
-                            Intent it = new Intent(AppUtil.broadcast.service_client);
-                            it.putExtra(AppUtil.message.sendMessage, jsonObject.toString());
-                            sendBroadcast(it);
+                            sendToService(JSONUtil.login(user).toString());
                         }
                     }
                 }).start();
@@ -210,10 +220,10 @@ public class LoginActivity extends BaseActivity {
                     spUtils.set(AppUtil.sp.loginFlag, true);
                     spUtils.set(AppUtil.sp.account, accountEdit.getText().toString());
                     spUtils.set(AppUtil.sp.password, StringUtil.MD5(passwordEdit.getText().toString()));
-                    spUtils.set(AppUtil.sp.classes, jsonObject.getString(AppUtil.login.classes));
-                    spUtils.set(AppUtil.sp.userName, jsonObject.getString(AppUtil.login.userName));
-                    spUtils.set(AppUtil.sp.portrait, jsonObject.getString(AppUtil.login.portrait));
-                    spUtils.set(AppUtil.sp.sex, jsonObject.getString(AppUtil.login.sex));
+                    spUtils.set(AppUtil.sp.classes, jsonObject.getString(AppUtil.user.classes));
+                    spUtils.set(AppUtil.sp.userName, jsonObject.getString(AppUtil.user.userName));
+                    spUtils.set(AppUtil.sp.portrait, jsonObject.getString(AppUtil.user.portrait));
+                    spUtils.set(AppUtil.sp.sex, jsonObject.getString(AppUtil.user.sex));
                     System.out.println("写入");
                 }catch (JSONException e){
                     e.printStackTrace();
@@ -230,7 +240,7 @@ public class LoginActivity extends BaseActivity {
             try {
                 Message m = new Message();
                 JSONObject jsonObject = new JSONObject(msg);
-                Boolean flag = jsonObject.getBoolean(AppUtil.login.loginFlag);
+                Boolean flag = jsonObject.getBoolean(AppUtil.user.loginFlag);
                 if (flag){
                     //  获取账号信息并写入缓存
                     saveInfoToSP(jsonObject);

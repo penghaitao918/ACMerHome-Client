@@ -1,6 +1,7 @@
-package com.xiaotao.Afamily.activity;
+package com.xiaotao.Afamily.activity.register;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.xiaotao.Afamily.R;
+import com.xiaotao.Afamily.activity.LoginActivity;
+import com.xiaotao.Afamily.activity.core.BasePageActivity;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.ChangeUtil;
@@ -89,6 +92,8 @@ public class RegisterActivity extends BaseActivity {
                     if (progressDialog.isShowing()){
                         progressDialog.dismiss();
                     }
+                    Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                    startActivity(intent);
                     Toast.makeText(RegisterActivity.this,"  注册成功\n欢迎你的加入",Toast.LENGTH_LONG).show();
                     break;
                 case 3: //  注册超时
@@ -100,6 +105,32 @@ public class RegisterActivity extends BaseActivity {
             }
         }
     };
+
+    private void setProgressDialogTime(final int time){
+        new Thread(){
+            @Override
+            public void run() {
+                Message m = new Message();
+                m.what = 0;
+                handler.sendMessage(m);
+            }
+        }.start();
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(time);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (progressDialog.isShowing()){
+                    Message m = new Message();
+                    m.what = 3;
+                    handler.sendMessage(m);
+                }
+            }
+        }.start();
+    }
 
     public void registerOnClick(View view){
         Message message = new Message();
@@ -115,6 +146,7 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void run()
                     {
+                        setProgressDialogTime(1000 * 15);
                         String account = accountEdit.getText().toString();
                         String password = StringUtil.MD5(pswEdit.getText().toString());
                         String classes = classesEdit.getText().toString();
@@ -134,13 +166,8 @@ public class RegisterActivity extends BaseActivity {
                 }.start();
                 break;
             case R.id.register_tipBtn:
-                Bitmap  bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.portrait_default);
-                String portrait = ChangeUtil.toBinary(bitmap);
-                System.out.println("#");
-                System.out.println(portrait);
-                System.out.println("#");
-                SPUtils spUtils = new SPUtils(this);
-                spUtils.set(AppUtil.sp.portrait, portrait);
+                Intent intent = new Intent(this,AgreementPopWin.class);
+                startActivity(intent);
                 break;
         }
     }

@@ -47,6 +47,7 @@ import java.net.SocketTimeoutException;
  */
 public class ClientService extends Service {
     //  Socket 连接
+    private boolean flag = true;
     private Socket socket = null;
     //  定义客户端发送数据的广播接收
     private ServiceReceiver serviceReceiver = null;
@@ -74,15 +75,20 @@ public class ClientService extends Service {
         super.onDestroy();
         super.unregisterReceiver(serviceReceiver);
         //  告诉服务器登出
-        try{
-            OutputStream outputStream = getSocket().getOutputStream();
-            outputStream.write((JSONUtil.logout() + "\r\n").getBytes("utf-8"));
-        }catch (Exception e) {
-            Log.i(AppUtil.tag.error, "logout is Error");
-            e.printStackTrace();
-        }
-        this.close();
-        socket = null;
+        new Thread(){
+            @Override
+            public void run() {
+                try{
+                    OutputStream outputStream = getSocket().getOutputStream();
+                    outputStream.write((JSONUtil.logout() + "\r\n").getBytes("utf-8"));
+                }catch (Exception e) {
+                    Log.i(AppUtil.tag.error, "logout is Error");
+                    e.printStackTrace();
+                }
+    //            ClientService.this.close();
+    //            socket = null;
+            }
+        }.start();
     }
 
     private void init(){
@@ -109,7 +115,8 @@ public class ClientService extends Service {
         if (null == socket) {
             setSocket();
         }
-        while (socket == null){}
+        while (flag && socket == null){ }
+        flag = true;
         return socket;
     }
 
@@ -123,9 +130,11 @@ public class ClientService extends Service {
                     System.out.println("###新建socket连接");
                     receiveThread();
                 } catch (SocketTimeoutException timeException) {
+                    flag = false;
                     Log.i(AppUtil.tag.network, "ClientService is Error -----> 服务器连接超时");
                     timeException.printStackTrace();
                 } catch (Exception e) {
+                    flag = false;
                     Log.i(AppUtil.tag.network, "ClientService is Error -----> 服务器连接失败");
                     e.printStackTrace();
                 }
@@ -158,15 +167,21 @@ public class ClientService extends Service {
     //  服务器广播,将接受到的客户端请求发送到服务器
     public class ServiceReceiver extends BroadcastReceiver {
         @Override
-        public void onReceive(final Context context, Intent intent) {
-            String msg = intent.getStringExtra(AppUtil.message.sendMessage);
-            try {
-                JSONObject jsonObject = new JSONObject(msg);
-                send = new ClientSend(getSocket(),jsonObject);
-                new Thread(send).start();
-            }catch (JSONException e){
-                e.printStackTrace();
-            }
+        public void onReceive(final Context context, final Intent intent) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String msg = intent.getStringExtra(AppUtil.message.sendMessage);
+                    try {
+                        JSONObject jsonObject = new JSONObject(msg);
+                        send = new ClientSend(getSocket(),jsonObject);
+                        new Thread(send).start();
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+
         }
     }
 

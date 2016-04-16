@@ -101,6 +101,12 @@ public class ClientReceive implements Runnable {
                     intent.putExtra(AppUtil.message.test, testEntity);
                     context.sendBroadcast(intent);
                     break;
+                case AppUtil.socket.taskList:
+                    Intent intentTaskList = new Intent(AppUtil.broadcast.conversationList);
+                    intentTaskList.putExtra(AppUtil.message.type, 0);
+                    intentTaskList.putExtra(AppUtil.message.taskList, jsonObject.toString());
+                    context.sendBroadcast(intentTaskList);
+                    break;
                 default:
                     Log.i(AppUtil.tag.network,AppUtil.net.tip);
                     System.out.println(AppUtil.socket.checkMSG);

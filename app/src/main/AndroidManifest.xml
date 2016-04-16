@@ -18,10 +18,22 @@
         <!--登录-->
         <activity android:name=".activity.LoginActivity"/>
         <!--注册-->
-        <activity android:name=".activity.RegisterActivity"/>
+        <activity android:name=".activity.register.RegisterActivity"/>
+        <!--用户协议-->
+        <activity android:name=".activity.register.AgreementPopWin"
+            android:theme="@style/MyDialogStyleBottom"/>
 
         <!--主体功能界面-->
-        <activity android:name=".activity.core.MainPageActivity"/>
+        <activity android:name=".activity.core.BasePageActivity"/>
+        <!--任务讨论-->
+        <activity android:name=".activity.core.ConversationListPageActivity"/>
+        <!--主要菜单-->
+        <activity android:name=".activity.core.HomePageActivity"/>
+        <!--用户信息-->
+        <activity android:name=".activity.core.UserPageActivity"/>
+
+        <!--任务一览-->
+        <activity android:name=".activity.subpage.TaskListPage"/>
 
         <!--测试-->
         <activity android:name=".test.TestActivity"/>

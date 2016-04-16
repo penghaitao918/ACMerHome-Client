@@ -75,12 +75,7 @@ public class TestActivity extends BaseActivity {
                 TestEntity testEntity = new TestEntity();
                 testEntity.setMsg(input.getText().toString());
 
-                JSONUtil jsonUtil = new JSONUtil();
-                JSONObject jsonObject = jsonUtil.test(testEntity);
-
-				Intent it = new Intent(AppUtil.broadcast.service_client);
-				it.putExtra(AppUtil.message.sendMessage, jsonObject.toString());
-                sendBroadcast(it);
+                sendToService(JSONUtil.test(testEntity).toString());
 
                 input.setText("");
             }

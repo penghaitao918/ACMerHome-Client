@@ -1,11 +1,9 @@
-package com.xiaotao.Afamily.activity.core;
+package com.xiaotao.Afamily.activity.register;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.base.BaseActivity;
-import com.xiaotao.Afamily.test.TestActivity;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -23,25 +21,13 @@ import com.xiaotao.Afamily.test.TestActivity;
  * 　　    ＞―r￣￣`ｰ―＿
  *
  * @author xiaoTao
- * @date 2016-03-04  22:49
+ * @date 2016-04-10  20:17
  */
-public class MainPageActivity extends BaseActivity{
+public class AgreementPopWin extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
-        this.init();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    private void init(){
-
-        Intent loginIntent = new Intent(this,TestActivity.class);
-        startActivity(loginIntent);
+        super.setContentView(R.layout.popwin_agreement);
     }
 }

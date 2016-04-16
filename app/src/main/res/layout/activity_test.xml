@@ -21,12 +21,31 @@
 			android:text="@string/send"/>
 	</LinearLayout>
 	<!-- 定义一个文本框，它用于显示来自服务器的信息 -->
+
 	<TextView
 		android:id="@+id/show"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="200dp"
 		android:gravity="top"
 		android:background="#ffff"
 		android:textSize="14dp"
 		android:textColor="#f000"/>
+
+	<RadioGroup
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal">
+
+		<RadioButton
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="New RadioButton"
+			android:id="@+id/radioButton" />
+
+		<RadioButton
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="New RadioButton"
+			android:id="@+id/radioButton2" />
+	</RadioGroup>
 </LinearLayout>

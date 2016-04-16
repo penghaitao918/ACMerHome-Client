@@ -12,15 +12,13 @@ import android.view.animation.AlphaAnimation;
 import android.widget.RelativeLayout;
 
 import com.xiaotao.Afamily.R;
-import com.xiaotao.Afamily.activity.core.MainPageActivity;
+import com.xiaotao.Afamily.activity.core.BasePageActivity;
+import com.xiaotao.Afamily.activity.register.RegisterActivity;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.model.entity.User;
-import com.xiaotao.Afamily.service.ClientService;
-import com.xiaotao.Afamily.test.TestActivity;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
 import com.xiaotao.Afamily.utils.SPUtils;
-import com.xiaotao.Afamily.utils.StringUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -105,11 +103,7 @@ public class WelcomeActivity extends BaseActivity
 		User user = new User();
 		user.setStuId((String) spUtils.get(AppUtil.sp.account, ""));
 		user.setPassword((String) spUtils.get(AppUtil.sp.password, ""));
-		JSONUtil jsonUtil = new JSONUtil();
-		JSONObject jsonObject = jsonUtil.reLogin(user);
-		Intent it = new Intent(AppUtil.broadcast.service_client);
-		it.putExtra(AppUtil.message.sendMessage, jsonObject.toString());
-		sendBroadcast(it);
+		sendToService(JSONUtil.reLogin(user).toString());
 	}
 
 	private Handler handler = new Handler()
@@ -119,7 +113,7 @@ public class WelcomeActivity extends BaseActivity
 		{
 			switch (msg.what){
 				case 0:
-					Intent intent = new Intent(WelcomeActivity.this,MainPageActivity.class);
+					Intent intent = new Intent(WelcomeActivity.this,BasePageActivity.class);
 					startActivity(intent);
 					finish();
 					break;
@@ -153,7 +147,7 @@ public class WelcomeActivity extends BaseActivity
 			try {
 				Message m = new Message();
 				JSONObject jsonObject = new JSONObject(msg);
-				boolean flag = jsonObject.getBoolean(AppUtil.login.loginFlag);
+				boolean flag = jsonObject.getBoolean(AppUtil.user.loginFlag);
 				if (flag){
 					m.what = 0;
 				}else {
