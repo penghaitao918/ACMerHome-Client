@@ -47,11 +47,12 @@ import static com.xiaotao.Afamily.R.drawable.shape_search_cursor_res;
  */
 public class ConversationListPageActivity extends BaseActivity {
 
+    private boolean isLoad = false;
 
     private ListView listView = null;
     private SearchView searchView = null;
-    private ConversationAdapter simpleAdapter = null;
     private ArrayList<Conversation> dataList = null;
+    private ConversationAdapter simpleAdapter = null;
 
     private ConversationListBroadcastReceiver receiver = null;
 
@@ -116,6 +117,7 @@ public class ConversationListPageActivity extends BaseActivity {
         }catch (JSONException e){
             e.printStackTrace();
         }
+        simpleAdapter.notifyDataSetChanged();
     }
 
     private class OnItemClickListenerImpl implements AdapterView.OnItemClickListener {
@@ -130,7 +132,7 @@ public class ConversationListPageActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             int type =  intent.getIntExtra(AppUtil.message.type, -1);
             //  初始化列表
-            if (type == 0){
+            if (type == 0 && !isLoad){
                 String msg = intent.getStringExtra(AppUtil.message.taskList);
                 try {
                     JSONObject jsonObject = new JSONObject(msg);
@@ -140,6 +142,7 @@ public class ConversationListPageActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                isLoad = true;
             } else if(type == 1) {
                 //  TODO 接收最新消息
             }

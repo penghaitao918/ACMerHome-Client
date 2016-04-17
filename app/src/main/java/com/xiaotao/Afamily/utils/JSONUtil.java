@@ -1,5 +1,6 @@
 package com.xiaotao.Afamily.utils;
 
+import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.test.TestEntity;
 
@@ -90,11 +91,38 @@ public class JSONUtil{
         return logoutJSON;
     }
 
-    //  logout
+    //  获取任务列表
     public static JSONObject getAllTaskInfoList(){
         JSONObject logoutJSON = new JSONObject();
         try {
             logoutJSON.put(AppUtil.socket.type,AppUtil.socket.taskList);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        System.out.println(logoutJSON);
+        return logoutJSON;
+    }
+
+    //  获取任务完成情况
+    public static JSONObject getAllStudentTaskList(){
+        JSONObject logoutJSON = new JSONObject();
+        try {
+            logoutJSON.put(AppUtil.socket.type, AppUtil.socket.studentTaskList);
+            logoutJSON.put(AppUtil.studentTask.account, BaseApplication.getInstance().getAccount());
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        System.out.println(logoutJSON);
+        return logoutJSON;
+    }
+
+    //  完成任务
+    public static JSONObject submitTask(int taskId) {
+        JSONObject logoutJSON = new JSONObject();
+        try {
+            logoutJSON.put(AppUtil.socket.type, AppUtil.socket.submitTask);
+            logoutJSON.put(AppUtil.studentTask.taskId, taskId);
+            logoutJSON.put(AppUtil.studentTask.account, BaseApplication.getInstance().getAccount());
         }catch (JSONException e){
             e.printStackTrace();
         }

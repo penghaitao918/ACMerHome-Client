@@ -37,6 +37,8 @@ public class BaseApplication extends Application {
     private static BaseApplication instance;
     private List<Activity> activityList = new LinkedList<Activity>();
 
+    private String account = null;
+
     // 单例模式中获取唯一的MyApplication实例
     public static BaseApplication getInstance() {
         if (null == instance) {
@@ -93,5 +95,12 @@ public class BaseApplication extends Application {
         super.onTerminate();
     }
 
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
 }
 

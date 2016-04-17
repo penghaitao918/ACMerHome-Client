@@ -17,6 +17,7 @@ import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.activity.core.BasePageActivity;
 import com.xiaotao.Afamily.activity.register.RegisterActivity;
 import com.xiaotao.Afamily.base.BaseActivity;
+import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
@@ -177,6 +178,7 @@ public class LoginActivity extends BaseActivity {
                 onBackPressed();
                 break;
             case R.id.login_loginButton:
+                BaseApplication.getInstance().setAccount(accountEdit.getText().toString());
                 new Thread(new Runnable() {
                     @Override
                     public void run() {

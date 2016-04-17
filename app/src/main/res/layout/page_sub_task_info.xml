@@ -15,15 +15,16 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_margin="10dp"
+            android:paddingBottom="10dp"
             android:text="@string/taskInfo"
             android:textColor="@color/text_hint"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
     </RelativeLayout>
 
     <ListView
         android:id="@+id/listView"
+        android:layout_marginTop="12dp"
         android:layout_gravity="center_horizontal"
         android:listSelector="@color/transparent"
         android:layout_width="wrap_content"

@@ -34,6 +34,9 @@
 
         <!--任务一览-->
         <activity android:name=".activity.subpage.TaskListPage"/>
+        <!--确认完成任务-->
+        <activity android:name=".activity.subpage.ConfirmTask"
+            android:theme="@style/MyDialogStyleBottom"/>
 
         <!--测试-->
         <activity android:name=".test.TestActivity"/>

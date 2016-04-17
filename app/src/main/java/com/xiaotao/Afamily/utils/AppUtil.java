@@ -39,6 +39,8 @@ public class AppUtil {
         public static final int reLogin = 2;
         public static final int logout = 3;
         public static final int taskList = 4;
+        public static final int studentTaskList = 5;
+        public static final int submitTask = 6;
     }
 
     //  user
@@ -66,6 +68,7 @@ public class AppUtil {
         public static final String reLogin = "com.xiaotao.action.RELOGIN";
         public static final String test = "com.xiaotao.action.TEST";
         public static final String conversationList = "com.xiaotao.action.CONVERSATION_LIST";
+        public static final String studentTaskList = "com.xiaotao.action.STUDENT_TASK_LIST";
     }
 
     //  Broadcast Message
@@ -75,6 +78,7 @@ public class AppUtil {
         public static final String login = "RECEIVE_LOGIN_MSG";
         public static final String reLogin = "RECEIVE_RELOGIN_MSG";
         public static final String taskList = "RECEIVE_TASK_LIST_MSG";
+        public static final String studentTask = "RECEIVE_STUDENT_TASK_MSG";
         public static final String test = "TEST_MSG";
     }
 
@@ -101,4 +105,15 @@ public class AppUtil {
         public static final String count = "MESSAGE_COUNT";
         public static final String image = "COUNT_BG";
     }
+
+    //  任务完成情况
+    public static final class studentTask {
+        public static final String taskId = "TASK_ID";
+        public static final String name = "TASK_NAME";
+        public static final String account = "USER_ACCOUNT";
+        public static final String[] task = {
+                "TASK_A","TASK_B","TASK_C","TASK_D","TASK_E","TASK_F","TASK_G","TASK_H","TASK_I","TASK_J"
+        };
+    }
+
 }

@@ -15,6 +15,7 @@ import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.activity.core.BasePageActivity;
 import com.xiaotao.Afamily.activity.register.RegisterActivity;
 import com.xiaotao.Afamily.base.BaseActivity;
+import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
@@ -104,6 +105,7 @@ public class WelcomeActivity extends BaseActivity
 		user.setStuId((String) spUtils.get(AppUtil.sp.account, ""));
 		user.setPassword((String) spUtils.get(AppUtil.sp.password, ""));
 		sendToService(JSONUtil.reLogin(user).toString());
+		BaseApplication.getInstance().setAccount(user.getStuId());
 	}
 
 	private Handler handler = new Handler()
@@ -113,12 +115,14 @@ public class WelcomeActivity extends BaseActivity
 		{
 			switch (msg.what){
 				case 0:
+					System.out.println("A");
 					Intent intent = new Intent(WelcomeActivity.this,BasePageActivity.class);
 					startActivity(intent);
 					finish();
 					break;
 				case 1:
 					//按钮淡入淡出特效
+					System.out.println("B");
 					layout.setVisibility(View.VISIBLE);
 					layout.setAnimation(animation);
 					animation.startNow();

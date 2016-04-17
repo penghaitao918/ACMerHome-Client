@@ -102,10 +102,21 @@ public class ClientReceive implements Runnable {
                     context.sendBroadcast(intent);
                     break;
                 case AppUtil.socket.taskList:
-                    Intent intentTaskList = new Intent(AppUtil.broadcast.conversationList);
-                    intentTaskList.putExtra(AppUtil.message.type, 0);
-                    intentTaskList.putExtra(AppUtil.message.taskList, jsonObject.toString());
-                    context.sendBroadcast(intentTaskList);
+                    Intent intentTaskListToConversation = new Intent(AppUtil.broadcast.conversationList);
+                    intentTaskListToConversation.putExtra(AppUtil.message.type, 0);
+                    intentTaskListToConversation.putExtra(AppUtil.message.taskList, jsonObject.toString());
+                    context.sendBroadcast(intentTaskListToConversation);
+
+                    Intent intentTaskListToStudentTask = new Intent(AppUtil.broadcast.studentTaskList);
+                    intentTaskListToStudentTask.putExtra(AppUtil.message.type, 0);
+                    intentTaskListToStudentTask.putExtra(AppUtil.message.studentTask, jsonObject.toString());
+                    context.sendBroadcast(intentTaskListToStudentTask);
+                    break;
+                case AppUtil.socket.studentTaskList:
+                    Intent intentStudentTask = new Intent(AppUtil.broadcast.studentTaskList);
+                    intentStudentTask.putExtra(AppUtil.message.type, 1);
+                    intentStudentTask.putExtra(AppUtil.message.studentTask, jsonObject.toString());
+                    context.sendBroadcast(intentStudentTask);
                     break;
                 default:
                     Log.i(AppUtil.tag.network,AppUtil.net.tip);

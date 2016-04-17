@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.model.entity.Conversation;
+import com.xiaotao.Afamily.model.entity.StudentTask;
 
 import java.util.ArrayList;
 
@@ -28,12 +30,12 @@ import java.util.ArrayList;
  * 　　    ＞―r￣￣`ｰ―＿
  *
  * @author xiaoTao
- * @date 2016-04-15  13:41
+ * @date 2016-04-17  13:00
  */
-public class ConversationAdapter extends BaseAdapter {
+public class StudentTaskAdapter extends BaseAdapter {
 
     private final int[] mTo = {
-            R.id.taskName, R.id.conversationTime, R.id.conversationMessage, R.id.count
+            R.id.taskName, R.id.isFinish
     };
 
     private int mResource;
@@ -41,11 +43,11 @@ public class ConversationAdapter extends BaseAdapter {
 
     private ViewHolder holder;
 
-    private ArrayList<Conversation> mData;
+    private ArrayList<StudentTask> mData;
 
-    public ConversationAdapter(Context context, ArrayList<Conversation> list) {
+    public StudentTaskAdapter(Context context, ArrayList<StudentTask> list) {
         this.mData = list;
-        this.mResource = R.layout.conversation_item;
+        this.mResource = R.layout.check_task_item;
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -78,9 +80,7 @@ public class ConversationAdapter extends BaseAdapter {
             view = mInflater.inflate(resource, parent, false);
             holder = new ViewHolder();
             holder.taskName = (TextView) view.findViewById(mTo[0]);
-            holder.conversationTime = (TextView) view.findViewById(mTo[1]);
-            holder.conversationMessage = (TextView) view.findViewById(mTo[2]);
-            holder.count = (TextView) view.findViewById(mTo[3]);
+            holder.isFinish = (ImageView) view.findViewById(mTo[1]);
             view.setTag(holder);
         }
         bindView(position);
@@ -89,30 +89,22 @@ public class ConversationAdapter extends BaseAdapter {
     }
 
     private void bindView(int position) {
-        Conversation itemData = mData.get(position);
+        StudentTask itemData = mData.get(position);
         if (itemData != null) {
             String name = itemData.getTaskName();
-            String who = itemData.getAccountName();
-            String message = itemData.getConversationMessage();
-            String time = itemData.getConversationTime();
-            int count = itemData.getMessageCount();
+            boolean finish = itemData.isFinish();
 
             holder.taskName.setText(name);
-            holder.conversationMessage.setText(who + message);
-            holder.conversationTime.setText(time);
-            if (count <= 0) {
-                holder.count.setVisibility(View.GONE);
+            if (finish) {
+                holder.isFinish.setImageResource(R.color.green);
             } else {
-                holder.count.setText(String.valueOf(count));
-                holder.count.setVisibility(View.VISIBLE);
+                holder.isFinish.setImageResource(R.color.grey);
             }
         }
     }
 
     private final class ViewHolder {
         TextView taskName;
-        TextView conversationMessage;
-        TextView conversationTime;
-        TextView count;
+        ImageView isFinish;
     }
 }
