@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/textTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:text="@string/homePage"
+            android:textColor="@color/text_hint"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:background="@null"
+        android:id="@+id/viewpager_user_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/tab"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="PageOnClick"
+            android:id="@+id/TaskPage"
+            android:src="@drawable/ic_launcher"
+            android:background="@color/transparent"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageButton
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="PageOnClick"
+            android:id="@+id/HomePage"
+            android:src="@drawable/menu_lab"
+            android:background="@color/transparent"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageButton
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="PageOnClick"
+            android:id="@+id/UserPage"
+            android:src="@drawable/ic_launcher"
+            android:background="@color/transparent"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+</LinearLayout>
