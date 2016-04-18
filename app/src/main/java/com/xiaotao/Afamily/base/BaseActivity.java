@@ -6,12 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
-import com.xiaotao.Afamily.service.ClientService;
+import com.xiaotao.Afamily.service.NetworkService;
 import com.xiaotao.Afamily.utils.AppUtil;
-import com.xiaotao.Afamily.utils.JSONUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -65,12 +61,12 @@ public class BaseActivity extends Activity {
     protected void startClientService(){
         //	启动后台Service
         System.out.println("### 开启service");
-        Intent intent = new Intent(this, ClientService.class);
+        Intent intent = new Intent(this, NetworkService.class);
         startService(intent);
     }
 
     protected void sendToService(String jsonMessage) {
-        Intent it = new Intent(AppUtil.broadcast.service_client);
+        Intent it = new Intent(AppUtil.broadcast.network_service);
         it.putExtra(AppUtil.message.sendMessage, jsonMessage);
         sendBroadcast(it);
     }

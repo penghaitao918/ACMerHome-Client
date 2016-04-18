@@ -132,7 +132,7 @@ public class TaskListPage extends BaseActivity {
                     msg = intent.getStringExtra(AppUtil.message.studentTask);
                     jsonObject = new JSONObject(msg);
                     JSONArray idList = jsonObject.getJSONArray(AppUtil.conversation.taskId);
-                    JSONArray nameList = jsonObject.getJSONArray(AppUtil.conversation.name);
+                    JSONArray nameList = jsonObject.getJSONArray(AppUtil.conversation.taskName);
                     setListData(idList, nameList);
                 } else if (type == 1) {
                     msg = intent.getStringExtra(AppUtil.message.studentTask);

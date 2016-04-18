@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.xiaotao.Afamily.R;
 
@@ -79,7 +80,7 @@ public class SearchViewUtil {
             //注意第一个参数持有这个属性(mQueryTextView)的对象(mSearchView) 光标必须是一张图片不能是颜色，因为光标有两张图片，
             //一张是第一次获得焦点的时候的闪烁的图片，一张是后边有内容时候的图片，如果用颜色填充的话，就会失去闪烁的那张图片，
             //颜色填充的会缩短文字和光标的距离（某些字母会背光标覆盖一部分）。
-            mCursorDrawableRes.set(mQueryTextView.get(mSearchView),drawableRes);
+            mCursorDrawableRes.set(mQueryTextView.get(mSearchView), drawableRes);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -96,6 +97,12 @@ public class SearchViewUtil {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
 
+    //  设置字体颜色
+    public void setTextColor(int resources) {
+        int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+        TextView textView = (TextView) mSearchView.findViewById(id);
+        textView.setTextColor(resources);
     }
 }

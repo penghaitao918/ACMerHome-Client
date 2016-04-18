@@ -1,4 +1,8 @@
-package com.xiaotao.Afamily.base;
+package com.xiaotao.Afamily.activity.subpage;
+
+import android.os.Bundle;
+
+import com.xiaotao.Afamily.base.BaseActivity;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -15,8 +19,18 @@ package com.xiaotao.Afamily.base;
  * 　　    7　　　　　　　|／
  * 　　    ＞―r￣￣`ｰ―＿
  *
- * @author littleTao
- * @date 2016-02-03  21:08
+ * @author xiaoTao
+ * @date 2016-04-17  22:13
  */
-public class BaseDialog {
+public class Settings extends BaseActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

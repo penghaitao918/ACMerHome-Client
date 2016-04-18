@@ -17,7 +17,9 @@ import com.xiaotao.Afamily.activity.register.RegisterActivity;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.model.entity.User;
+import com.xiaotao.Afamily.service.LocalService;
 import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.ChangeUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
 import com.xiaotao.Afamily.utils.SPUtils;
 
@@ -57,6 +59,9 @@ public class WelcomeActivity extends BaseActivity
 		this.initBroadcast();
 		this.layout = (RelativeLayout) findViewById(R.id.flagLayout);
 		this.spUtils = new SPUtils(getBaseContext());
+		//	启动本地服务
+		Intent intent = new Intent(this, LocalService.class);
+		startService(intent);
 		//	启动后台Service
 		startClientService();
 		/** 设置透明度渐变动画 */
@@ -106,6 +111,14 @@ public class WelcomeActivity extends BaseActivity
 		user.setPassword((String) spUtils.get(AppUtil.sp.password, ""));
 		sendToService(JSONUtil.reLogin(user).toString());
 		BaseApplication.getInstance().setAccount(user.getStuId());
+		BaseApplication.getInstance().setName((String) spUtils.get(AppUtil.sp.userName, ""));
+		BaseApplication.getInstance().setPortrait(
+				ChangeUtil.toBitmap((String) spUtils.get(AppUtil.sp.portrait, ""))
+		);
+
+		Message m = new Message();
+		m.what = 0;
+		handler.sendMessage(m);
 	}
 
 	private Handler handler = new Handler()

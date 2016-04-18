@@ -5,14 +5,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Binder;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.xiaotao.Afamily.base.BaseActivity;
-import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.network.ClientReceive;
 import com.xiaotao.Afamily.network.ClientSend;
 import com.xiaotao.Afamily.utils.AppUtil;
@@ -45,12 +41,12 @@ import java.net.SocketTimeoutException;
  * @author xiaoTao
  * @date 2016-02-17  23:32
  */
-public class ClientService extends Service {
+public class NetworkService extends Service {
     //  Socket 连接
     private boolean flag = true;
     private Socket socket = null;
     //  定义客户端发送数据的广播接收
-    private ServiceReceiver serviceReceiver = null;
+    private ClientServiceReceiver serviceReceiver = null;
     //  将客户端数据发送到服务器
     private ClientSend send = null;
     // 该线程所处理的Socket所对应的输入流
@@ -85,7 +81,7 @@ public class ClientService extends Service {
                     Log.i(AppUtil.tag.error, "logout is Error");
                     e.printStackTrace();
                 }
-    //            ClientService.this.close();
+    //            NetworkService.this.close();
     //            socket = null;
             }
         }.start();
@@ -93,9 +89,9 @@ public class ClientService extends Service {
 
     private void init(){
         //  创建ServiceReceiver
-        serviceReceiver = new ServiceReceiver();
+        serviceReceiver = new ClientServiceReceiver();
         IntentFilter filter = new IntentFilter();
-        filter.addAction(AppUtil.broadcast.service_client);
+        filter.addAction(AppUtil.broadcast.network_service);
         registerReceiver(serviceReceiver, filter);
     }
 
@@ -131,11 +127,11 @@ public class ClientService extends Service {
                     receiveThread();
                 } catch (SocketTimeoutException timeException) {
                     flag = false;
-                    Log.i(AppUtil.tag.network, "ClientService is Error -----> 服务器连接超时");
+                    Log.i(AppUtil.tag.network, "NetworkService is Error -----> 服务器连接超时");
                     timeException.printStackTrace();
                 } catch (Exception e) {
                     flag = false;
-                    Log.i(AppUtil.tag.network, "ClientService is Error -----> 服务器连接失败");
+                    Log.i(AppUtil.tag.network, "NetworkService is Error -----> 服务器连接失败");
                     e.printStackTrace();
                 }
             }
@@ -155,9 +151,9 @@ public class ClientService extends Service {
                     // 为当前线程初始化Looper
                     Looper.prepare();
                     // 启动Looper
-                    Looper.loop();Log.i(AppUtil.tag.network, "ClientService.receiveThread() is Connect");
+                    Looper.loop();Log.i(AppUtil.tag.network, "NetworkService.receiveThread() is Connect");
                 } catch (Exception e) {
-                    Log.i(AppUtil.tag.error, "ClientService.receiveThread() is Error ----->  Exception ");
+                    Log.i(AppUtil.tag.error, "NetworkService.receiveThread() is Error ----->  Exception ");
                     e.printStackTrace();
                 }
             }
@@ -165,7 +161,7 @@ public class ClientService extends Service {
     }
 
     //  服务器广播,将接受到的客户端请求发送到服务器
-    public class ServiceReceiver extends BroadcastReceiver {
+    public class ClientServiceReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(final Context context, final Intent intent) {
             new Thread(new Runnable() {

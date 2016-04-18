@@ -20,6 +20,7 @@ import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.ChangeUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
 import com.xiaotao.Afamily.utils.SPUtils;
 import com.xiaotao.Afamily.utils.StringUtil;
@@ -127,7 +128,6 @@ public class LoginActivity extends BaseActivity {
                     Intent loginIntent = new Intent(LoginActivity.this,BasePageActivity.class);
                     loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(loginIntent);
-                    finish();
                     break;
                 //  登录失败
                 case 2:
@@ -219,6 +219,13 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void run(){
                 try {
+                    BaseApplication.getInstance().setName(jsonObject.getString(AppUtil.user.userName));
+                    BaseApplication.getInstance().setPortrait(
+                            ChangeUtil.toBitmap(jsonObject.getString(AppUtil.user.portrait))
+                    );
+                    System.out.println("#A " + BaseApplication.getInstance().getAccount());
+                    System.out.println("#P " + BaseApplication.getInstance().getPortrait());
+                    System.out.println("#N " + BaseApplication.getInstance().getName());
                     spUtils.set(AppUtil.sp.loginFlag, true);
                     spUtils.set(AppUtil.sp.account, accountEdit.getText().toString());
                     spUtils.set(AppUtil.sp.password, StringUtil.MD5(passwordEdit.getText().toString()));
@@ -227,6 +234,7 @@ public class LoginActivity extends BaseActivity {
                     spUtils.set(AppUtil.sp.portrait, jsonObject.getString(AppUtil.user.portrait));
                     spUtils.set(AppUtil.sp.sex, jsonObject.getString(AppUtil.user.sex));
                     System.out.println("写入");
+                    finish();
                 }catch (JSONException e){
                     e.printStackTrace();
                 }

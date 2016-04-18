@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * @author xiaoTao
  * @date 2016-04-15  13:41
  */
-public class ConversationAdapter extends BaseAdapter {
+public class ConversationListAdapter extends BaseAdapter {
 
     private final int[] mTo = {
             R.id.taskName, R.id.conversationTime, R.id.conversationMessage, R.id.count
@@ -43,7 +43,7 @@ public class ConversationAdapter extends BaseAdapter {
 
     private ArrayList<Conversation> mData;
 
-    public ConversationAdapter(Context context, ArrayList<Conversation> list) {
+    public ConversationListAdapter(Context context, ArrayList<Conversation> list) {
         this.mData = list;
         this.mResource = R.layout.conversation_item;
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

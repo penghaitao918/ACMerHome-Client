@@ -4,10 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.xiaotao.Afamily.base.BaseActivity;
-import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.model.view.MyNotification;
-import com.xiaotao.Afamily.service.ClientService;
 import com.xiaotao.Afamily.test.TestEntity;
 import com.xiaotao.Afamily.utils.AppUtil;
 
@@ -91,7 +88,7 @@ public class ClientReceive implements Runnable {
                     context.sendBroadcast(intentReLogin);
                     break;
                 case AppUtil.socket.logout:
-                //    ClientService.getSocket().close();
+                //    NetworkService.getSocket().close();
                     break;
                 case AppUtil.socket.test:
                     TestEntity testEntity = new TestEntity(jsonObject);
@@ -118,6 +115,10 @@ public class ClientReceive implements Runnable {
                     intentStudentTask.putExtra(AppUtil.message.studentTask, jsonObject.toString());
                     context.sendBroadcast(intentStudentTask);
                     break;
+                case AppUtil.socket.sendConversationMessage:
+                    Intent intentChat = new Intent(AppUtil.broadcast.chat);
+                    intentChat.putExtra(AppUtil.message.chatMessage, jsonObject.toString());
+                    context.sendBroadcast(intentChat);
                 default:
                     Log.i(AppUtil.tag.network,AppUtil.net.tip);
                     System.out.println(AppUtil.socket.checkMSG);

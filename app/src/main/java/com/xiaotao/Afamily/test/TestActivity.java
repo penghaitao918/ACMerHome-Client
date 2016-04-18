@@ -15,13 +15,10 @@ import android.widget.TextView;
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.base.BaseApplication;
-import com.xiaotao.Afamily.network.ClientSend;
-import com.xiaotao.Afamily.service.ClientService;
+import com.xiaotao.Afamily.service.NetworkService;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
 import com.xiaotao.Afamily.utils.SPUtils;
-
-import org.json.JSONObject;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -99,7 +96,7 @@ public class TestActivity extends BaseActivity {
         super.unregisterReceiver(testReceiver);
         SPUtils spUtils = new SPUtils(getBaseContext());
         spUtils.set(AppUtil.sp.loginFlag, false);
-        Intent intent = new Intent(this, ClientService.class);
+        Intent intent = new Intent(this, NetworkService.class);
         stopService(intent);
         BaseApplication.getInstance().exit();
     }

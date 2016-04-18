@@ -23,7 +23,7 @@ public class AppUtil {
     //  Socket Connect
     public static final class net {
         public static final int port = 30000;
-        public static final String IP = "192.168.56.1";
+        public static final String IP = "10.163.16.137";
         public static final String tip = "消息类型错误！";
     }
 
@@ -41,6 +41,7 @@ public class AppUtil {
         public static final int taskList = 4;
         public static final int studentTaskList = 5;
         public static final int submitTask = 6;
+        public static final int sendConversationMessage = 7;
     }
 
     //  user
@@ -63,12 +64,14 @@ public class AppUtil {
 
     //  BroadcastReceiver
     public static final class broadcast {
-        public static final String service_client = "com.xiaotao.action.SERVICE_CLIENT";
+        public static final String network_service = "com.xiaotao.action.NETWORK_SERVICE";
+        public static final String local_service = "com.xiaotao.action.LOCAL_SERVICE";
         public static final String login = "com.xiaotao.action.LOGIN";
         public static final String reLogin = "com.xiaotao.action.RELOGIN";
         public static final String test = "com.xiaotao.action.TEST";
         public static final String conversationList = "com.xiaotao.action.CONVERSATION_LIST";
         public static final String studentTaskList = "com.xiaotao.action.STUDENT_TASK_LIST";
+        public static final String chat = "com.xiaotao.action.CHAT";
     }
 
     //  Broadcast Message
@@ -79,6 +82,7 @@ public class AppUtil {
         public static final String reLogin = "RECEIVE_RELOGIN_MSG";
         public static final String taskList = "RECEIVE_TASK_LIST_MSG";
         public static final String studentTask = "RECEIVE_STUDENT_TASK_MSG";
+        public static final String chatMessage = "RECEIVE_STUDENT_TASK_MSG";
         public static final String test = "TEST_MSG";
     }
 
@@ -96,9 +100,10 @@ public class AppUtil {
 
     //  讨论组
     public static final class conversation {
-        public static final String type = "TYPE";
         public static final String taskId = "TASK_ID";
-        public static final String name = "TASK_NAME";
+        public static final String taskName = "TASK_NAME";
+        public static final String account = "STUDENT_ACCOUNT";
+        public static final String potrait = "STUDENT_PORTRAIT";
         public static final String who = "STUDENT_NAME";
         public static final String mesaage = "MESSAGE";
         public static final String time = "MESSAHE_TIME";
@@ -114,6 +119,19 @@ public class AppUtil {
         public static final String[] task = {
                 "TASK_A","TASK_B","TASK_C","TASK_D","TASK_E","TASK_F","TASK_G","TASK_H","TASK_I","TASK_J"
         };
+    }
+
+    //  本地服务
+    public static final class localService {
+        public static final int all = 0;
+        public static final int sound = 1;
+        public static final int vibrate = 2;
+    }
+
+    //  Chat
+    public static final class chat {
+        public static final int from = 0;
+        public static final int to = 1;
     }
 
 }

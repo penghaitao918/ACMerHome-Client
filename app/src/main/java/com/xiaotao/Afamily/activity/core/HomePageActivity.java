@@ -10,8 +10,10 @@ import android.widget.GridView;
 import android.widget.SimpleAdapter;
 
 import com.xiaotao.Afamily.R;
+import com.xiaotao.Afamily.activity.subpage.ChatActivity;
 import com.xiaotao.Afamily.activity.subpage.TaskListPage;
 import com.xiaotao.Afamily.base.BaseActivity;
+import com.xiaotao.Afamily.utils.AppUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -101,6 +103,10 @@ public class HomePageActivity extends BaseActivity {
                 case 2:
                     break;
                 case 3:
+                    Intent intent3 = new Intent(HomePageActivity.this, ChatActivity.class);
+                    intent3.putExtra(AppUtil.conversation.taskId, 0);
+                    intent3.putExtra(AppUtil.conversation.taskName, "家人");
+                    startActivity(intent3);
                     break;
                 case 4:
                     break;

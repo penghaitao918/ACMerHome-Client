@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,8 +12,9 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.xiaotao.Afamily.R;
+import com.xiaotao.Afamily.activity.subpage.ChatActivity;
 import com.xiaotao.Afamily.base.BaseActivity;
-import com.xiaotao.Afamily.model.adapter.ConversationAdapter;
+import com.xiaotao.Afamily.model.adapter.ConversationListAdapter;
 import com.xiaotao.Afamily.model.entity.Conversation;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
@@ -52,7 +54,7 @@ public class ConversationListPageActivity extends BaseActivity {
     private ListView listView = null;
     private SearchView searchView = null;
     private ArrayList<Conversation> dataList = null;
-    private ConversationAdapter simpleAdapter = null;
+    private ConversationListAdapter simpleAdapter = null;
 
     private ConversationListBroadcastReceiver receiver = null;
 
@@ -80,7 +82,7 @@ public class ConversationListPageActivity extends BaseActivity {
         listView.setDivider(null);
         listView.setOnItemClickListener(new OnItemClickListenerImpl());
 
-        simpleAdapter = new ConversationAdapter(this, dataList);
+        simpleAdapter = new ConversationListAdapter(this, dataList);
         listView.setAdapter(simpleAdapter);
         /*动态刷新ListView*/
         simpleAdapter.notifyDataSetChanged();
@@ -92,6 +94,7 @@ public class ConversationListPageActivity extends BaseActivity {
         searchViewUtil.setBackground(btn_search_bg);
         searchViewUtil.setCursorDrawableRes(shape_search_cursor_res);
         searchViewUtil.setCloseButton();
+        searchViewUtil.setTextColor(Color.BLACK);
     }
 
     //  从服务器获取task列表
@@ -123,7 +126,10 @@ public class ConversationListPageActivity extends BaseActivity {
     private class OnItemClickListenerImpl implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            System.out.println(position + " # " + dataList.get(position).getTaskName());
+            Intent intent = new Intent(ConversationListPageActivity.this, ChatActivity.class);
+            intent.putExtra(AppUtil.conversation.taskId, position);
+            intent.putExtra(AppUtil.conversation.taskName, dataList.get(position).getTaskName());
+            startActivity(intent);
         }
     }
 
@@ -137,7 +143,7 @@ public class ConversationListPageActivity extends BaseActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(msg);
                     JSONArray idList = jsonObject.getJSONArray(AppUtil.conversation.taskId);
-                    JSONArray nameList = jsonObject.getJSONArray(AppUtil.conversation.name);
+                    JSONArray nameList = jsonObject.getJSONArray(AppUtil.conversation.taskName);
                     setListData(idList, nameList);
                 } catch (JSONException e) {
                     e.printStackTrace();

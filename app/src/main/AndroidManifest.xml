@@ -38,12 +38,17 @@
         <activity android:name=".activity.subpage.ConfirmTask"
             android:theme="@style/MyDialogStyleBottom"/>
 
+        <!--讨论聊天-->
+        <activity android:name=".activity.subpage.ChatActivity"/>
+
         <!--测试-->
         <activity android:name=".test.TestActivity"/>
 
         <!--配置Service组件-->
         <!--网络服务-->
-        <service android:name = ".service.ClientService"/>
+        <service android:name = ".service.NetworkService"/>
+        <!--本地设置-->
+        <service android:name = ".service.LocalService"/>
 
     </application>
 

@@ -3,13 +3,10 @@ package com.xiaotao.Afamily.base;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.xiaotao.Afamily.network.ClientSend;
-import com.xiaotao.Afamily.service.ClientService;
 import com.xiaotao.Afamily.utils.AppUtil;
-import com.xiaotao.Afamily.utils.JSONUtil;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -38,6 +35,8 @@ public class BaseApplication extends Application {
     private List<Activity> activityList = new LinkedList<Activity>();
 
     private String account = null;
+    private String name = null;
+    private Bitmap portrait = null;
 
     // 单例模式中获取唯一的MyApplication实例
     public static BaseApplication getInstance() {
@@ -101,6 +100,22 @@ public class BaseApplication extends Application {
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+    public Bitmap getPortrait() {
+        return portrait;
+    }
+
+    public void setPortrait(Bitmap portrait) {
+        this.portrait = portrait;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 

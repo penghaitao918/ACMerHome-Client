@@ -1,6 +1,7 @@
 package com.xiaotao.Afamily.utils;
 
 import com.xiaotao.Afamily.base.BaseApplication;
+import com.xiaotao.Afamily.model.entity.Chat;
 import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.test.TestEntity;
 
@@ -128,5 +129,21 @@ public class JSONUtil{
         }
         System.out.println(logoutJSON);
         return logoutJSON;
+    }
+
+    //  发送消息
+    public static JSONObject sendConversationMessage(Chat chat) {
+        JSONObject conversationJSON = new JSONObject();
+        try {
+            conversationJSON.put(AppUtil.socket.type, AppUtil.socket.sendConversationMessage);
+            conversationJSON.put(AppUtil.conversation.taskId, chat.getType());
+            conversationJSON.put(AppUtil.conversation.who, chat.getName());
+            conversationJSON.put(AppUtil.conversation.account, chat.getAccount());
+            conversationJSON.put(AppUtil.conversation.potrait, ChangeUtil.toBinary(chat.getPortrait()));
+            conversationJSON.put(AppUtil.conversation.mesaage, chat.getMessage());
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return conversationJSON;
     }
 }
