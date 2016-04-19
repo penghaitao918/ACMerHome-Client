@@ -76,13 +76,17 @@ public class ChatAdapter extends BaseAdapter {
     }
 
     private View createViewFromResource(int position, View convertView) {
+
         String account = mData.get(position).getAccount();
         if (BaseApplication.getInstance().getAccount().equals(account)) {
             convertView = mInflater.inflate(R.layout.chatto_item, null);
         } else {
             convertView = mInflater.inflate(R.layout.chafrom_item, null);
         }
-
+        if (position == 0) {
+            convertView.setVisibility(View.INVISIBLE);
+            return convertView;
+        }
         holder = new ViewHolder();
         holder.chatPortait = (ImageView) convertView.findViewById(mTo[0]);
         holder.chatName = (TextView) convertView.findViewById(mTo[1]);

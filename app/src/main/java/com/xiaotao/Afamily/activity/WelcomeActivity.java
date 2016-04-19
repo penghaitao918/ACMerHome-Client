@@ -56,14 +56,14 @@ public class WelcomeActivity extends BaseActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
+		//	启动后台Service
+		startClientService();
 		this.initBroadcast();
 		this.layout = (RelativeLayout) findViewById(R.id.flagLayout);
 		this.spUtils = new SPUtils(getBaseContext());
 		//	启动本地服务
 		Intent intent = new Intent(this, LocalService.class);
 		startService(intent);
-		//	启动后台Service
-		startClientService();
 		/** 设置透明度渐变动画 */
 		animation = new AlphaAnimation(0, 1);
 		animation.setDuration(3500);//设置动画持续时间
@@ -72,20 +72,15 @@ public class WelcomeActivity extends BaseActivity
 	@Override
 	protected void onStart() {
 		super.onStart();
-		new Thread(){
-			@Override
-			public void run() {
-				Boolean isLogin = (Boolean) spUtils.get(AppUtil.sp.loginFlag,false);
-				if (!isLogin) {
-					Message msg = new Message();
-					msg.what = 1;
-					handler.sendMessage(msg);
-				}else {
-					layout.setVisibility(View.GONE);
-					initLogin();
-				}
-			}
-		}.start();
+		Boolean isLogin = (Boolean) spUtils.get(AppUtil.sp.loginFlag,false);
+		if (!isLogin) {
+			Message msg = new Message();
+			msg.what = 1;
+			handler.sendMessage(msg);
+		}else {
+			layout.setVisibility(View.GONE);
+			initLogin();
+		}
 	}
 
 	@Override
@@ -115,10 +110,10 @@ public class WelcomeActivity extends BaseActivity
 		BaseApplication.getInstance().setPortrait(
 				ChangeUtil.toBitmap((String) spUtils.get(AppUtil.sp.portrait, ""))
 		);
-
+/*
 		Message m = new Message();
 		m.what = 0;
-		handler.sendMessage(m);
+		handler.sendMessage(m);*/
 	}
 
 	private Handler handler = new Handler()
@@ -126,10 +121,12 @@ public class WelcomeActivity extends BaseActivity
 		@Override
 		public void handleMessage(Message msg)
 		{
+			System.out.println("1");
 			switch (msg.what){
 				case 0:
 					System.out.println("A");
 					Intent intent = new Intent(WelcomeActivity.this,BasePageActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
 					finish();
 					break;
@@ -160,6 +157,7 @@ public class WelcomeActivity extends BaseActivity
 	public class ReLoginReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			System.out.println("2");
 			String msg = intent.getStringExtra(AppUtil.message.reLogin);
 			try {
 				Message m = new Message();
@@ -167,8 +165,10 @@ public class WelcomeActivity extends BaseActivity
 				boolean flag = jsonObject.getBoolean(AppUtil.user.loginFlag);
 				if (flag){
 					m.what = 0;
+					System.out.println("3");
 				}else {
 					m.what = 1;
+					System.out.println("4");
 				}
 				handler.sendMessage(m);
 			}catch (JSONException e){

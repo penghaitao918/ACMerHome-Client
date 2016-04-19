@@ -92,7 +92,7 @@ public class ConversationListAdapter extends BaseAdapter {
         Conversation itemData = mData.get(position);
         if (itemData != null) {
             String name = itemData.getTaskName();
-            String who = itemData.getAccountName();
+            String who = itemData.getAccountName() ;
             String message = itemData.getConversationMessage();
             String time = itemData.getConversationTime();
             int count = itemData.getMessageCount();

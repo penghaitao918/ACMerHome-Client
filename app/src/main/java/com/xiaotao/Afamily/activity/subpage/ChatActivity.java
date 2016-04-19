@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,6 +22,8 @@ import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.model.adapter.ChatAdapter;
 import com.xiaotao.Afamily.model.entity.Chat;
 import com.xiaotao.Afamily.model.entity.Conversation;
+import com.xiaotao.Afamily.sqlite.ConversationTab;
+import com.xiaotao.Afamily.sqlite.DATABASE;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
 
@@ -58,6 +61,9 @@ public class ChatActivity extends BaseActivity {
     private ArrayList<Chat> dataList = null;
     private ChatAdapter simpleAdapter = null;
 
+    private SQLiteOpenHelper helper = null;
+    private ConversationTab conversationTab = null;
+
     private ChatReceiver receiver = null;
 
     @Override
@@ -70,12 +76,21 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //  清除未读消息
+        unregisterReceiver(receiver);
+        Intent cleanCount = new Intent(AppUtil.broadcast.conversationList);
+        cleanCount.putExtra(AppUtil.message.type, 2);
+        cleanCount.putExtra(AppUtil.conversation.taskId, conversationId);
+        sendBroadcast(cleanCount);
         if (dataList != null) {
             dataList.clear();
         }
+        conversationTab = new ConversationTab(helper.getWritableDatabase());
+        conversationTab.deleteByTaskId(conversationId);
     }
 
     private void init() {
+        initSQLite();
         initRegisterBroadcas();
         editText = (EditText) super.findViewById(R.id.editText);
         this.conversationName = (TextView) super.findViewById(R.id.textTab);
@@ -99,8 +114,18 @@ public class ChatActivity extends BaseActivity {
         this.registerReceiver(receiver, filter);
     }
 
+    private void initSQLite() {
+        this.helper = new DATABASE(this);
+    }
+
     private void initData() {
-        dataList = new ArrayList<Chat>();
+        conversationTab = new ConversationTab(helper.getWritableDatabase());
+        dataList = new ArrayList<Chat>(
+                conversationTab.getConversationMsgByTaskId(
+                        getIntent().getIntExtra(AppUtil.conversation.taskId, -1)
+                )
+        );
+        System.out.println("#A " + dataList);
         simpleAdapter = new ChatAdapter(this,dataList);
         listView.setAdapter(simpleAdapter);
         simpleAdapter.notifyDataSetChanged();
@@ -115,6 +140,7 @@ public class ChatActivity extends BaseActivity {
             chat.setPortrait(BaseApplication.getInstance().getPortrait());
             chat.setMessage(editText.getText().toString());
             sendToService(JSONUtil.sendConversationMessage(chat).toString());
+            editText.setText("");
         }
     }
 
@@ -131,16 +157,15 @@ public class ChatActivity extends BaseActivity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Chat chat;
                     JSONObject jsonObject;
                     String msg = intent.getStringExtra(AppUtil.message.chatMessage);
-                    System.out.println("");
                     try {
                         jsonObject = new JSONObject(msg);
-                        chat = new Chat(jsonObject);
-                        dataList.add(chat);
-                        System.out.println("## " + chat.getMessage());
-                        handler.sendMessage(new Message());
+                        if (jsonObject.getInt(AppUtil.conversation.taskId) == conversationId) {
+                            Chat chat = new Chat(jsonObject);
+                            dataList.add(chat);
+                            handler.sendMessage(new Message());
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

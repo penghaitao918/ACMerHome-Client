@@ -10,6 +10,10 @@ import android.view.View;
 
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.test.TestActivity;
+import com.xiaotao.Afamily.utils.AppUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -34,13 +38,23 @@ public class MyNotification {
     private Context mContext = null;
     private Notification notification = null;
     private NotificationManager notificationManager = null;
+    private String mTitle = "一家人";
     private String mText = "已有新的版本，请及时更新。";
 
-    public MyNotification(Context context, String text){
-        this.mContext = context;
-        this.mText = text;
+    public MyNotification(){
         this.build();
     }
+    public MyNotification(Context context, JSONObject jsonObject){
+        this.mContext = context;
+        try {
+            this.mTitle = jsonObject.getString(AppUtil.notify.notifyTitle);
+            this.mText = jsonObject.getString(AppUtil.notify.notifyMessage);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        this.build();
+    }
+
 
     private void build(){
         // 获取系统的NotificationManager服务
@@ -52,11 +66,11 @@ public class MyNotification {
                 // 设置打开该通知，该通知自动消失
                 .setAutoCancel(true)
                         // 设置显示在状态栏的通知提示信息
-                .setTicker("有新的消息")
+                .setTicker("您有新的消息")
                         // 设置通知的图标
                 .setSmallIcon(R.drawable.ic_launcher)
                         // 设置通知内容的标题
-                .setContentTitle("一家人")
+                .setContentTitle(mTitle)
                         // 设置通知内容
                 .setContentText(mText)
                         // 设置使用系统默认的声音、默认LED灯、震动

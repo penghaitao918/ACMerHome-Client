@@ -53,6 +53,8 @@ public class NetworkService extends Service {
     private BufferedReader br = null;
     private ClientReceive receive = null;
 
+    public static boolean isStart = false;
+
     @Override
     public IBinder onBind(Intent intent)
     {
@@ -93,6 +95,7 @@ public class NetworkService extends Service {
         IntentFilter filter = new IntentFilter();
         filter.addAction(AppUtil.broadcast.network_service);
         registerReceiver(serviceReceiver, filter);
+        isStart = true;
     }
 
 

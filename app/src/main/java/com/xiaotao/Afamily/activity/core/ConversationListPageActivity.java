@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.xiaotao.Afamily.activity.subpage.ChatActivity;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.model.adapter.ConversationListAdapter;
 import com.xiaotao.Afamily.model.entity.Conversation;
+import com.xiaotao.Afamily.sqlite.ConversationTab;
+import com.xiaotao.Afamily.sqlite.DATABASE;
 import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
 import com.xiaotao.Afamily.utils.SearchViewUtil;
@@ -24,7 +27,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static com.xiaotao.Afamily.R.drawable.btn_search_bg;
 import static com.xiaotao.Afamily.R.drawable.shape_search_cursor_res;
@@ -56,6 +62,9 @@ public class ConversationListPageActivity extends BaseActivity {
     private ArrayList<Conversation> dataList = null;
     private ConversationListAdapter simpleAdapter = null;
 
+    private SQLiteOpenHelper helper = null;
+    private ConversationTab conversationTab = null;
+
     private ConversationListBroadcastReceiver receiver = null;
 
     @Override
@@ -78,6 +87,8 @@ public class ConversationListPageActivity extends BaseActivity {
         initRegisterBroadcas();
         initList();
         initSearchViewRes();
+        initSQLite();
+
         listView = (ListView) super.findViewById(R.id.listView);
         listView.setDivider(null);
         listView.setOnItemClickListener(new OnItemClickListenerImpl());
@@ -101,7 +112,7 @@ public class ConversationListPageActivity extends BaseActivity {
     private void initList(){
         dataList = new ArrayList<>();
         Conversation conversation = new Conversation("家人");
-        dataList.add(0,conversation);
+        dataList.add(0, conversation);
         sendToService(JSONUtil.getAllTaskInfoList().toString());
     }
 
@@ -113,6 +124,10 @@ public class ConversationListPageActivity extends BaseActivity {
         this.registerReceiver(receiver, filter);
     }
 
+    private void initSQLite() {
+        this.helper = new DATABASE(this);
+    }
+
     private void setListData(JSONArray id, JSONArray name) {
         try {
             for (int i = 0; i < id.length(); ++ i)
@@ -120,6 +135,32 @@ public class ConversationListPageActivity extends BaseActivity {
         }catch (JSONException e){
             e.printStackTrace();
         }
+        simpleAdapter.notifyDataSetChanged();
+    }
+
+    private void refresh(String jsonMsg) {
+        try {
+            JSONObject jsonObject = new JSONObject(jsonMsg);
+            int position = jsonObject.getInt(AppUtil.conversation.taskId);
+            dataList.get(position).setAccountName(jsonObject.getString(AppUtil.conversation.who) + "：");
+            dataList.get(position).setConversationMessage(jsonObject.getString(AppUtil.conversation.mesaage));
+            Date date=new Date();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            dataList.get(position).setConversationTime(format.format(date));
+            dataList.get(position).addCount();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        Intent localService = new Intent(AppUtil.broadcast.local_service);
+        localService.putExtra(AppUtil.message.type, AppUtil.localService.all);
+        sendBroadcast(localService);
+
+        simpleAdapter.notifyDataSetChanged();
+    }
+
+    private void cleanCount(int position) {
+        dataList.get(position).setMessageCount(0);
         simpleAdapter.notifyDataSetChanged();
     }
 
@@ -139,20 +180,32 @@ public class ConversationListPageActivity extends BaseActivity {
             int type =  intent.getIntExtra(AppUtil.message.type, -1);
             //  初始化列表
             if (type == 0 && !isLoad){
-                String msg = intent.getStringExtra(AppUtil.message.taskList);
                 try {
-                    JSONObject jsonObject = new JSONObject(msg);
+                    String taskListMsg = intent.getStringExtra(AppUtil.message.taskList);
+                    JSONObject jsonObject = new JSONObject(taskListMsg);
                     JSONArray idList = jsonObject.getJSONArray(AppUtil.conversation.taskId);
                     JSONArray nameList = jsonObject.getJSONArray(AppUtil.conversation.taskName);
                     setListData(idList, nameList);
+                    isLoad = true;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                isLoad = true;
             } else if(type == 1) {
-                //  TODO 接收最新消息
+                final String recentConversationtMsg = intent.getStringExtra(AppUtil.message.chatMessage);
+                refresh(recentConversationtMsg);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        conversationTab = new ConversationTab(helper.getWritableDatabase());
+                        conversationTab.create(recentConversationtMsg);
+                    }
+                }).start();
+            } else if(type == 2) {
+                int id = intent.getIntExtra(AppUtil.conversation.taskId, -1);
+                if (id >= 0) {
+                    cleanCount(id);
+                }
             }
-
         }
     }
 

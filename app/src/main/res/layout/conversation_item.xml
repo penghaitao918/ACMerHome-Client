@@ -31,8 +31,8 @@
             android:text="New Text"
             android:layout_marginTop="2dp"
             android:layout_marginRight="5dp"
-            android:textColor="@color/text_hint"
-            android:textSize="10dp" />
+            android:textColor="@color/black_grey"
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/conversationMessage"
@@ -40,8 +40,8 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="New Text"
-            android:textColor="@color/text_hint"
-            android:textSize="16dp"
+            android:textColor="@color/black_grey"
+            android:textSize="18dp"
             android:layout_below="@+id/taskName"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"

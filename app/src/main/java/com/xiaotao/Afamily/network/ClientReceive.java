@@ -74,7 +74,7 @@ public class ClientReceive implements Runnable {
         try {
             switch (type) {
                 case AppUtil.socket.notify:
-                    MyNotification notification = new MyNotification(context,"这里是新的通知");
+                    MyNotification notification = new MyNotification(context, jsonObject);
                     notification.start();
                     break;
                 case AppUtil.socket.login:
@@ -119,6 +119,12 @@ public class ClientReceive implements Runnable {
                     Intent intentChat = new Intent(AppUtil.broadcast.chat);
                     intentChat.putExtra(AppUtil.message.chatMessage, jsonObject.toString());
                     context.sendBroadcast(intentChat);
+
+                    Intent intentRecentConversation = new Intent(AppUtil.broadcast.conversationList);
+                    intentRecentConversation.putExtra(AppUtil.message.type, 1);
+                    intentRecentConversation.putExtra(AppUtil.message.chatMessage, jsonObject.toString());
+                    context.sendBroadcast(intentRecentConversation);
+                    break;
                 default:
                     Log.i(AppUtil.tag.network,AppUtil.net.tip);
                     System.out.println(AppUtil.socket.checkMSG);

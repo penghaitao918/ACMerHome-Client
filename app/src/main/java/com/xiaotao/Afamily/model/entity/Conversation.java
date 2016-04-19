@@ -79,4 +79,8 @@ public class Conversation {
         this.accountName = accountName;
     }
 
+    public void addCount() {
+        this.messageCount ++;
+    }
+
 }

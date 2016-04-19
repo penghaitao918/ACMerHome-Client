@@ -61,14 +61,20 @@ public class BaseActivity extends Activity {
     protected void startClientService(){
         //	启动后台Service
         System.out.println("### 开启service");
-        Intent intent = new Intent(this, NetworkService.class);
+        Intent intent = new Intent(BaseActivity.this, NetworkService.class);
         startService(intent);
     }
 
-    protected void sendToService(String jsonMessage) {
-        Intent it = new Intent(AppUtil.broadcast.network_service);
-        it.putExtra(AppUtil.message.sendMessage, jsonMessage);
-        sendBroadcast(it);
+    protected void sendToService(final String jsonMessage) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!NetworkService.isStart) {  }
+                Intent it = new Intent(AppUtil.broadcast.network_service);
+                it.putExtra(AppUtil.message.sendMessage, jsonMessage);
+                sendBroadcast(it);
+            }
+        }).start();
     }
 
     @Override

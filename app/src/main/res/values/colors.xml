@@ -30,6 +30,7 @@
     <color name="blue3">#c92294e5</color>
 
     <color name="black">#ff000000</color>
+    <color name="black_grey">#83000000</color>
     <color name="text_hint">#a0a0a0</color>
 
     <color name="white_green">#18b05b</color>
@@ -46,7 +47,6 @@
     <color name="red">#ffff0000</color>
     <color name="orange">#ffff570a</color>
     <color name="grey">#ffbfbfbf</color>
-    <color name="black_grey">#83000000</color>
     <color name="font_value">#ff2f2f2f</color>
     <color name="white_blue">#ff56c6ff</color>
     <color name="green0">#ff18b151</color>

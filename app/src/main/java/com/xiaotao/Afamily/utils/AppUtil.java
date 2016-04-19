@@ -23,7 +23,7 @@ public class AppUtil {
     //  Socket Connect
     public static final class net {
         public static final int port = 30000;
-        public static final String IP = "10.163.16.137";
+        public static final String IP = "192.168.56.1";
         public static final String tip = "消息类型错误！";
     }
 
@@ -42,6 +42,11 @@ public class AppUtil {
         public static final int studentTaskList = 5;
         public static final int submitTask = 6;
         public static final int sendConversationMessage = 7;
+    }
+
+    public static final class notify {
+        public static final String notifyTitle = "NOTIFY_TITLE";
+        public static final String notifyMessage = "NOTIFY_MESSAGE";
     }
 
     //  user
@@ -126,12 +131,6 @@ public class AppUtil {
         public static final int all = 0;
         public static final int sound = 1;
         public static final int vibrate = 2;
-    }
-
-    //  Chat
-    public static final class chat {
-        public static final int from = 0;
-        public static final int to = 1;
     }
 
 }
