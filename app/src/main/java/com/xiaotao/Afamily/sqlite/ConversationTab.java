@@ -46,6 +46,7 @@ public class ConversationTab {
 
     //  更新数据    有新消息是调用
     public void create(String jsonMsg) {
+        System.out.println("MSG " + jsonMsg);
         try {
             JSONObject jsonObject = new JSONObject(jsonMsg);
             ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -54,9 +55,10 @@ public class ConversationTab {
             ).compress(
                     Bitmap.CompressFormat.PNG, 100, os
             );
-            String sql = "INSERT INTO conversation VALUES(?, ?, ?, ?, datetime())";
+            String sql = "INSERT INTO conversation VALUES(?, ?, ?, ?, ?, datetime())";
             Object args[] = new Object[]{
                     jsonObject.getInt(AppUtil.conversation.taskId),
+                    jsonObject.getString(AppUtil.conversation.account),
                     jsonObject.getString(AppUtil.conversation.who),
                     os.toByteArray(),
                     jsonObject.getString(AppUtil.conversation.mesaage)
@@ -77,20 +79,29 @@ public class ConversationTab {
         for (result.moveToFirst(); !result.isAfterLast(); result.moveToNext()) {
             Chat item = new Chat();
             item.setType(result.getInt(0));
-            item.setName(result.getString(1));
-            byte[] in = result.getBlob(2);
+            item.setAccount(result.getString(1));
+            item.setName(result.getString(2));
+            byte[] in = result.getBlob(3);
             item.setPortrait(BitmapFactory.decodeByteArray(in, 0, in.length));
-            item.setMessage(result.getString(3));
+            item.setMessage(result.getString(4));
             chatList.add(item);
         }
         this.db.close();
         return chatList;
     }
 
+    //  删除指定task的讨论数据
     public void deleteByTaskId(int id) {
         String delete = "delete from conversation where task_id = ?";
         String args[] = new String[]{Integer.toString(id)};
         this.db.execSQL(delete, args);
+        this.db.close();
+    }
+
+    //  删除所有对话
+    public void deleteAllConversation() {
+        String delete = "delete from conversation";
+        this.db.execSQL(delete);
         this.db.close();
     }
 }

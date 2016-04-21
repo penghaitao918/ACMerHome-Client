@@ -11,6 +11,7 @@ import android.widget.SimpleAdapter;
 
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.activity.subpage.ChatActivity;
+import com.xiaotao.Afamily.activity.subpage.NotifyPage;
 import com.xiaotao.Afamily.activity.subpage.TaskListPage;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.utils.AppUtil;
@@ -75,7 +76,12 @@ public class HomePageActivity extends BaseActivity {
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         gridView.setOnItemClickListener(new OnItemClickListenerImpl());
 
-        simpleAdapter = new SimpleAdapter(this, dataList, R.layout.gridview_item, from, to);
+        simpleAdapter = new SimpleAdapter(this,
+                dataList,
+                R.layout.gridview_item,
+                from,
+                to
+        );
         gridView.setAdapter(simpleAdapter);
     }
 
@@ -101,6 +107,8 @@ public class HomePageActivity extends BaseActivity {
                     startActivity(intent1);
                     break;
                 case 2:
+                    Intent intent2 = new Intent(HomePageActivity.this, NotifyPage.class);
+                    startActivity(intent2);
                     break;
                 case 3:
                     Intent intent3 = new Intent(HomePageActivity.this, ChatActivity.class);

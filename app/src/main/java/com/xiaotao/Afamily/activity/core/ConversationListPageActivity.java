@@ -81,6 +81,7 @@ public class ConversationListPageActivity extends BaseActivity {
             dataList.clear();
         }
         super.unregisterReceiver(receiver);
+        helper.close();
     }
 
     private void init() {

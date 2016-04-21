@@ -38,6 +38,9 @@
         <activity android:name=".activity.subpage.ConfirmTask"
             android:theme="@style/MyDialogStyleBottom"/>
 
+        <!--通知-->
+        <activity android:name=".activity.subpage.NotifyPage"/>
+
         <!--讨论聊天-->
         <activity android:name=".activity.subpage.ChatActivity"/>
 

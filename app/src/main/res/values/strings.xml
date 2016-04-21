@@ -24,4 +24,15 @@
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
 
+    <string name="signIn">签到</string>
+    <string name="taskList">任务</string>
+    <string name="notification">通知</string>
+    <string name="talkAboutEveryOne">家人</string>
+    <string name="weather">天气</string>
+    <string name="calendar">日程规划</string>
+    <string name="game">游戏</string>
+    <string name="settings">设置</string>
+    <string name="feedback">意见反馈</string>
+    <string name="update">更新</string>
+
 </resources>

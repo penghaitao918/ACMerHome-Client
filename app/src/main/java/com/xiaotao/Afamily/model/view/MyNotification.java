@@ -5,10 +5,16 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.view.View;
 
 import com.xiaotao.Afamily.R;
+import com.xiaotao.Afamily.activity.subpage.NotifyPage;
+import com.xiaotao.Afamily.model.entity.Notify;
+import com.xiaotao.Afamily.sqlite.ConversationTab;
+import com.xiaotao.Afamily.sqlite.DATABASE;
+import com.xiaotao.Afamily.sqlite.NotifyTab;
 import com.xiaotao.Afamily.test.TestActivity;
 import com.xiaotao.Afamily.utils.AppUtil;
 
@@ -41,18 +47,20 @@ public class MyNotification {
     private String mTitle = "一家人";
     private String mText = "已有新的版本，请及时更新。";
 
-    public MyNotification(){
-        this.build();
-    }
-    public MyNotification(Context context, JSONObject jsonObject){
+    private NotifyTab notifyTab = null;
+
+    public MyNotification(){}
+    public MyNotification(Context context, Notify notify){
         this.mContext = context;
-        try {
-            this.mTitle = jsonObject.getString(AppUtil.notify.notifyTitle);
-            this.mText = jsonObject.getString(AppUtil.notify.notifyMessage);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        this.mTitle = notify.getTitle();
+        this.mText = notify.getMessage();
         this.build();
+        this.writeToDB();
+    }
+
+    private void writeToDB() {
+        notifyTab = new NotifyTab(new DATABASE(mContext).getWritableDatabase());
+        notifyTab.create(mTitle, mText);
     }
 
 
@@ -60,7 +68,7 @@ public class MyNotification {
         // 获取系统的NotificationManager服务
         this.notificationManager = (NotificationManager)mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         // 创建一个启动其他Activity的Intent
-        Intent intent = new Intent(mContext, TestActivity.class);
+        Intent intent = new Intent(mContext, NotifyPage.class);
         PendingIntent pi = PendingIntent.getActivity(mContext, 0, intent, 0);
         this.notification = new Notification.Builder(mContext)
                 // 设置打开该通知，该通知自动消失

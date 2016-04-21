@@ -85,8 +85,8 @@ public class ChatActivity extends BaseActivity {
         if (dataList != null) {
             dataList.clear();
         }
-        conversationTab = new ConversationTab(helper.getWritableDatabase());
-        conversationTab.deleteByTaskId(conversationId);
+    //    conversationTab = new ConversationTab(helper.getWritableDatabase());
+    //    conversationTab.deleteByTaskId(conversationId);
     }
 
     private void init() {
@@ -125,7 +125,6 @@ public class ChatActivity extends BaseActivity {
                         getIntent().getIntExtra(AppUtil.conversation.taskId, -1)
                 )
         );
-        System.out.println("#A " + dataList);
         simpleAdapter = new ChatAdapter(this,dataList);
         listView.setAdapter(simpleAdapter);
         simpleAdapter.notifyDataSetChanged();

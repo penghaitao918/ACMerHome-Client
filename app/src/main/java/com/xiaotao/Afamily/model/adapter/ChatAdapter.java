@@ -78,9 +78,13 @@ public class ChatAdapter extends BaseAdapter {
     private View createViewFromResource(int position, View convertView) {
 
         String account = mData.get(position).getAccount();
+        System.out.println("#F " + account);
+        System.out.println("#T " + BaseApplication.getInstance().getAccount());
         if (BaseApplication.getInstance().getAccount().equals(account)) {
+            System.out.println("A");
             convertView = mInflater.inflate(R.layout.chatto_item, null);
         } else {
+            System.out.println("B");
             convertView = mInflater.inflate(R.layout.chafrom_item, null);
         }
         if (position == 0) {
