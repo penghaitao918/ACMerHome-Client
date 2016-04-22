@@ -12,8 +12,10 @@ import android.widget.SimpleAdapter;
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.activity.subpage.ChatActivity;
 import com.xiaotao.Afamily.activity.subpage.NotifyPage;
+import com.xiaotao.Afamily.activity.subpage.SettingsPage;
 import com.xiaotao.Afamily.activity.subpage.TaskListPage;
 import com.xiaotao.Afamily.base.BaseActivity;
+import com.xiaotao.Afamily.service.LocalService;
 import com.xiaotao.Afamily.utils.AppUtil;
 
 import java.util.ArrayList;
@@ -61,6 +63,8 @@ public class HomePageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_page_home);
+        Intent intent = new Intent(this, LocalService.class);
+        startService(intent);
         this.init();
     }
 
@@ -101,6 +105,7 @@ public class HomePageActivity extends BaseActivity {
             System.out.println(position);
             switch (position) {
                 case 0:
+                    startLocalService(AppUtil.localService.all);
                     break;
                 case 1:
                     Intent intent1 = new Intent(HomePageActivity.this, TaskListPage.class);
@@ -119,6 +124,14 @@ public class HomePageActivity extends BaseActivity {
                 case 4:
                     break;
                 case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    Intent intent7 = new Intent(HomePageActivity.this, SettingsPage.class);
+                    startActivity(intent7);
+                    break;
+                case 8:
                     break;
             }
         }

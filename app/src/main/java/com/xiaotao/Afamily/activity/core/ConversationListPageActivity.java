@@ -153,9 +153,7 @@ public class ConversationListPageActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        Intent localService = new Intent(AppUtil.broadcast.local_service);
-        localService.putExtra(AppUtil.message.type, AppUtil.localService.all);
-        sendBroadcast(localService);
+        startLocalService(AppUtil.localService.all);
 
         simpleAdapter.notifyDataSetChanged();
     }

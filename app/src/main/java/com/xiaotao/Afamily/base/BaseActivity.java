@@ -65,6 +65,12 @@ public class BaseActivity extends Activity {
         startService(intent);
     }
 
+    protected void startLocalService(int type) {
+        Intent localService = new Intent(AppUtil.broadcast.local_service);
+        localService.putExtra(AppUtil.message.type, type);
+        sendBroadcast(localService);
+    }
+
     protected void sendToService(final String jsonMessage) {
         new Thread(new Runnable() {
             @Override

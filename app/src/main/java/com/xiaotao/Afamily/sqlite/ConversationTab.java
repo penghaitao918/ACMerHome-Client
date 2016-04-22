@@ -46,7 +46,6 @@ public class ConversationTab {
 
     //  更新数据    有新消息是调用
     public void create(String jsonMsg) {
-        System.out.println("MSG " + jsonMsg);
         try {
             JSONObject jsonObject = new JSONObject(jsonMsg);
             ByteArrayOutputStream os = new ByteArrayOutputStream();

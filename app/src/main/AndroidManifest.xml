@@ -32,17 +32,22 @@
         <!--用户信息-->
         <activity android:name=".activity.core.UserPageActivity"/>
 
+        <!--讨论聊天-->
+        <activity android:name=".activity.subpage.ChatActivity"/>
+
         <!--任务一览-->
         <activity android:name=".activity.subpage.TaskListPage"/>
         <!--确认完成任务-->
-        <activity android:name=".activity.subpage.ConfirmTask"
+        <activity android:name=".activity.popwin.ConfirmTask"
             android:theme="@style/MyDialogStyleBottom"/>
 
         <!--通知-->
         <activity android:name=".activity.subpage.NotifyPage"/>
-
-        <!--讨论聊天-->
-        <activity android:name=".activity.subpage.ChatActivity"/>
+        <!--设置-->
+        <activity android:name=".activity.subpage.SettingsPage"/>
+        <!--确认删除聊天记录-->
+        <activity android:name=".activity.popwin.ConfirmConversation"
+            android:theme="@style/MyDialogStyleBottom"/>
 
         <!--测试-->
         <activity android:name=".test.TestActivity"/>

@@ -11,6 +11,7 @@ import android.os.Vibrator;
 
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.SPUtils;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -33,7 +34,7 @@ import com.xiaotao.Afamily.utils.AppUtil;
 public class LocalService extends Service {
 
     public static boolean soundFlag = true;
-    private static boolean vibrateFlag = true;
+    public static boolean vibrateFlag = true;
 
     private MediaPlayer mediaPlayer = null;
 
@@ -58,6 +59,9 @@ public class LocalService extends Service {
 
     private void init() {
         initReceiver();
+        SPUtils spUtils = new SPUtils(this);
+        soundFlag = (boolean) spUtils.get(AppUtil.sp.localSound, true);
+        vibrateFlag = (boolean) spUtils.get(AppUtil.sp.localVibrate, true);
         mediaPlayer = MediaPlayer.create(this, R.raw.dingdong);
     }
 

@@ -34,7 +34,7 @@ public class BaseApplication extends Application {
     private static BaseApplication instance;
     private List<Activity> activityList = new LinkedList<Activity>();
 
-    private String account = null;
+    private String account = "";
     private String name = null;
     private Bitmap portrait = null;
 

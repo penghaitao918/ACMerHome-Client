@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.xiaotao.Afamily.model.entity.Notify;
-import com.xiaotao.Afamily.model.view.MyNotification;
+import com.xiaotao.Afamily.model.view.NotificationView;
 import com.xiaotao.Afamily.test.TestEntity;
 import com.xiaotao.Afamily.utils.AppUtil;
 
@@ -75,7 +75,7 @@ public class ClientReceive implements Runnable {
         try {
             switch (type) {
                 case AppUtil.socket.notify:
-                    MyNotification notification = new MyNotification(context, new Notify(jsonObject));
+                    NotificationView notification = new NotificationView(context, new Notify(jsonObject));
                     notification.start();
                     break;
                 case AppUtil.socket.login:

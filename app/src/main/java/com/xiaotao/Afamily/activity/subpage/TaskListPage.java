@@ -1,9 +1,7 @@
 package com.xiaotao.Afamily.activity.subpage;
 
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -12,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.xiaotao.Afamily.R;
+import com.xiaotao.Afamily.activity.popwin.ConfirmTask;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.model.adapter.StudentTaskAdapter;
 import com.xiaotao.Afamily.model.entity.StudentTask;

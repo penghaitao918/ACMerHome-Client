@@ -88,6 +88,7 @@ public class WelcomeActivity extends BaseActivity
 		super.onDestroy();
 		//	结束动画
 		animation.cancel();
+		this.spUtils.recycle();
 		super.unregisterReceiver(reLoginReceiver);
 	}
 
@@ -110,10 +111,19 @@ public class WelcomeActivity extends BaseActivity
 		BaseApplication.getInstance().setPortrait(
 				ChangeUtil.toBitmap((String) spUtils.get(AppUtil.sp.portrait, ""))
 		);
-/*
-		Message m = new Message();
-		m.what = 0;
-		handler.sendMessage(m);*/
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(1500);
+					Message m = new Message();
+					m.what = 1;
+					handler.sendMessage(m);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
 
 	private Handler handler = new Handler()
@@ -121,7 +131,6 @@ public class WelcomeActivity extends BaseActivity
 		@Override
 		public void handleMessage(Message msg)
 		{
-			System.out.println("1");
 			switch (msg.what){
 				case 0:
 					System.out.println("A");
@@ -157,7 +166,6 @@ public class WelcomeActivity extends BaseActivity
 	public class ReLoginReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			System.out.println("2");
 			String msg = intent.getStringExtra(AppUtil.message.reLogin);
 			try {
 				Message m = new Message();
@@ -165,10 +173,8 @@ public class WelcomeActivity extends BaseActivity
 				boolean flag = jsonObject.getBoolean(AppUtil.user.loginFlag);
 				if (flag){
 					m.what = 0;
-					System.out.println("3");
 				}else {
 					m.what = 1;
-					System.out.println("4");
 				}
 				handler.sendMessage(m);
 			}catch (JSONException e){

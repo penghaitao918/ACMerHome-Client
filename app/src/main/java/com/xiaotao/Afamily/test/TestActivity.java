@@ -96,6 +96,7 @@ public class TestActivity extends BaseActivity {
         super.unregisterReceiver(testReceiver);
         SPUtils spUtils = new SPUtils(getBaseContext());
         spUtils.set(AppUtil.sp.loginFlag, false);
+        spUtils.recycle();
         Intent intent = new Intent(this, NetworkService.class);
         stopService(intent);
         BaseApplication.getInstance().exit();

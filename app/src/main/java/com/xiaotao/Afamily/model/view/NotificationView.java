@@ -39,7 +39,7 @@ import org.json.JSONObject;
  * @author xiaoTao
  * @date 2016-02-25  20:53
  */
-public class MyNotification {
+public class NotificationView {
 
     private Context mContext = null;
     private Notification notification = null;
@@ -49,8 +49,8 @@ public class MyNotification {
 
     private NotifyTab notifyTab = null;
 
-    public MyNotification(){}
-    public MyNotification(Context context, Notify notify){
+    public NotificationView(){}
+    public NotificationView(Context context, Notify notify){
         this.mContext = context;
         this.mTitle = notify.getTitle();
         this.mText = notify.getMessage();

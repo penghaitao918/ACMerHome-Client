@@ -31,13 +31,12 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/notifyTime" />
 
-        <LinearLayout
-            android:orientation="vertical"
+        <com.xiaotao.Afamily.model.view.DashedLineView
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_margin="10dp"
-            android:background="@drawable/shape_dash_line"
-            android:layout_gravity="center_horizontal"></LinearLayout>
+            android:layout_gravity="center_horizontal" />
 
         <TextView
             android:layout_width="wrap_content"

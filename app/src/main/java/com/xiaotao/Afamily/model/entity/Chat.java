@@ -30,7 +30,7 @@ public class Chat {
 
     private int type = -1;
 
-    private String account = null;
+    private String account = "";
     private String name = null;
     private Bitmap portrait = null;
     private String message = null;

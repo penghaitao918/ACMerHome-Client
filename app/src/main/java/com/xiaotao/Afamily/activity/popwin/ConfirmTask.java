@@ -1,4 +1,4 @@
-package com.xiaotao.Afamily.activity.subpage;
+package com.xiaotao.Afamily.activity.popwin;
 
 import android.content.Intent;
 import android.os.Bundle;

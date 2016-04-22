@@ -101,6 +101,9 @@ public class AppUtil {
         public static final String userName = "userName";
         public static final String sex = "userSex";
         public static final String classes = "userClasses";
+
+        public static final String localSound = "LOCAL_SOUND";
+        public static final String localVibrate = "LOCAL_VIBRATE";
     }
 
     //  讨论组
