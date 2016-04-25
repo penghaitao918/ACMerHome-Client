@@ -20,6 +20,13 @@ package com.xiaotao.Afamily.utils;
  */
 public class AppUtil {
 
+    //  本地服务
+    public static final class localService {
+        public static final int all = 0;
+        public static final int sound = 1;
+        public static final int vibrate = 2;
+    }
+
     //  Socket Connect
     public static final class net {
         public static final int port = 30000;
@@ -42,6 +49,7 @@ public class AppUtil {
         public static final int studentTaskList = 5;
         public static final int submitTask = 6;
         public static final int sendConversationMessage = 7;
+        public static final int feedback = 8;
     }
 
     public static final class notify {
@@ -73,10 +81,10 @@ public class AppUtil {
         public static final String local_service = "com.xiaotao.action.LOCAL_SERVICE";
         public static final String login = "com.xiaotao.action.LOGIN";
         public static final String reLogin = "com.xiaotao.action.RELOGIN";
-        public static final String test = "com.xiaotao.action.TEST";
         public static final String conversationList = "com.xiaotao.action.CONVERSATION_LIST";
         public static final String studentTaskList = "com.xiaotao.action.STUDENT_TASK_LIST";
         public static final String chat = "com.xiaotao.action.CHAT";
+        public static final String feedback = "com.xiaotao.action.FEEDBACK";
     }
 
     //  Broadcast Message
@@ -88,7 +96,6 @@ public class AppUtil {
         public static final String taskList = "RECEIVE_TASK_LIST_MSG";
         public static final String studentTask = "RECEIVE_STUDENT_TASK_MSG";
         public static final String chatMessage = "RECEIVE_STUDENT_TASK_MSG";
-        public static final String test = "TEST_MSG";
     }
 
     //  SharedPreferences 存储
@@ -115,8 +122,6 @@ public class AppUtil {
         public static final String who = "STUDENT_NAME";
         public static final String mesaage = "MESSAGE";
         public static final String time = "MESSAHE_TIME";
-        public static final String count = "MESSAGE_COUNT";
-        public static final String image = "COUNT_BG";
     }
 
     //  任务完成情况
@@ -129,11 +134,11 @@ public class AppUtil {
         };
     }
 
-    //  本地服务
-    public static final class localService {
-        public static final int all = 0;
-        public static final int sound = 1;
-        public static final int vibrate = 2;
+    //  意见反馈
+    public static final class feedback {
+        public static final String who = "FEEDBACK_NAME";
+        public static final String title = "FEEDBACK_TITLE";
+        public static final String body = "FEEDBACK_BODY";
     }
 
 }

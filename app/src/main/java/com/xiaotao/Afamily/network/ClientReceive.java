@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.xiaotao.Afamily.model.entity.Notify;
 import com.xiaotao.Afamily.model.view.NotificationView;
-import com.xiaotao.Afamily.test.TestEntity;
 import com.xiaotao.Afamily.utils.AppUtil;
 
 import org.json.JSONException;
@@ -91,14 +90,6 @@ public class ClientReceive implements Runnable {
                 case AppUtil.socket.logout:
                 //    NetworkService.getSocket().close();
                     break;
-                case AppUtil.socket.test:
-                    TestEntity testEntity = new TestEntity(jsonObject);
-                    System.out.println(testEntity.getMsg());
-
-                    Intent intent = new Intent(AppUtil.broadcast.test);
-                    intent.putExtra(AppUtil.message.test, testEntity);
-                    context.sendBroadcast(intent);
-                    break;
                 case AppUtil.socket.taskList:
                     Intent intentTaskListToConversation = new Intent(AppUtil.broadcast.conversationList);
                     intentTaskListToConversation.putExtra(AppUtil.message.type, 0);
@@ -125,6 +116,11 @@ public class ClientReceive implements Runnable {
                     intentRecentConversation.putExtra(AppUtil.message.type, 1);
                     intentRecentConversation.putExtra(AppUtil.message.chatMessage, jsonObject.toString());
                     context.sendBroadcast(intentRecentConversation);
+                    break;
+                case AppUtil.socket.feedback:
+                    Intent intentFeedback = new Intent(AppUtil.broadcast.feedback);
+                    intentFeedback.putExtra(AppUtil.message.type, 1);
+                    context.sendBroadcast(intentFeedback);
                     break;
                 default:
                     Log.i(AppUtil.tag.network,AppUtil.net.tip);

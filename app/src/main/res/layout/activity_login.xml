@@ -20,17 +20,6 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/login_backButton"
-            android:onClick="loginOnClick"
-            android:padding="15dp"
-            android:background="@null"
-            android:src="@drawable/btn_login_back"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true" />
-
     </RelativeLayout>
 
     <RelativeLayout

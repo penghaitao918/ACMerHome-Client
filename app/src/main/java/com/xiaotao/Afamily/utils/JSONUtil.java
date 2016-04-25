@@ -3,7 +3,6 @@ package com.xiaotao.Afamily.utils;
 import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.model.entity.Chat;
 import com.xiaotao.Afamily.model.entity.User;
-import com.xiaotao.Afamily.test.TestEntity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,19 +38,6 @@ public class JSONUtil{
             e.printStackTrace();
         }
         return checkJSON;
-    }
-
-    //  test
-    public static JSONObject test(TestEntity testEntity) {
-        //  创建 JSONObject 对象
-        JSONObject testJSON = new JSONObject();
-        try {
-            testJSON.put(AppUtil.socket.type, AppUtil.socket.test);
-            testJSON.put("MSG", testEntity.getMsg());
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-        return testJSON;
     }
 
     //  login
@@ -145,5 +131,19 @@ public class JSONUtil{
             e.printStackTrace();
         }
         return conversationJSON;
+    }
+
+    //  意见反馈
+    public static JSONObject feedback(String title, String body) {
+        JSONObject feedbackJSON = new JSONObject();
+        try {
+            feedbackJSON.put(AppUtil.socket.type, AppUtil.socket.feedback);
+            feedbackJSON.put(AppUtil.feedback.who, BaseApplication.getInstance().getName());
+            feedbackJSON.put(AppUtil.feedback.title, title);
+            feedbackJSON.put(AppUtil.feedback.body, body);
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return feedbackJSON;
     }
 }

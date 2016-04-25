@@ -49,8 +49,9 @@
         <activity android:name=".activity.popwin.ConfirmConversation"
             android:theme="@style/MyDialogStyleBottom"/>
 
-        <!--测试-->
-        <activity android:name=".test.TestActivity"/>
+        <!--意见反馈-->
+        <activity android:name=".activity.subpage.FeedbackPage"/>
+
 
         <!--配置Service组件-->
         <!--网络服务-->

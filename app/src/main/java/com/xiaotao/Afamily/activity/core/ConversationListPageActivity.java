@@ -114,6 +114,8 @@ public class ConversationListPageActivity extends BaseActivity {
         dataList = new ArrayList<>();
         Conversation conversation = new Conversation("家人");
         dataList.add(0, conversation);
+
+
         sendToService(JSONUtil.getAllTaskInfoList().toString());
     }
 

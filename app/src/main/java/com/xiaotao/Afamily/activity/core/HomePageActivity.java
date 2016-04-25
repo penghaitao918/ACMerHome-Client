@@ -11,6 +11,7 @@ import android.widget.SimpleAdapter;
 
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.activity.subpage.ChatActivity;
+import com.xiaotao.Afamily.activity.subpage.FeedbackPage;
 import com.xiaotao.Afamily.activity.subpage.NotifyPage;
 import com.xiaotao.Afamily.activity.subpage.SettingsPage;
 import com.xiaotao.Afamily.activity.subpage.TaskListPage;
@@ -132,6 +133,10 @@ public class HomePageActivity extends BaseActivity {
                     startActivity(intent7);
                     break;
                 case 8:
+                    Intent intent8 = new Intent(HomePageActivity.this, FeedbackPage.class);
+                    startActivity(intent8);
+                    break;
+                case 9:
                     break;
             }
         }

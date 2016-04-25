@@ -41,4 +41,7 @@
     <string name="confirmConversation">是否确认清空所有聊天记录？</string>
     <string name="about">关于我们</string>
 
+    <string name="title">标题</string>
+    <string name="feedbackBody">在这里留下您宝贵的意见~</string>
+
 </resources>

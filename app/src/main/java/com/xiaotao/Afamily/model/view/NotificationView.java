@@ -5,21 +5,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.view.View;
 
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.activity.subpage.NotifyPage;
 import com.xiaotao.Afamily.model.entity.Notify;
-import com.xiaotao.Afamily.sqlite.ConversationTab;
 import com.xiaotao.Afamily.sqlite.DATABASE;
 import com.xiaotao.Afamily.sqlite.NotifyTab;
-import com.xiaotao.Afamily.test.TestActivity;
-import com.xiaotao.Afamily.utils.AppUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * 　 　　   へ　　　 　／|

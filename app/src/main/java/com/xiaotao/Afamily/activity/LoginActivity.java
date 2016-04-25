@@ -174,9 +174,6 @@ public class LoginActivity extends BaseActivity {
 
     public void loginOnClick(View view) {
         switch (view.getId()) {
-            case R.id.login_backButton:
-                onBackPressed();
-                break;
             case R.id.login_loginButton:
                 BaseApplication.getInstance().setAccount(accountEdit.getText().toString());
                 new Thread(new Runnable() {

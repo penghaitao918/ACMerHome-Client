@@ -163,7 +163,6 @@
                 android:layout_height="60dp"
                 android:layout_margin="30dp"
                 android:onClick="SettingsOnClick"
-                android:background="@drawable/exit_bg"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
 
