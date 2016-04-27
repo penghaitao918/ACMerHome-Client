@@ -1,13 +1,18 @@
 package com.xiaotao.Afamily.activity.core;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.activity.subpage.ChatActivity;
@@ -18,6 +23,7 @@ import com.xiaotao.Afamily.activity.subpage.TaskListPage;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.service.LocalService;
 import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.JSONUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +49,8 @@ import java.util.Map;
  */
 public class HomePageActivity extends BaseActivity {
 
+    private HomePageReceiver receiver = null;
+
     private final String IMAGE = "image";
     private final String TEXT = "text";
     private final String[] from = {IMAGE, TEXT};
@@ -66,6 +74,7 @@ public class HomePageActivity extends BaseActivity {
         super.setContentView(R.layout.activity_page_home);
         Intent intent = new Intent(this, LocalService.class);
         startService(intent);
+        initBroadcast();
         this.init();
     }
 
@@ -99,6 +108,14 @@ public class HomePageActivity extends BaseActivity {
             dataList.add(map);
         }
     }
+    private void initBroadcast() {
+        receiver = new HomePageReceiver();
+        //  创建IntentFilter
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(AppUtil.broadcast.check);
+        registerReceiver(receiver, filter);
+    }
+
 
     private class OnItemClickListenerImpl implements AdapterView.OnItemClickListener {
         @Override
@@ -106,7 +123,7 @@ public class HomePageActivity extends BaseActivity {
             System.out.println(position);
             switch (position) {
                 case 0:
-                    startLocalService(AppUtil.localService.all);
+                    sendToService(JSONUtil.check().toString());
                     break;
                 case 1:
                     Intent intent1 = new Intent(HomePageActivity.this, TaskListPage.class);
@@ -138,6 +155,15 @@ public class HomePageActivity extends BaseActivity {
                     break;
                 case 9:
                     break;
+            }
+        }
+    }
+
+    public class HomePageReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getIntExtra(AppUtil.message.type, -1) == 1) {
+                Toast.makeText(HomePageActivity.this, "签到成功", Toast.LENGTH_SHORT).show();
             }
         }
     }

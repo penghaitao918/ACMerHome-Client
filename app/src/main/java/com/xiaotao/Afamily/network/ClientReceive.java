@@ -73,6 +73,11 @@ public class ClientReceive implements Runnable {
         // 每当读到来自服务器的数据之后，发送消息通知程序
         try {
             switch (type) {
+                case AppUtil.socket.check:
+                    Intent intentCheck = new Intent(AppUtil.broadcast.check);
+                    intentCheck.putExtra(AppUtil.message.type, 1);
+                    context.sendBroadcast(intentCheck);
+                    break;
                 case AppUtil.socket.notify:
                     NotificationView notification = new NotificationView(context, new Notify(jsonObject));
                     notification.start();
@@ -128,8 +133,7 @@ public class ClientReceive implements Runnable {
                     context.sendBroadcast(intentUpdateInfo);
                     break;
                 default:
-                    Log.i(AppUtil.tag.network,AppUtil.net.tip);
-                    System.out.println(AppUtil.socket.checkMSG);
+                    Log.i(AppUtil.tag.network, AppUtil.net.tip);
                     break;
             }
         } catch (Exception e) {

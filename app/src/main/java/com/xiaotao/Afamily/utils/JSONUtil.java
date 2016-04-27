@@ -28,12 +28,14 @@ import org.json.JSONObject;
  */
 public class JSONUtil{
 
-    //  心跳检测
-    public static JSONObject connectCheck() {
+    //  签到
+    public static JSONObject check(/*String flag*/) {
         //  创建 JSONObject 对象
         JSONObject checkJSON = new JSONObject();
         try {
             checkJSON.put(AppUtil.socket.type, AppUtil.socket.check);
+        //    checkJSON.put(AppUtil.check.checkType, flag);
+            checkJSON.put(AppUtil.user.account, BaseApplication.getInstance().getUser().getStuId());
         }catch (JSONException e){
             e.printStackTrace();
         }

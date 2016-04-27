@@ -37,20 +37,24 @@ public class AppUtil {
     //  Connect Type
     public static final class socket {
         public static final String type = "CONNECT_TYPE";
-        public static final String logoutFLAG = "LOGOUT_FLAG";
-        public static final String checkMSG = "###心跳检测###";
-        public static final int test = -2;
-        public static final int check = -1;
-        public static final int notify = 0;
-        public static final int login = 1;
-        public static final int reLogin = 2;
-        public static final int logout = 3;
-        public static final int taskList = 4;
-        public static final int studentTaskList = 5;
-        public static final int submitTask = 6;
-        public static final int sendConversationMessage = 7;
-        public static final int feedback = 8;
-        public static final int updateUserInfo = 9;
+
+        public static final int check = 0;
+        public static final int notify = 1;
+        public static final int login = 2;
+        public static final int reLogin = 3;
+        public static final int logout =4 ;
+        public static final int taskList = 5;
+        public static final int studentTaskList = 6;
+        public static final int submitTask = 7;
+        public static final int sendConversationMessage = 8;
+        public static final int feedback = 9;
+        public static final int updateUserInfo = 10;
+    }
+
+    public static final class check {
+        public static final String checkType = "NOTIFY_TITLE";
+        public static final String checkIn = "CheckIn";
+        public static final String checkOut = "CheckOut";
     }
 
     public static final class notify {
@@ -80,6 +84,8 @@ public class AppUtil {
     public static final class broadcast {
         public static final String network_service = "com.xiaotao.action.NETWORK_SERVICE";
         public static final String local_service = "com.xiaotao.action.LOCAL_SERVICE";
+
+        public static final String check = "com.xiaotao.action.CHECK_IN_OUT";
         public static final String login = "com.xiaotao.action.LOGIN";
         public static final String reLogin = "com.xiaotao.action.RELOGIN";
         public static final String conversationList = "com.xiaotao.action.CONVERSATION_LIST";
