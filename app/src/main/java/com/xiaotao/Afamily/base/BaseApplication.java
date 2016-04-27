@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.utils.AppUtil;
 
 import java.util.LinkedList;
@@ -34,9 +35,7 @@ public class BaseApplication extends Application {
     private static BaseApplication instance;
     private List<Activity> activityList = new LinkedList<Activity>();
 
-    private String account = "";
-    private String name = null;
-    private Bitmap portrait = null;
+    private User user = null;
 
     // 单例模式中获取唯一的MyApplication实例
     public static BaseApplication getInstance() {
@@ -94,28 +93,12 @@ public class BaseApplication extends Application {
         super.onTerminate();
     }
 
-    public String getAccount() {
-        return account;
+    public User getUser() {
+        return user;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public Bitmap getPortrait() {
-        return portrait;
-    }
-
-    public void setPortrait(Bitmap portrait) {
-        this.portrait = portrait;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(User user) {
+        this.user = new User(user);
     }
 }
 

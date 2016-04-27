@@ -164,7 +164,12 @@
                 android:layout_margin="30dp"
                 android:onClick="SettingsOnClick"
                 android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:text="退 出"
+                android:textStyle="bold"
+                android:textSize="28dp"
+                android:textColor="@color/black"
+                android:background="@drawable/login_button_bg"/>
 
         </RelativeLayout>
 

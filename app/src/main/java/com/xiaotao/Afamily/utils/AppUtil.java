@@ -50,6 +50,7 @@ public class AppUtil {
         public static final int submitTask = 6;
         public static final int sendConversationMessage = 7;
         public static final int feedback = 8;
+        public static final int updateUserInfo = 9;
     }
 
     public static final class notify {
@@ -85,6 +86,7 @@ public class AppUtil {
         public static final String studentTaskList = "com.xiaotao.action.STUDENT_TASK_LIST";
         public static final String chat = "com.xiaotao.action.CHAT";
         public static final String feedback = "com.xiaotao.action.FEEDBACK";
+        public static final String userPage = "com.xiaotao.action.USER_PAGE";
     }
 
     //  Broadcast Message
@@ -96,6 +98,7 @@ public class AppUtil {
         public static final String taskList = "RECEIVE_TASK_LIST_MSG";
         public static final String studentTask = "RECEIVE_STUDENT_TASK_MSG";
         public static final String chatMessage = "RECEIVE_STUDENT_TASK_MSG";
+        public static final String userPage = "RECEIVE_STUDENT_USER_PAGE";
     }
 
     //  SharedPreferences 存储
@@ -139,6 +142,13 @@ public class AppUtil {
         public static final String who = "FEEDBACK_NAME";
         public static final String title = "FEEDBACK_TITLE";
         public static final String body = "FEEDBACK_BODY";
+    }
+
+    public static final class updateUserInfo {
+        public static final int updateSex = 0;
+        public static final int updatePortrait = 1;
+        public static final String updateType = "UPDATE_USER_INFO_TYPE";
+        public static final String updateBody = "UPDATE_USER_INFO_MESSAGE";
     }
 
 }

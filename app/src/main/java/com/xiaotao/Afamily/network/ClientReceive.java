@@ -122,6 +122,11 @@ public class ClientReceive implements Runnable {
                     intentFeedback.putExtra(AppUtil.message.type, 1);
                     context.sendBroadcast(intentFeedback);
                     break;
+                case AppUtil.socket.updateUserInfo:
+                    Intent intentUpdateInfo = new Intent(AppUtil.broadcast.userPage);
+                    intentUpdateInfo.putExtra(AppUtil.message.userPage, jsonObject.getInt(AppUtil.updateUserInfo.updateType));
+                    context.sendBroadcast(intentUpdateInfo);
+                    break;
                 default:
                     Log.i(AppUtil.tag.network,AppUtil.net.tip);
                     System.out.println(AppUtil.socket.checkMSG);

@@ -44,4 +44,10 @@
     <string name="title">标题</string>
     <string name="feedbackBody">在这里留下您宝贵的意见~</string>
 
+    <string name="portrait">头像</string>
+    <string name="account_lab">学号</string>
+    <string name="classes">班级</string>
+    <string name="name">昵称</string>
+    <string name="sex">性别</string>
+
 </resources>

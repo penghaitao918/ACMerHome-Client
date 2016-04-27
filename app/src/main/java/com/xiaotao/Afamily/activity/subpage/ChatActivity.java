@@ -134,9 +134,9 @@ public class ChatActivity extends BaseActivity {
         if (editText.getText().toString() != null && !editText.getText().toString().equals("")) {
             Chat chat = new Chat();
             chat.setType(conversationId);
-            chat.setName(BaseApplication.getInstance().getName());
-            chat.setAccount(BaseApplication.getInstance().getAccount());
-            chat.setPortrait(BaseApplication.getInstance().getPortrait());
+            chat.setName(BaseApplication.getInstance().getUser().getUserName());
+            chat.setAccount(BaseApplication.getInstance().getUser().getStuId());
+            chat.setPortrait(BaseApplication.getInstance().getUser().getPortrait());
             chat.setMessage(editText.getText().toString());
             sendToService(JSONUtil.sendConversationMessage(chat).toString());
             editText.setText("");

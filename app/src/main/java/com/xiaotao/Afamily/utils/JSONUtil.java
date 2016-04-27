@@ -95,7 +95,7 @@ public class JSONUtil{
         JSONObject logoutJSON = new JSONObject();
         try {
             logoutJSON.put(AppUtil.socket.type, AppUtil.socket.studentTaskList);
-            logoutJSON.put(AppUtil.studentTask.account, BaseApplication.getInstance().getAccount());
+            logoutJSON.put(AppUtil.studentTask.account, BaseApplication.getInstance().getUser().getStuId());
         }catch (JSONException e){
             e.printStackTrace();
         }
@@ -109,7 +109,7 @@ public class JSONUtil{
         try {
             logoutJSON.put(AppUtil.socket.type, AppUtil.socket.submitTask);
             logoutJSON.put(AppUtil.studentTask.taskId, taskId);
-            logoutJSON.put(AppUtil.studentTask.account, BaseApplication.getInstance().getAccount());
+            logoutJSON.put(AppUtil.studentTask.account, BaseApplication.getInstance().getUser().getStuId());
         }catch (JSONException e){
             e.printStackTrace();
         }
@@ -138,9 +138,23 @@ public class JSONUtil{
         JSONObject feedbackJSON = new JSONObject();
         try {
             feedbackJSON.put(AppUtil.socket.type, AppUtil.socket.feedback);
-            feedbackJSON.put(AppUtil.feedback.who, BaseApplication.getInstance().getName());
+            feedbackJSON.put(AppUtil.feedback.who, BaseApplication.getInstance().getUser().getUserName());
             feedbackJSON.put(AppUtil.feedback.title, title);
             feedbackJSON.put(AppUtil.feedback.body, body);
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return feedbackJSON;
+    }
+
+    //  修改个人信息
+    public static JSONObject updateUserInfo(int type, String message) {
+        JSONObject feedbackJSON = new JSONObject();
+        try {
+            feedbackJSON.put(AppUtil.socket.type, AppUtil.socket.updateUserInfo);
+            feedbackJSON.put(AppUtil.user.account, BaseApplication.getInstance().getUser().getStuId());
+            feedbackJSON.put(AppUtil.updateUserInfo.updateType, type);
+            feedbackJSON.put(AppUtil.updateUserInfo.updateBody, message);
         }catch (JSONException e) {
             e.printStackTrace();
         }

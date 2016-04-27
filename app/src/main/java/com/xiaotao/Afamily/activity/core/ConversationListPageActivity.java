@@ -15,6 +15,7 @@ import android.widget.SearchView;
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.activity.subpage.ChatActivity;
 import com.xiaotao.Afamily.base.BaseActivity;
+import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.model.adapter.ConversationListAdapter;
 import com.xiaotao.Afamily.model.entity.Conversation;
 import com.xiaotao.Afamily.sqlite.ConversationTab;
@@ -151,11 +152,14 @@ public class ConversationListPageActivity extends BaseActivity {
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             dataList.get(position).setConversationTime(format.format(date));
             dataList.get(position).addCount();
+
+            if (!jsonObject.getString(AppUtil.conversation.account).equals(BaseApplication.getInstance().getUser().getStuId())){
+                startLocalService(AppUtil.localService.all);
+            }
+
         }catch (JSONException e){
             e.printStackTrace();
         }
-
-        startLocalService(AppUtil.localService.all);
 
         simpleAdapter.notifyDataSetChanged();
     }

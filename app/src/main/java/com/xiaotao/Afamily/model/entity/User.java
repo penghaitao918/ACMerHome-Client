@@ -33,21 +33,27 @@ public class User {
     // TODO: 2016/3/1 将头像的String改为Bitmap，在函数中转换，变量只存bitmap
     private Bitmap portrait = null;
     private String userName = null;
-    private int sex = 0;
-    private String grade = null;
+    private String sex = null;
     private String classes = null;
 
     public User(){ }
+    public User(User user){
+        this.stuId = user.getStuId();
+        this.portrait = user.getPortrait();
+        this.userName = user.getUserName();
+        this.sex = user.getSex();
+        this.classes = user.getClasses();
+    }
 
     //  JSON解析
     public User(JSONObject jsonObject) {
         try {
             this.stuId = jsonObject.getString(AppUtil.user.account);
-            this.portrait = ChangeUtil.toBitmap(jsonObject.getString(AppUtil.user.password));
-            this.userName = jsonObject.getString(AppUtil.user.password);
-            this.sex = jsonObject.getInt(AppUtil.user.password);
-            this.grade = jsonObject.getString(AppUtil.user.password);
-            this.classes = jsonObject.getString(AppUtil.user.password);
+            this.portrait = ChangeUtil.toBitmap(jsonObject.getString(AppUtil.user.portrait));
+            this.userName = jsonObject.getString(AppUtil.user.userName);
+            this.sex = jsonObject.getString(AppUtil.user.sex);
+            this.classes = jsonObject.getString(AppUtil.user.classes);
+
         }catch (JSONException e){
             e.printStackTrace();
         }
@@ -85,20 +91,12 @@ public class User {
         this.userName = userName;
     }
 
-    public int getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
     }
 
     public String getClasses() {

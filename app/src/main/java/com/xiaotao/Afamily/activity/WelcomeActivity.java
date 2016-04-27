@@ -106,11 +106,16 @@ public class WelcomeActivity extends BaseActivity
 		user.setStuId((String) spUtils.get(AppUtil.sp.account, ""));
 		user.setPassword((String) spUtils.get(AppUtil.sp.password, ""));
 		sendToService(JSONUtil.reLogin(user).toString());
-		BaseApplication.getInstance().setAccount(user.getStuId());
-		BaseApplication.getInstance().setName((String) spUtils.get(AppUtil.sp.userName, ""));
-		BaseApplication.getInstance().setPortrait(
+
+		user.setSex((String) spUtils.get(AppUtil.sp.sex, ""));
+		user.setClasses((String) spUtils.get(AppUtil.sp.classes, ""));
+		user.setUserName((String) spUtils.get(AppUtil.sp.userName, ""));
+		user.setPortrait(
 				ChangeUtil.toBitmap((String) spUtils.get(AppUtil.sp.portrait, ""))
 		);
+		BaseApplication.getInstance().setUser(user);
+
+
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -172,6 +177,7 @@ public class WelcomeActivity extends BaseActivity
 				JSONObject jsonObject = new JSONObject(msg);
 				boolean flag = jsonObject.getBoolean(AppUtil.user.loginFlag);
 				if (flag){
+					setUserInfo(jsonObject);
 					m.what = 0;
 				}else {
 					m.what = 1;

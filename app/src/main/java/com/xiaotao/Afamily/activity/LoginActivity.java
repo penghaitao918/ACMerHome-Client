@@ -175,7 +175,6 @@ public class LoginActivity extends BaseActivity {
     public void loginOnClick(View view) {
         switch (view.getId()) {
             case R.id.login_loginButton:
-                BaseApplication.getInstance().setAccount(accountEdit.getText().toString());
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -215,26 +214,16 @@ public class LoginActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run(){
-                try {
-                    BaseApplication.getInstance().setName(jsonObject.getString(AppUtil.user.userName));
-                    BaseApplication.getInstance().setPortrait(
-                            ChangeUtil.toBitmap(jsonObject.getString(AppUtil.user.portrait))
-                    );
-                    System.out.println("#A " + BaseApplication.getInstance().getAccount());
-                    System.out.println("#P " + BaseApplication.getInstance().getPortrait());
-                    System.out.println("#N " + BaseApplication.getInstance().getName());
-                    spUtils.set(AppUtil.sp.loginFlag, true);
-                    spUtils.set(AppUtil.sp.account, accountEdit.getText().toString());
-                    spUtils.set(AppUtil.sp.password, StringUtil.MD5(passwordEdit.getText().toString()));
-                    spUtils.set(AppUtil.sp.classes, jsonObject.getString(AppUtil.user.classes));
-                    spUtils.set(AppUtil.sp.userName, jsonObject.getString(AppUtil.user.userName));
-                    spUtils.set(AppUtil.sp.portrait, jsonObject.getString(AppUtil.user.portrait));
-                    spUtils.set(AppUtil.sp.sex, jsonObject.getString(AppUtil.user.sex));
-                    System.out.println("写入");
-                    finish();
-                }catch (JSONException e){
-                    e.printStackTrace();
-                }
+                User user = new User(setUserInfo(jsonObject));
+                spUtils.set(AppUtil.sp.loginFlag, true);
+                spUtils.set(AppUtil.sp.account, user.getStuId());
+                spUtils.set(AppUtil.sp.password, StringUtil.MD5(passwordEdit.getText().toString()));
+                spUtils.set(AppUtil.sp.classes, user.getClasses());
+                spUtils.set(AppUtil.sp.userName, user.getUserName());
+                spUtils.set(AppUtil.sp.portrait, ChangeUtil.toBinary(user.getPortrait()));
+                spUtils.set(AppUtil.sp.sex, user.getSex());
+                System.out.println("写入");
+                finish();
             }
         }).start();
     }
@@ -243,7 +232,6 @@ public class LoginActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String msg = intent.getStringExtra(AppUtil.message.login);
-            System.out.println(msg);
             try {
                 Message m = new Message();
                 JSONObject jsonObject = new JSONObject(msg);

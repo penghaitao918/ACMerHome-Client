@@ -1,82 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@null">
-<!--
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/title"
-        android:layout_gravity="center_horizontal">
+    android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textTab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:text="@string/homePage"
-            android:textColor="@color/text_hint"
-            android:textSize="20dp" />
-
-    </RelativeLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager_user_main"
+    <ScrollView
+        android:layout_marginTop="10dp"
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_weight="1"/>
+        android:layout_gravity="center_horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/tab"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_weight="1"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="PageOnClick"
-            android:text="@string/conversationPage"
-            android:id="@+id/TaskPage"
-            android:drawableTop="@drawable/ic_launcher"
-            android:background="@color/transparent"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal" />
+            android:orientation="vertical">
 
-        <Button
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:onClick="PageOnClick"
-            android:text="@string/homePage"
-            android:id="@+id/HomePage"
-            android:drawableTop="@drawable/ic_launcher"
-            android:background="@color/transparent"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal" />
+            <RelativeLayout
+                android:id="@+id/myPortrait"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/login_button_bg"
+                android:onClick="UserPageOnClick">
 
-        <Button
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:onClick="PageOnClick"
-            android:text="@string/userPage"
-            android:id="@+id/UserPage"
-            android:drawableTop="@drawable/ic_launcher"
-            android:background="@color/transparent"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="30dp"
+                    android:text="@string/portrait"
+                    android:textColor="@color/text_hint"
+                    android:textSize="24dp" />
 
-    </LinearLayout>-->
+                <ImageView
+                    android:id="@+id/portraitImage"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@null" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:background="@drawable/login_input_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="30dp"
+                    android:text="@string/account_lab"
+                    android:textColor="@color/white"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/accountText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="24dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:background="@drawable/login_input_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="30dp"
+                    android:text="@string/classes"
+                    android:textColor="@color/white"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/classesText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="24dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/myName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/login_button_bg"
+                android:onClick="UserPageOnClick">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="30dp"
+                    android:text="@string/name"
+                    android:textColor="@color/text_hint"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/nameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:text=""
+                    android:textColor="@color/text_hint"
+                    android:textSize="24dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/mySex"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:background="@drawable/login_button_bg"
+                android:onClick="UserPageOnClick">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="30dp"
+                    android:text="@string/sex"
+                    android:textColor="@color/text_hint"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/sexText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:text=""
+                    android:textColor="@color/text_hint"
+                    android:textSize="24dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

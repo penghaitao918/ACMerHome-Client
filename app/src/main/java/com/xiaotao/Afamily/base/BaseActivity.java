@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
+import com.xiaotao.Afamily.model.entity.User;
 import com.xiaotao.Afamily.service.NetworkService;
 import com.xiaotao.Afamily.utils.AppUtil;
+
+import org.json.JSONObject;
 
 /**
  * 　 　　   へ　　　 　／|
@@ -63,6 +66,12 @@ public class BaseActivity extends Activity {
         System.out.println("### 开启service");
         Intent intent = new Intent(BaseActivity.this, NetworkService.class);
         startService(intent);
+    }
+
+    protected User setUserInfo(JSONObject jsonObject) {
+        User user = new User(jsonObject);
+        BaseApplication.getInstance().setUser(user);
+        return user;
     }
 
     protected void startLocalService(int type) {
