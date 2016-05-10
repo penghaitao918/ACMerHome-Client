@@ -3,6 +3,7 @@
 
     <application
         android:allowBackup="true"
+        android:supportsRtl="true"
         android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme">
@@ -51,7 +52,6 @@
 
         <!--意见反馈-->
         <activity android:name=".activity.subpage.FeedbackPage"/>
-
 
         <!--配置Service组件-->
         <!--网络服务-->

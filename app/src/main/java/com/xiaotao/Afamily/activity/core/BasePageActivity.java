@@ -43,11 +43,6 @@ public class BasePageActivity extends BaseActivity implements OnPageChangeListen
 
     private TextView textTab = null;
 
-    private ImageButton taskPageButton = null;
-    private ImageButton homePageButton = null;
-    private ImageButton userPageButton = null;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +65,12 @@ public class BasePageActivity extends BaseActivity implements OnPageChangeListen
     protected void onResume() {
         super.onResume();
         System.out.println("### MainPage --> onResume");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        UserPageActivity intentC = (UserPageActivity) manager.getActivity("C");
+        intentC.onActivityResult(requestCode, resultCode, data);
     }
 
     protected void onPause() {
@@ -96,9 +97,6 @@ public class BasePageActivity extends BaseActivity implements OnPageChangeListen
 
     private void initView() {
         this.textTab = (TextView) findViewById(R.id.textTab);
-        this.taskPageButton = (ImageButton) findViewById(R.id.TaskPage);
-        this.homePageButton = (ImageButton) findViewById(R.id.HomePage);
-        this.userPageButton = (ImageButton) findViewById(R.id.UserPage);
     }
 
     private void initViewPage() {

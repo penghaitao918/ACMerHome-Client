@@ -51,12 +51,6 @@ public class AppUtil {
         public static final int updateUserInfo = 10;
     }
 
-    public static final class check {
-        public static final String checkType = "NOTIFY_TITLE";
-        public static final String checkIn = "CheckIn";
-        public static final String checkOut = "CheckOut";
-    }
-
     public static final class notify {
         public static final String notifyTitle = "NOTIFY_TITLE";
         public static final String notifyMessage = "NOTIFY_MESSAGE";
@@ -151,6 +145,10 @@ public class AppUtil {
     }
 
     public static final class updateUserInfo {
+        //  图片调用
+        public static final int IMAGE_REQUEST_CODE = 0;
+        public static final int RESULT_REQUEST_CODE = 1;
+
         public static final int updateSex = 0;
         public static final int updatePortrait = 1;
         public static final String updateType = "UPDATE_USER_INFO_TYPE";

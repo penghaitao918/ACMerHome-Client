@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -154,6 +153,9 @@ public class HomePageActivity extends BaseActivity {
                     startActivity(intent8);
                     break;
                 case 9:
+                    Toast.makeText(HomePageActivity.this, "已达到最新版本！", Toast.LENGTH_SHORT).show();
+          //          Intent intent9 = new Intent(HomePageActivity.this, TestActivity.class);
+          //          startActivity(intent9);
                     break;
             }
         }

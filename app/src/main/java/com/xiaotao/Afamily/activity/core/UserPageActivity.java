@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +20,7 @@ import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.base.BaseActivity;
 import com.xiaotao.Afamily.base.BaseApplication;
 import com.xiaotao.Afamily.utils.AppUtil;
+import com.xiaotao.Afamily.utils.ChangeUtil;
 import com.xiaotao.Afamily.utils.JSONUtil;
 
 import org.json.JSONException;
@@ -96,6 +99,10 @@ public class UserPageActivity extends BaseActivity {
     public void UserPageOnClick(View view) {
         switch (view.getId()){
             case R.id.myPortrait:
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");//相片类型
+                //  ViewPager中的子Activity的startActivityForResult调用方法
+                getParent().startActivityForResult(intent, AppUtil.updateUserInfo.IMAGE_REQUEST_CODE);
                 break;
             case R.id.myName:
                 break;
@@ -104,6 +111,51 @@ public class UserPageActivity extends BaseActivity {
                 break;
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case AppUtil.updateUserInfo.IMAGE_REQUEST_CODE:
+                try {
+                    try {
+                        startPhotoZoom(data.getData());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case AppUtil.updateUserInfo.RESULT_REQUEST_CODE:
+                if (data != null) {
+                    setImageToView(data);
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void startPhotoZoom(Uri uri) {
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", 340);
+        intent.putExtra("outputY", 340);
+        intent.putExtra("return-data", true);
+        getParent().startActivityForResult(intent, AppUtil.updateUserInfo.RESULT_REQUEST_CODE);
+    }
+
+    private Bitmap bitmap = null;
+    private void setImageToView(Intent intent) {
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            bitmap = bundle.getParcelable("data");
+            sendToService(JSONUtil.updateUserInfo(AppUtil.updateUserInfo.updatePortrait, ChangeUtil.toBinary(bitmap)).toString());
+        }
+    }
+
     private int position = 0;
     private void dialog() {
         new AlertDialog.Builder(this)
@@ -112,11 +164,9 @@ public class UserPageActivity extends BaseActivity {
                         // 设置图标
                 .setIcon(R.drawable.sex_icon)
                         // 设置单选列表项，默认选中第二项（索引为1）
-                .setSingleChoiceItems(sexItem, position, new DialogInterface.OnClickListener()
-                {
+                .setSingleChoiceItems(sexItem, position, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                    public void onClick(DialogInterface dialog, int which) {
                         position = which;
                     }
                 })
@@ -124,7 +174,7 @@ public class UserPageActivity extends BaseActivity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // 此处可执行登录处理
+                        // 此处可执行更新处理
                         sendToService(JSONUtil.updateUserInfo(AppUtil.updateUserInfo.updateSex, sexItem[position]).toString());
                     }
                 })
@@ -141,6 +191,10 @@ public class UserPageActivity extends BaseActivity {
                 case AppUtil.updateUserInfo.updateSex:
                     sexText.setText(sexItem[position]);
                     Toast.makeText(UserPageActivity.this, "性别修改成功", Toast.LENGTH_SHORT).show();
+                    break;
+                case AppUtil.updateUserInfo.updatePortrait:
+                    portraitImage.setImageBitmap(bitmap);
+                    Toast.makeText(UserPageActivity.this, "头像修改成功", Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     Toast.makeText(UserPageActivity.this, "操作错误！", Toast.LENGTH_SHORT).show();

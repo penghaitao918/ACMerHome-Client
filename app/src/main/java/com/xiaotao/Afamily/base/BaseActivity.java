@@ -61,6 +61,11 @@ public class BaseActivity extends Activity {
         Log.i(AppUtil.tag.activity, this.getClass().getSimpleName() + "--->onResume");
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     protected void startClientService(){
         //	启动后台Service
         System.out.println("### 开启service");
