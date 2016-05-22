@@ -21,8 +21,7 @@
         <!--注册-->
         <activity android:name=".activity.register.RegisterActivity"/>
         <!--用户协议-->
-        <activity android:name=".activity.register.AgreementPopWin"
-            android:theme="@style/MyDialogStyleBottom"/>
+        <activity android:name=".activity.register.AgreementPopWin"/>
 
         <!--主体功能界面-->
         <activity android:name=".activity.core.BasePageActivity"/>
@@ -32,6 +31,11 @@
         <activity android:name=".activity.core.HomePageActivity"/>
         <!--用户信息-->
         <activity android:name=".activity.core.UserPageActivity"/>
+
+
+        <!--确认签到-->
+        <activity android:name=".activity.popwin.ConfirmSignIn"
+            android:theme="@style/MyDialogStyleBottom"/>
 
         <!--讨论聊天-->
         <activity android:name=".activity.subpage.ChatActivity"/>

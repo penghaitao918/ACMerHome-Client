@@ -14,6 +14,8 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.xiaotao.Afamily.R;
+import com.xiaotao.Afamily.activity.popwin.ConfirmSignIn;
+import com.xiaotao.Afamily.activity.popwin.ConfirmTask;
 import com.xiaotao.Afamily.activity.subpage.ChatActivity;
 import com.xiaotao.Afamily.activity.subpage.FeedbackPage;
 import com.xiaotao.Afamily.activity.subpage.NotifyPage;
@@ -122,7 +124,8 @@ public class HomePageActivity extends BaseActivity {
             System.out.println(position);
             switch (position) {
                 case 0:
-                    sendToService(JSONUtil.check().toString());
+                    Intent intent0 = new Intent(HomePageActivity.this, ConfirmSignIn.class);
+                    startActivity(intent0);
                     break;
                 case 1:
                     Intent intent1 = new Intent(HomePageActivity.this, TaskListPage.class);
@@ -139,10 +142,13 @@ public class HomePageActivity extends BaseActivity {
                     startActivity(intent3);
                     break;
                 case 4:
+                    Toast.makeText(HomePageActivity.this, "该功能尚未完善，敬请期待。", Toast.LENGTH_SHORT).show();
                     break;
                 case 5:
+                    Toast.makeText(HomePageActivity.this, "该功能尚未完善，敬请期待。", Toast.LENGTH_SHORT).show();
                     break;
                 case 6:
+                    Toast.makeText(HomePageActivity.this, "该功能尚未完善，敬请期待。", Toast.LENGTH_SHORT).show();
                     break;
                 case 7:
                     Intent intent7 = new Intent(HomePageActivity.this, SettingsPage.class);
@@ -153,9 +159,7 @@ public class HomePageActivity extends BaseActivity {
                     startActivity(intent8);
                     break;
                 case 9:
-                    Toast.makeText(HomePageActivity.this, "已达到最新版本！", Toast.LENGTH_SHORT).show();
-          //          Intent intent9 = new Intent(HomePageActivity.this, TestActivity.class);
-          //          startActivity(intent9);
+                    Toast.makeText(HomePageActivity.this, "Version 1.0 \n 当前已是最高版本！", Toast.LENGTH_SHORT).show();
                     break;
             }
         }

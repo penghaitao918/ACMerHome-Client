@@ -35,6 +35,8 @@
     <string name="feedback">意见反馈</string>
     <string name="update">更新</string>
 
+    <string name="confirmCheckIn">您上次签到时间：</string>
+
     <string name="sound">声 音</string>
     <string name="vibrate">震 动</string>
     <string name="deleteAllConversation">清空所有聊天记录</string>

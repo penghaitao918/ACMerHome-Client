@@ -79,10 +79,8 @@ public class ChatAdapter extends BaseAdapter {
 
         String account = mData.get(position).getAccount();
         if (BaseApplication.getInstance().getUser().getStuId().equals(account)) {
-            System.out.println("A");
             convertView = mInflater.inflate(R.layout.chatto_item, null);
         } else {
-            System.out.println("B");
             convertView = mInflater.inflate(R.layout.chafrom_item, null);
         }
         if (position == 0) {

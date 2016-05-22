@@ -114,6 +114,8 @@ public class AppUtil {
 
         public static final String localSound = "LOCAL_SOUND";
         public static final String localVibrate = "LOCAL_VIBRATE";
+
+        public static final String signTime = "SIGN_TIME";
     }
 
     //  讨论组
