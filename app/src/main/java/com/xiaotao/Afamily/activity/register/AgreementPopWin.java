@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.xiaotao.Afamily.R;
 import com.xiaotao.Afamily.base.BaseActivity;
+import com.xiaotao.Afamily.utils.AppUtil;
 import com.xiaotao.Afamily.utils.HttpUtil;
 
 
@@ -65,7 +66,7 @@ public class AgreementPopWin extends BaseActivity {
         @Override
         public void run() {
             Message m = new Message();
-            response = HttpUtil.get("http://192.168.56.1:8080/afamily/agreement");
+            response = HttpUtil.get("http://" + AppUtil.net.IP + "/A-family/agreement");
             if (!response.equals(HttpUtil.ERROR)){
                 System.out.println("Success");
                 m.what = 2;

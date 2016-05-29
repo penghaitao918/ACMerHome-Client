@@ -166,11 +166,10 @@
                 android:onClick="SettingsOnClick"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:text="退 出"
-                android:textStyle="bold"
+                android:text="退   出"
                 android:textSize="28dp"
-                android:textColor="@color/black"
-                android:background="@drawable/login_button_bg"/>
+                android:textColor="@color/white"
+                android:background="@drawable/exit_btn"/>
 
         </RelativeLayout>
 

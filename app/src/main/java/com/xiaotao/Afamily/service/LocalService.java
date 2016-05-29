@@ -86,7 +86,7 @@ public class LocalService extends Service {
                 Vibrator localVibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                 vibrator = localVibrator;
             }
-            long[] pattern = {50, 800, 500, 800}; // OFF/ON/OFF/ON
+            long[] pattern = {50, 500, 100, 500}; // OFF/ON/OFF/ON
             vibrator.vibrate(pattern,-1);
         }
     }

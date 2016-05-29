@@ -41,7 +41,7 @@
     <color name="page">#c6c6c6</color>
 
     <color name="btn_text">#ffa79c88</color>
-    <color name="tab">#ffeeeeee</color>
+    <color name="tab">#33ffffff</color>
     <color name="sidebar">#ffe0d8c3</color>
 
     <color name="red">#ffff0000</color>
@@ -50,5 +50,8 @@
     <color name="font_value">#ff2f2f2f</color>
     <color name="white_blue">#ff56c6ff</color>
     <color name="green0">#ff18b151</color>
+
+    <color name="exit_bg_normal">#ffd270</color>
+    <color name="exit_bg_press">#ffb370</color>
 
 </resources>

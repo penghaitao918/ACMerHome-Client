@@ -152,7 +152,7 @@ public class RegisterActivity extends BaseActivity {
                         String classes = classesEdit.getText().toString();
                         String name = nameEdit.getText().toString();
                         Message m = new Message();
-                        response = HttpUtil.post("http://192.168.56.1:8080/afamily/register",
+                        response = HttpUtil.post("http://" + AppUtil.net.IP + "/A-family/register",
                                 "account="+account+"&password="+password+"&classes="+classes+"&name="+name);
                         if (!response.equals(HttpUtil.ERROR)){
                             System.out.println("Success");

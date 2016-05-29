@@ -57,11 +57,11 @@ public class HomePageActivity extends BaseActivity {
     private final String[] from = {IMAGE, TEXT};
     private final int[] to = {R.id.labIcon, R.id.labName};
     private final String[] iconName = {
-            "签到", "任务b", "通知", "家人", "天气",  "日程规划", "游戏", "设置", "意见反馈", "更新"
+            "签到", "任务", "通知", "家人", "天气",  "日程规划", "游戏", "设置", "意见反馈", "更新"
     };
     private final int[] icon = {
-            R.drawable.ic_launcher, R.drawable.task_info_btn, R.drawable.ic_launcher, R.drawable.ic_launcher,
-            R.drawable.weather_btn, R.drawable.calendar_btn, R.drawable.ic_launcher, R.drawable.setting_btn,
+            R.drawable.sign_btn, R.drawable.task_info_btn, R.drawable.notify_btn, R.drawable.family_btn,
+            R.drawable.weather_btn, R.drawable.calendar_btn, R.drawable.game_btn, R.drawable.setting_btn,
             R.drawable.feedback_btn, R.drawable.update_btn
     };
 

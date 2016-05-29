@@ -48,7 +48,7 @@
             android:layout_height="match_parent"
             android:onClick="PageOnClick"
             android:id="@+id/TaskPage"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/talk_btn"
             android:background="@color/transparent"
             android:layout_gravity="center_horizontal" />
 
@@ -68,7 +68,7 @@
             android:layout_height="match_parent"
             android:onClick="PageOnClick"
             android:id="@+id/UserPage"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/user_info"
             android:background="@color/transparent"
             android:layout_gravity="center_horizontal" />
 

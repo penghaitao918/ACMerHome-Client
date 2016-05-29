@@ -190,7 +190,7 @@ public class LoginActivity extends BaseActivity {
                         }
                         //  无网络功能测试
                         //  TODO 此处在最终版本时注释
-                        if (account.equals("1234") && password.equals("5678")){
+/*                        if (account.equals("1234") && password.equals("5678")){
                             Message m = new Message();
                             m.what = 1;
                             handler.sendMessage(m);
@@ -199,7 +199,11 @@ public class LoginActivity extends BaseActivity {
                             user.setStuId(account);
                             user.setPassword(StringUtil.MD5(password));
                             sendToService(JSONUtil.login(user).toString());
-                        }
+                        }*/
+                        User user = new User();
+                        user.setStuId(account);
+                        user.setPassword(StringUtil.MD5(password));
+                        sendToService(JSONUtil.login(user).toString());
                     }
                 }).start();
                 break;
