@@ -41,6 +41,8 @@
     <string name="vibrate">震 动</string>
     <string name="deleteAllConversation">清空所有聊天记录</string>
     <string name="confirmConversation">是否确认清空所有聊天记录？</string>
+    <string name="deleteAllNotifition">清空通知记录</string>
+    <string name="confirmNotifition">是否确认清空通知记录？</string>
     <string name="about">关于我们</string>
 
     <string name="title">标题</string>

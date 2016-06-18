@@ -75,10 +75,12 @@ public class SettingsPage extends BaseActivity {
     public void SettingsOnClick(View view) {
         switch (view.getId()) {
             case R.id.deleteConversation:
-                Intent intent = new Intent(this, ConfirmConversation.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(this, ConfirmConversation.class);
+                startActivity(intent1);
                 break;
-            case R.id.about:
+            case R.id.deleteNotifition:
+                Intent intent2 = new Intent(this, ConfirmConversation.class);
+                startActivity(intent2);
                 break;
             case R.id.exitSystem:
                 SPUtils spUtils = new SPUtils(getBaseContext());

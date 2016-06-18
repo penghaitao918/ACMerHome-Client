@@ -53,6 +53,9 @@
         <!--确认删除聊天记录-->
         <activity android:name=".activity.popwin.ConfirmConversation"
             android:theme="@style/MyDialogStyleBottom"/>
+        <!--确认删除通知记录-->
+        <activity android:name=".activity.popwin.ConfirmNotifition"
+            android:theme="@style/MyDialogStyleBottom"/>
 
         <!--意见反馈-->
         <activity android:name=".activity.subpage.FeedbackPage"/>

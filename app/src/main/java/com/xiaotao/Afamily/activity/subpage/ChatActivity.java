@@ -74,6 +74,12 @@ public class ChatActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        listView.setSelection(listView.getBottom());
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //  清除未读消息
@@ -147,6 +153,7 @@ public class ChatActivity extends BaseActivity {
         @Override
         public void handleMessage(Message msg) {
             simpleAdapter.notifyDataSetChanged();
+            listView.setSelection(listView.getBottom());
         }
     };
 

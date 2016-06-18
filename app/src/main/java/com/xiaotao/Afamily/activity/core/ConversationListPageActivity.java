@@ -116,7 +116,6 @@ public class ConversationListPageActivity extends BaseActivity {
         Conversation conversation = new Conversation("家人");
         dataList.add(0, conversation);
 
-
         sendToService(JSONUtil.getAllTaskInfoList().toString());
     }
 
@@ -184,8 +183,12 @@ public class ConversationListPageActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             int type =  intent.getIntExtra(AppUtil.message.type, -1);
             //  初始化列表
-            if (type == 0 && !isLoad){
+            if (type == 0){
                 try {
+                    if (isLoad) {
+                        dataList.clear();
+                        dataList.add(0, new Conversation("家人"));
+                    }
                     String taskListMsg = intent.getStringExtra(AppUtil.message.taskList);
                     JSONObject jsonObject = new JSONObject(taskListMsg);
                     JSONArray idList = jsonObject.getJSONArray(AppUtil.conversation.taskId);

@@ -142,13 +142,13 @@ public class HomePageActivity extends BaseActivity {
                     startActivity(intent3);
                     break;
                 case 4:
-                    Toast.makeText(HomePageActivity.this, "该功能尚未完善，敬请期待。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePageActivity.this, "该功能尚未开放，敬请期待。", Toast.LENGTH_SHORT).show();
                     break;
                 case 5:
-                    Toast.makeText(HomePageActivity.this, "该功能尚未完善，敬请期待。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePageActivity.this, "该功能尚未开放，敬请期待。", Toast.LENGTH_SHORT).show();
                     break;
                 case 6:
-                    Toast.makeText(HomePageActivity.this, "该功能尚未完善，敬请期待。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePageActivity.this, "该功能尚未开放，敬请期待。", Toast.LENGTH_SHORT).show();
                     break;
                 case 7:
                     Intent intent7 = new Intent(HomePageActivity.this, SettingsPage.class);
@@ -159,7 +159,7 @@ public class HomePageActivity extends BaseActivity {
                     startActivity(intent8);
                     break;
                 case 9:
-                    Toast.makeText(HomePageActivity.this, "Version 1.0 \n 当前已是最高版本！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePageActivity.this, "Version 1.1 \n 当前已是最高版本！", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
